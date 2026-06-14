@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/learner-admissibility-profile.schema.json",
+  "title": "StegLearn Learner Admissibility Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_id",
+    "created_at",
+    "updated_at",
+    "learner_id",
+    "preferred_evidence_modes",
+    "accepted_evidence_modes",
+    "emerging_evidence_modes",
+    "modes_needing_support",
+    "reviewed_by",
+    "privacy"
+  ],
+  "properties": {
+    "profile_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "preferred_evidence_modes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "accepted_evidence_modes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "emerging_evidence_modes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "modes_needing_support": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reviewed_by": { "type": "string" },
+    "review_note": { "type": "string" },
+    "privacy": {
+      "type": "string",
+      "enum": ["private", "parent-approved-export", "public"]
+    },
+    "non_capture_note": { "type": "string" }
+  }
+}
