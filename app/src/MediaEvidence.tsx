@@ -1,3 +1,4 @@
+import type { ChangeEvent } from 'react';
 import type { ArtifactRecord } from './types';
 
 interface MediaEvidenceProps {
@@ -22,7 +23,7 @@ function artifactTypeFromFile(file: File): string {
 }
 
 export default function MediaEvidence({ learnerId, artifacts, onAddArtifact }: MediaEvidenceProps) {
-  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
 
