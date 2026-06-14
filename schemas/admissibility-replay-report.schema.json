@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/admissibility-replay-report.schema.json",
+  "title": "StegLearn Admissibility Replay Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_id",
+    "generated_at",
+    "total_steps",
+    "replay_steps",
+    "final_profile_summary",
+    "warnings",
+    "non_capture_note"
+  ],
+  "properties": {
+    "report_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "total_steps": { "type": "integer", "minimum": 0 },
+    "replay_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step_index", "decision_id", "source_receipt_id", "evidence_mode", "profile_update"],
+        "properties": {
+          "step_index": { "type": "integer", "minimum": 0 },
+          "decision_id": { "type": "string" },
+          "snapshot_id": { "type": "string" },
+          "source_receipt_id": { "type": "string" },
+          "evidence_mode": { "type": "string" },
+          "decision_class": { "type": "string" },
+          "profile_update": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "final_profile_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_evidence_modes", "emerging_evidence_modes", "modes_needing_support", "preferred_evidence_modes"],
+      "properties": {
+        "accepted_evidence_modes": { "type": "array", "items": { "type": "string" } },
+        "emerging_evidence_modes": { "type": "array", "items": { "type": "string" } },
+        "modes_needing_support": { "type": "array", "items": { "type": "string" } },
+        "preferred_evidence_modes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "non_capture_note": { "type": "string" }
+  }
+}
