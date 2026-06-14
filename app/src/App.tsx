@@ -5,9 +5,16 @@ import {
   createAdmissibilityDecision,
   evidenceModes,
   previewAdmissibilityDecision,
+  profileUpdateOptions,
+  recommendedProfileUpdate,
   updateLearnerAdmissibilityProfile,
 } from './admissibility';
-import type { AdmissibilityDecision, EvidenceMode, LearnerAdmissibilityProfile } from './admissibility';
+import type {
+  AdmissibilityDecision,
+  EvidenceMode,
+  LearnerAdmissibilityProfile,
+  ProfileUpdateDisposition,
+} from './admissibility';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, PortfolioRecord, SubjectMapping } from './types';
@@ -156,6 +163,7 @@ export default function App() {
   const [parentNote, setParentNote] = useState('');
   const [subjects, setSubjects] = useState('language arts, science');
   const [evidenceMode, setEvidenceMode] = useState<EvidenceMode>('spoken-explanation');
+  const [profileUpdateDisposition, setProfileUpdateDisposition] = useState<ProfileUpdateDisposition>('emerging');
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [receipts, setReceipts] = useState<LearningReceipt[]>(() => loadReceipts());
   const [portfolio, setPortfolio] = useState<PortfolioRecord | null>(() => loadPortfolio());
@@ -169,6 +177,7 @@ export default function App() {
     () => previewAdmissibilityDecision(admissibilityProfile, evidenceMode, sessionValidation.ok),
     [admissibilityProfile, evidenceMode, sessionValidation.ok],
   );
+  const recommendedProfileDisposition = recommendedProfileUpdate(admissibilityPreview.decision_class);
   const canReview = Boolean(sessionValidation.ok && parentNote.trim() && subjects.trim());
   const latestReceipt = receipts.length ? receipts[receipts.length - 1] : null;
   const latestAdmissibilityDecision = admissibilityDecisions.length
@@ -182,6 +191,11 @@ export default function App() {
       ...patch,
       updated_at: now(),
     }));
+  }
+
+  function changeEvidenceMode(nextMode: EvidenceMode) {
+    setEvidenceMode(nextMode);
+    setProfileUpdateDisposition(recommendedProfileUpdate(previewAdmissibilityDecision(admissibilityProfile, nextMode, sessionValidation.ok).decision_class));
   }
 
   function toggleActivity(activity: ActivityType) {
@@ -265,6 +279,7 @@ export default function App() {
       session.learner_id,
       evidenceMode,
       admissibilityPreview.decision_class,
+      profileUpdateDisposition,
       admissibilityPreview.reason,
       'parent-local-001',
       receipt.receipt_id,
@@ -276,7 +291,8 @@ export default function App() {
       session.learner_id,
       evidenceMode,
       'parent-local-001',
-      `${parentNote}\n\nAdmissibility decision: ${decision.decision_class}. ${decision.reason}`,
+      `${parentNote}\n\nAdmissibility decision: ${decision.decision_class}. Profile update: ${decision.profile_update}. ${decision.reason}`,
+      profileUpdateDisposition,
     );
 
     const nextReceipts = [...receipts, receipt];
@@ -305,6 +321,7 @@ export default function App() {
     setParentNote('');
     setSubjects('language arts, science');
     setEvidenceMode('spoken-explanation');
+    setProfileUpdateDisposition('emerging');
     setValidationErrors([]);
   }
 
@@ -365,7 +382,7 @@ export default function App() {
           <h2>5. Parent review</h2>
           <label>
             Evidence mode for this learner
-            <select value={evidenceMode} onChange={(event) => setEvidenceMode(event.target.value as EvidenceMode)}>
+            <select value={evidenceMode} onChange={(event) => changeEvidenceMode(event.target.value as EvidenceMode)}>
               {evidenceModes.map((mode) => (
                 <option key={mode} value={mode}>{mode}</option>
               ))}
@@ -375,6 +392,18 @@ export default function App() {
             <strong>Admissibility preview: {admissibilityPreview.decision_class}</strong>
             <p>{admissibilityPreview.reason}</p>
           </div>
+          <label>
+            Profile update after accepting this receipt
+            <select
+              value={profileUpdateDisposition}
+              onChange={(event) => setProfileUpdateDisposition(event.target.value as ProfileUpdateDisposition)}
+            >
+              {profileUpdateOptions.map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+          <p className="hint">Recommended profile update: {recommendedProfileDisposition}</p>
           <label>
             Subject mappings, comma-separated
             <input value={subjects} onChange={(event) => setSubjects(event.target.value)} />
@@ -407,6 +436,8 @@ export default function App() {
           <p>Transition events: {transitionEvents.length}</p>
           <p>Admissibility decisions: {admissibilityDecisions.length}</p>
           <p>Known accepted modes: {admissibilityProfile?.accepted_evidence_modes.join(', ') || 'none yet'}</p>
+          <p>Emerging modes: {admissibilityProfile?.emerging_evidence_modes.join(', ') || 'none yet'}</p>
+          <p>Modes needing support: {admissibilityProfile?.modes_needing_support.join(', ') || 'none yet'}</p>
           <p>Current session state: {session.state}</p>
           <div className="actions">
             <button type="button" disabled={!receipts.length} onClick={() => exportJson('steglearn-receipts.json', receipts)}>
