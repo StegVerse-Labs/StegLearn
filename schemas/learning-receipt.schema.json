@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/learning-receipt.schema.json",
+  "title": "StegLearn Learning Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "created_at",
+    "learner_id",
+    "wonder",
+    "activity_summary",
+    "learner_explanation",
+    "parent_review",
+    "subject_mappings",
+    "evidence_items",
+    "status"
+  ],
+  "properties": {
+    "receipt_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "wonder": { "type": "string" },
+    "activity_summary": { "type": "string" },
+    "learner_explanation": { "type": "string" },
+    "parent_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewed_by", "reviewed_at", "review_note", "accepted"],
+      "properties": {
+        "reviewed_by": { "type": "string" },
+        "reviewed_at": { "type": "string", "format": "date-time" },
+        "review_note": { "type": "string" },
+        "accepted": { "type": "boolean" }
+      }
+    },
+    "subject_mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["subject", "evidence_note"],
+        "properties": {
+          "subject": { "type": "string" },
+          "evidence_note": { "type": "string" }
+        }
+      }
+    },
+    "evidence_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "description"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["text", "parent_note", "learner_quote", "audio", "video", "image", "drawing", "build_artifact", "code", "game_map", "experiment_result", "outdoor_observation", "reading_reflection", "other"]
+          },
+          "description": { "type": "string" },
+          "uri": { "type": "string" }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "reviewed", "accepted", "rejected", "needs-follow-up"]
+    },
+    "next_questions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "non_capture_note": { "type": "string" }
+  }
+}
