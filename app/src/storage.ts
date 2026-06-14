@@ -1,3 +1,4 @@
+import type { LearnerAdmissibilityProfile } from './admissibility';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import type { LearningReceipt, PortfolioRecord } from './types';
 
@@ -5,6 +6,7 @@ const RECEIPTS_KEY = 'steglearn.receipts';
 const PORTFOLIO_KEY = 'steglearn.portfolio';
 const EVENTS_KEY = 'steglearn.learningTransitionEvents';
 const HISTORY_KEY = 'steglearn.entityLearningHistory';
+const ADMISSIBILITY_PROFILE_KEY = 'steglearn.learnerAdmissibilityProfile';
 
 export function loadReceipts(): LearningReceipt[] {
   const raw = localStorage.getItem(RECEIPTS_KEY);
@@ -64,6 +66,21 @@ export function loadEntityLearningHistory(): EntityLearningHistory | null {
 
 export function saveEntityLearningHistory(history: EntityLearningHistory): void {
   localStorage.setItem(HISTORY_KEY, JSON.stringify(history, null, 2));
+}
+
+export function loadLearnerAdmissibilityProfile(): LearnerAdmissibilityProfile | null {
+  const raw = localStorage.getItem(ADMISSIBILITY_PROFILE_KEY);
+  if (!raw) return null;
+
+  try {
+    return JSON.parse(raw) as LearnerAdmissibilityProfile;
+  } catch {
+    return null;
+  }
+}
+
+export function saveLearnerAdmissibilityProfile(profile: LearnerAdmissibilityProfile): void {
+  localStorage.setItem(ADMISSIBILITY_PROFILE_KEY, JSON.stringify(profile, null, 2));
 }
 
 export function exportJson(filename: string, data: unknown): void {
