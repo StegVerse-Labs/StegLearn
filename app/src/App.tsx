@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react';
+import MediaEvidence from './MediaEvidence';
+import SpeechCapture from './SpeechCapture';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, PortfolioRecord, SubjectMapping } from './types';
@@ -164,7 +166,7 @@ export default function App() {
     });
   }
 
-  function addArtifact() {
+  function addArtifactNote() {
     const description = window.prompt('Describe the artifact. Example: photo of LEGO build, video explanation, game map note.');
     if (!description) return;
 
@@ -177,6 +179,10 @@ export default function App() {
       privacy: 'private',
     };
 
+    addArtifact(artifact);
+  }
+
+  function addArtifact(artifact: ArtifactRecord) {
     setArtifacts((current) => [...current, artifact]);
     updateSession({
       artifacts: [...session.artifacts, artifact.artifact_id],
@@ -218,21 +224,19 @@ export default function App() {
         <p className="eyebrow">StegLearn prototype</p>
         <h1>Wonder → Evidence → Receipt → History</h1>
         <p>
-          Local-first learner loop. No account. No cloud requirement. Parent review before portfolio and entity history save.
+          Local-first learner loop. Speech and media start as draft evidence. Parent review before portfolio and entity history save.
         </p>
       </header>
 
       <section className="grid">
         <article className="card">
           <h2>1. Capture wonder</h2>
-          <label>
-            Learner wonder
-            <textarea
-              value={session.wonder}
-              onChange={(event) => updateSession({ wonder: event.target.value, state: 'wonder-captured' })}
-              placeholder="Why does sleep feel instant? Does reality render when we are not looking?"
-            />
-          </label>
+          <SpeechCapture
+            label="Learner wonder"
+            value={session.wonder}
+            onChange={(value) => updateSession({ wonder: value, state: 'wonder-captured' })}
+            placeholder="Why does sleep feel instant? Does reality render when we are not looking?"
+          />
         </article>
 
         <article className="card">
@@ -253,24 +257,18 @@ export default function App() {
 
         <article className="card">
           <h2>3. Attach evidence</h2>
-          <button type="button" onClick={addArtifact}>Add artifact note</button>
-          <ul>
-            {artifacts.map((artifact) => (
-              <li key={artifact.artifact_id}>{artifact.description} · {artifact.privacy}</li>
-            ))}
-          </ul>
+          <button type="button" onClick={addArtifactNote}>Add artifact note</button>
+          <MediaEvidence learnerId={session.learner_id} artifacts={artifacts} onAddArtifact={addArtifact} />
         </article>
 
         <article className="card">
           <h2>4. Learner explains</h2>
-          <label>
-            Learner explanation
-            <textarea
-              value={session.learner_explanation}
-              onChange={(event) => updateSession({ learner_explanation: event.target.value, state: 'explanation-captured' })}
-              placeholder="I noticed... I made... I think... I would change..."
-            />
-          </label>
+          <SpeechCapture
+            label="Learner explanation"
+            value={session.learner_explanation}
+            onChange={(value) => updateSession({ learner_explanation: value, state: 'explanation-captured' })}
+            placeholder="I noticed... I made... I think... I would change..."
+          />
         </article>
 
         <article className="card">
