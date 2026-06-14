@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/entity-learning-history.schema.json",
+  "title": "StegLearn Entity Learning History",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "history_id",
+    "created_at",
+    "updated_at",
+    "entity_id",
+    "entity_type",
+    "event_ids",
+    "privacy"
+  ],
+  "properties": {
+    "history_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "entity_id": { "type": "string" },
+    "entity_type": {
+      "type": "string",
+      "enum": ["learner", "parent-steward", "ai-scaffold", "session", "artifact", "receipt", "portfolio", "curriculum-reference", "teaching-agent"]
+    },
+    "event_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "source_receipt_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "source_artifact_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "summary_notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "privacy": {
+      "type": "string",
+      "enum": ["private", "parent-approved-export", "public"]
+    },
+    "non_capture_note": { "type": "string" }
+  }
+}
