@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/admissibility-consistency-report.schema.json",
+  "title": "StegLearn Admissibility Consistency Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_id",
+    "generated_at",
+    "consistent",
+    "differences",
+    "warnings",
+    "non_capture_note"
+  ],
+  "properties": {
+    "report_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "consistent": { "type": "boolean" },
+    "differences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "stored", "replayed"],
+        "properties": {
+          "field": { "type": "string" },
+          "stored": { "type": "array", "items": { "type": "string" } },
+          "replayed": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "non_capture_note": { "type": "string" }
+  }
+}
