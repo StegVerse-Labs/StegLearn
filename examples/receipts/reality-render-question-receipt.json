@@ -1,0 +1,45 @@
+{
+  "receipt_id": "example-reality-render-question-001",
+  "created_at": "2026-06-14T00:10:00Z",
+  "learner_id": "learner-example-001",
+  "wonder": "Does reality render when we are not looking at it?",
+  "activity_summary": "Learner discussed whether an unseen room continues to exist or update when no one is observing it. The conversation used a game-engine metaphor to explore observation, continuity, and hidden state.",
+  "learner_explanation": "If you are not looking at reality, maybe it is like a game that only renders what you see. But when you go back, things still seem like they were there.",
+  "parent_review": {
+    "reviewed_by": "parent-example",
+    "reviewed_at": "2026-06-14T00:15:00Z",
+    "review_note": "Accepted as evidence of abstract reasoning using a computational metaphor to explore observation and continuity.",
+    "accepted": true
+  },
+  "subject_mappings": [
+    {
+      "subject": "philosophy",
+      "evidence_note": "Learner considered whether unobserved reality persists."
+    },
+    {
+      "subject": "science",
+      "evidence_note": "Learner discussed observation and continuity in the physical world."
+    },
+    {
+      "subject": "technology",
+      "evidence_note": "Learner used rendering as a computational metaphor."
+    }
+  ],
+  "evidence_items": [
+    {
+      "type": "parent_note",
+      "description": "Parent-recorded conversation summary."
+    },
+    {
+      "type": "learner_quote",
+      "description": "Learner asked whether reality renders when not observed."
+    }
+  ],
+  "status": "accepted",
+  "next_questions": [
+    "What would be different if unseen rooms did not keep running?",
+    "How could we test whether something changed while we were away?",
+    "What is the difference between seeing something and knowing something?"
+  ],
+  "non_capture_note": "This receipt records one learning event and should not be used as a fixed identity label."
+}
