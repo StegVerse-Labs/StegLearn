@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/artifact-record.schema.json",
+  "title": "StegLearn Artifact Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "created_at",
+    "learner_id",
+    "type",
+    "description",
+    "privacy"
+  ],
+  "properties": {
+    "artifact_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "parent_note",
+        "learner_quote",
+        "audio",
+        "video",
+        "image",
+        "drawing",
+        "build_artifact",
+        "code",
+        "game_map",
+        "experiment_result",
+        "outdoor_observation",
+        "reading_reflection",
+        "other"
+      ]
+    },
+    "description": { "type": "string" },
+    "uri": { "type": "string" },
+    "linked_session_id": { "type": "string" },
+    "linked_receipt_id": { "type": "string" },
+    "privacy": {
+      "type": "string",
+      "enum": ["private", "parent-approved-export", "public"]
+    },
+    "parent_note": { "type": "string" },
+    "learner_note": { "type": "string" },
+    "metadata_note": { "type": "string" }
+  }
+}
