@@ -171,10 +171,14 @@ pre {
   font-weight: 700;
 }
 
-.validation-panel {
-  border: 1px solid #f2b8b8;
+.validation-panel,
+.decision-panel {
   border-radius: 1rem;
   padding: 0.85rem;
+}
+
+.validation-panel {
+  border: 1px solid #f2b8b8;
   background: #fff4f4;
   color: #7b1919;
 }
@@ -182,6 +186,32 @@ pre {
 .validation-panel ul {
   margin: 0.5rem 0 0;
   padding-left: 1.25rem;
+}
+
+.decision-panel {
+  border: 1px solid #d6ddec;
+  background: #f8faff;
+}
+
+.decision-panel p {
+  margin: 0.5rem 0 0;
+  color: #4b5874;
+}
+
+.decision-panel.known-accepted {
+  border-color: #9bd8b4;
+  background: #effaf3;
+}
+
+.decision-panel.new-emerging {
+  border-color: #bdd1ff;
+  background: #f2f6ff;
+}
+
+.decision-panel.needs-support,
+.decision-panel.insufficient {
+  border-color: #f0c36c;
+  background: #fff8e8;
 }
 
 .artifact-list {
