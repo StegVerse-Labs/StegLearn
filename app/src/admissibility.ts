@@ -17,7 +17,10 @@ export const evidenceModes = [
   'parent-transcribed-language',
 ] as const;
 
+export const profileUpdateOptions = ['accepted', 'emerging', 'needs-support', 'no-change'] as const;
+
 export type EvidenceMode = (typeof evidenceModes)[number];
+export type ProfileUpdateDisposition = (typeof profileUpdateOptions)[number];
 export type AdmissibilityDecisionClass = 'known-accepted' | 'new-emerging' | 'needs-support' | 'insufficient';
 
 export interface LearnerAdmissibilityProfile {
@@ -41,6 +44,7 @@ export interface AdmissibilityDecision {
   learner_id: string;
   evidence_mode: EvidenceMode;
   decision_class: AdmissibilityDecisionClass;
+  profile_update: ProfileUpdateDisposition;
   reason: string;
   reviewed_by: string;
   source_receipt_id: string;
@@ -61,21 +65,26 @@ function uniqueModes(modes: EvidenceMode[]): EvidenceMode[] {
   return Array.from(new Set(modes));
 }
 
+function removeMode(modes: EvidenceMode[], evidenceMode: EvidenceMode): EvidenceMode[] {
+  return modes.filter((mode) => mode !== evidenceMode);
+}
+
 export function createLearnerAdmissibilityProfile(
   learnerId: string,
   evidenceMode: EvidenceMode,
   reviewedBy: string,
   reviewNote: string,
+  disposition: ProfileUpdateDisposition,
 ): LearnerAdmissibilityProfile {
   const timestamp = now();
 
-  return {
+  const base: LearnerAdmissibilityProfile = {
     profile_id: id('admissibility-profile'),
     created_at: timestamp,
     updated_at: timestamp,
     learner_id: learnerId,
-    preferred_evidence_modes: [evidenceMode],
-    accepted_evidence_modes: [evidenceMode],
+    preferred_evidence_modes: [],
+    accepted_evidence_modes: [],
     emerging_evidence_modes: [],
     modes_needing_support: [],
     reviewed_by: reviewedBy,
@@ -83,6 +92,8 @@ export function createLearnerAdmissibilityProfile(
     privacy: 'private',
     non_capture_note: 'This profile describes current evidence modes and must not become a fixed learner identity label.',
   };
+
+  return updateLearnerAdmissibilityProfile(base, learnerId, evidenceMode, reviewedBy, reviewNote, disposition);
 }
 
 export function updateLearnerAdmissibilityProfile(
@@ -91,19 +102,60 @@ export function updateLearnerAdmissibilityProfile(
   evidenceMode: EvidenceMode,
   reviewedBy: string,
   reviewNote: string,
+  disposition: ProfileUpdateDisposition,
 ): LearnerAdmissibilityProfile {
   if (!existing) {
-    return createLearnerAdmissibilityProfile(learnerId, evidenceMode, reviewedBy, reviewNote);
+    return createLearnerAdmissibilityProfile(learnerId, evidenceMode, reviewedBy, reviewNote, disposition);
+  }
+
+  const withoutMode = {
+    preferred_evidence_modes: removeMode(existing.preferred_evidence_modes, evidenceMode),
+    accepted_evidence_modes: removeMode(existing.accepted_evidence_modes, evidenceMode),
+    emerging_evidence_modes: removeMode(existing.emerging_evidence_modes, evidenceMode),
+    modes_needing_support: removeMode(existing.modes_needing_support, evidenceMode),
+  };
+
+  if (disposition === 'accepted') {
+    return {
+      ...existing,
+      ...withoutMode,
+      updated_at: now(),
+      learner_id: learnerId,
+      preferred_evidence_modes: uniqueModes([...withoutMode.preferred_evidence_modes, evidenceMode]),
+      accepted_evidence_modes: uniqueModes([...withoutMode.accepted_evidence_modes, evidenceMode]),
+      reviewed_by: reviewedBy,
+      review_note: reviewNote,
+    };
+  }
+
+  if (disposition === 'emerging') {
+    return {
+      ...existing,
+      ...withoutMode,
+      updated_at: now(),
+      learner_id: learnerId,
+      emerging_evidence_modes: uniqueModes([...withoutMode.emerging_evidence_modes, evidenceMode]),
+      reviewed_by: reviewedBy,
+      review_note: reviewNote,
+    };
+  }
+
+  if (disposition === 'needs-support') {
+    return {
+      ...existing,
+      ...withoutMode,
+      updated_at: now(),
+      learner_id: learnerId,
+      modes_needing_support: uniqueModes([...withoutMode.modes_needing_support, evidenceMode]),
+      reviewed_by: reviewedBy,
+      review_note: reviewNote,
+    };
   }
 
   return {
     ...existing,
     updated_at: now(),
     learner_id: learnerId,
-    preferred_evidence_modes: uniqueModes([...existing.preferred_evidence_modes, evidenceMode]),
-    accepted_evidence_modes: uniqueModes([...existing.accepted_evidence_modes, evidenceMode]),
-    emerging_evidence_modes: existing.emerging_evidence_modes.filter((mode) => mode !== evidenceMode),
-    modes_needing_support: existing.modes_needing_support.filter((mode) => mode !== evidenceMode),
     reviewed_by: reviewedBy,
     review_note: reviewNote,
   };
@@ -124,7 +176,7 @@ export function previewAdmissibilityDecision(
   if (!profile) {
     return {
       decision_class: 'new-emerging',
-      reason: 'No learner admissibility profile exists yet. Parent acceptance can establish this as an accepted evidence mode.',
+      reason: 'No learner admissibility profile exists yet. Parent acceptance can establish or cautiously track this evidence mode.',
     };
   }
 
@@ -144,14 +196,22 @@ export function previewAdmissibilityDecision(
 
   return {
     decision_class: 'new-emerging',
-    reason: 'This evidence mode is new or not yet established for this learner. Parent review can admit it without making it a fixed identity label.',
+    reason: 'This evidence mode is new or not yet established for this learner. Parent review can admit the receipt while choosing how the profile changes.',
   };
+}
+
+export function recommendedProfileUpdate(decisionClass: AdmissibilityDecisionClass): ProfileUpdateDisposition {
+  if (decisionClass === 'known-accepted') return 'accepted';
+  if (decisionClass === 'needs-support') return 'needs-support';
+  if (decisionClass === 'insufficient') return 'no-change';
+  return 'emerging';
 }
 
 export function createAdmissibilityDecision(
   learnerId: string,
   evidenceMode: EvidenceMode,
   decisionClass: AdmissibilityDecisionClass,
+  profileUpdate: ProfileUpdateDisposition,
   reason: string,
   reviewedBy: string,
   sourceReceiptId: string,
@@ -163,6 +223,7 @@ export function createAdmissibilityDecision(
     learner_id: learnerId,
     evidence_mode: evidenceMode,
     decision_class: decisionClass,
+    profile_update: profileUpdate,
     reason,
     reviewed_by: reviewedBy,
     source_receipt_id: sourceReceiptId,
