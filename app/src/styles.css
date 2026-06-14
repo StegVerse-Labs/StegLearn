@@ -169,6 +169,19 @@ pre {
   font-weight: 700;
 }
 
+.validation-panel {
+  border: 1px solid #f2b8b8;
+  border-radius: 1rem;
+  padding: 0.85rem;
+  background: #fff4f4;
+  color: #7b1919;
+}
+
+.validation-panel ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
 .artifact-list {
   display: grid;
   gap: 1rem;
