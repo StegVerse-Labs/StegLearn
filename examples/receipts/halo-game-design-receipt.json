@@ -1,0 +1,45 @@
+{
+  "receipt_id": "example-halo-game-design-001",
+  "created_at": "2026-06-14T00:20:00Z",
+  "learner_id": "learner-example-001",
+  "wonder": "Can I build a game space that other people will play?",
+  "activity_summary": "Learner used in-game creation tools to build and host a multiplayer game space. Other players joined and interacted with the created environment.",
+  "learner_explanation": "I made a place for people to play. They joined and played in it.",
+  "parent_review": {
+    "reviewed_by": "parent-example",
+    "reviewed_at": "2026-06-14T00:25:00Z",
+    "review_note": "Accepted as evidence of tool discovery, game design, public runtime awareness, and systems thinking.",
+    "accepted": true
+  },
+  "subject_mappings": [
+    {
+      "subject": "technology",
+      "evidence_note": "Learner used digital creation tools and hosted a playable environment."
+    },
+    {
+      "subject": "engineering",
+      "evidence_note": "Learner configured an interactive system with rules, space, and user behavior."
+    },
+    {
+      "subject": "social studies",
+      "evidence_note": "Learner observed how other players interacted with a shared environment."
+    }
+  ],
+  "evidence_items": [
+    {
+      "type": "game_map",
+      "description": "Created multiplayer game environment."
+    },
+    {
+      "type": "parent_note",
+      "description": "Parent observed that other players joined the hosted environment."
+    }
+  ],
+  "status": "accepted",
+  "next_questions": [
+    "What did players do that you expected?",
+    "What did players do that surprised you?",
+    "What would you change in the next version?"
+  ],
+  "non_capture_note": "This receipt records one learning event and should not be used as a fixed identity label."
+}
