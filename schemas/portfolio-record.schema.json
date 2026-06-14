@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/portfolio-record.schema.json",
+  "title": "StegLearn Portfolio Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "portfolio_id",
+    "created_at",
+    "updated_at",
+    "learner_id",
+    "receipt_ids",
+    "privacy"
+  ],
+  "properties": {
+    "portfolio_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "receipt_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "active_projects": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "accepted_subject_mappings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "artifact_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "parent_notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "privacy": {
+      "type": "string",
+      "enum": ["private", "parent-approved-export", "public"]
+    },
+    "non_capture_note": { "type": "string" }
+  }
+}
