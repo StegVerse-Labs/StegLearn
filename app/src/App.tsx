@@ -1,16 +1,20 @@
 import { useMemo, useState } from 'react';
 import MediaEvidence from './MediaEvidence';
 import SpeechCapture from './SpeechCapture';
+import { evidenceModes, updateLearnerAdmissibilityProfile } from './admissibility';
+import type { EvidenceMode, LearnerAdmissibilityProfile } from './admissibility';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, PortfolioRecord, SubjectMapping } from './types';
 import {
   exportJson,
   loadEntityLearningHistory,
+  loadLearnerAdmissibilityProfile,
   loadLearningTransitionEvents,
   loadPortfolio,
   loadReceipts,
   saveEntityLearningHistory,
+  saveLearnerAdmissibilityProfile,
   saveLearningTransitionEvents,
   savePortfolio,
   saveReceipts,
@@ -144,11 +148,13 @@ export default function App() {
   const [artifacts, setArtifacts] = useState<ArtifactRecord[]>([]);
   const [parentNote, setParentNote] = useState('');
   const [subjects, setSubjects] = useState('language arts, science');
+  const [evidenceMode, setEvidenceMode] = useState<EvidenceMode>('spoken-explanation');
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [receipts, setReceipts] = useState<LearningReceipt[]>(() => loadReceipts());
   const [portfolio, setPortfolio] = useState<PortfolioRecord | null>(() => loadPortfolio());
   const [transitionEvents, setTransitionEvents] = useState<LearningTransitionEvent[]>(() => loadLearningTransitionEvents());
   const [entityHistory, setEntityHistory] = useState<EntityLearningHistory | null>(() => loadEntityLearningHistory());
+  const [admissibilityProfile, setAdmissibilityProfile] = useState<LearnerAdmissibilityProfile | null>(() => loadLearnerAdmissibilityProfile());
 
   const sessionValidation = useMemo(() => validateSessionForReview(session, artifacts), [session, artifacts]);
   const canReview = Boolean(sessionValidation.ok && parentNote.trim() && subjects.trim());
@@ -240,6 +246,14 @@ export default function App() {
       return;
     }
 
+    const nextAdmissibilityProfile = updateLearnerAdmissibilityProfile(
+      admissibilityProfile,
+      session.learner_id,
+      evidenceMode,
+      'parent-local-001',
+      parentNote,
+    );
+
     const nextReceipts = [...receipts, receipt];
     const nextTransitionEvents = [...transitionEvents, transitionEvent];
 
@@ -247,10 +261,12 @@ export default function App() {
     setTransitionEvents(nextTransitionEvents);
     setPortfolio(nextPortfolio);
     setEntityHistory(nextEntityHistory);
+    setAdmissibilityProfile(nextAdmissibilityProfile);
     saveReceipts(nextReceipts);
     saveLearningTransitionEvents(nextTransitionEvents);
     savePortfolio(nextPortfolio);
     saveEntityLearningHistory(nextEntityHistory);
+    saveLearnerAdmissibilityProfile(nextAdmissibilityProfile);
     setValidationErrors([]);
     updateSession({ state: 'portfolio-saved' });
   }
@@ -260,6 +276,7 @@ export default function App() {
     setArtifacts([]);
     setParentNote('');
     setSubjects('language arts, science');
+    setEvidenceMode('spoken-explanation');
     setValidationErrors([]);
   }
 
@@ -269,7 +286,7 @@ export default function App() {
         <p className="eyebrow">StegLearn prototype</p>
         <h1>Wonder → Evidence → Receipt → History</h1>
         <p>
-          Local-first learner loop. Speech and media start as draft evidence. Parent review before portfolio and entity history save.
+          Local-first learner loop. Admissibility changes by learner as reviewed evidence modes become known.
         </p>
       </header>
 
@@ -319,6 +336,14 @@ export default function App() {
         <article className="card">
           <h2>5. Parent review</h2>
           <label>
+            Evidence mode for this learner
+            <select value={evidenceMode} onChange={(event) => setEvidenceMode(event.target.value as EvidenceMode)}>
+              {evidenceModes.map((mode) => (
+                <option key={mode} value={mode}>{mode}</option>
+              ))}
+            </select>
+          </label>
+          <label>
             Subject mappings, comma-separated
             <input value={subjects} onChange={(event) => setSubjects(event.target.value)} />
           </label>
@@ -348,6 +373,7 @@ export default function App() {
           <h2>6. Portfolio/history/export</h2>
           <p>Accepted receipts: {receipts.length}</p>
           <p>Transition events: {transitionEvents.length}</p>
+          <p>Known accepted modes: {admissibilityProfile?.accepted_evidence_modes.join(', ') || 'none yet'}</p>
           <p>Current session state: {session.state}</p>
           <div className="actions">
             <button type="button" disabled={!receipts.length} onClick={() => exportJson('steglearn-receipts.json', receipts)}>
@@ -362,6 +388,9 @@ export default function App() {
             <button type="button" disabled={!entityHistory} onClick={() => exportJson('steglearn-entity-history.json', entityHistory)}>
               Export entity history JSON
             </button>
+            <button type="button" disabled={!admissibilityProfile} onClick={() => exportJson('steglearn-admissibility-profile.json', admissibilityProfile)}>
+              Export admissibility profile JSON
+            </button>
           </div>
         </article>
       </section>
@@ -369,6 +398,11 @@ export default function App() {
       <section className="card full">
         <h2>Latest receipt preview</h2>
         <pre>{JSON.stringify(latestReceipt, null, 2)}</pre>
+      </section>
+
+      <section className="card full">
+        <h2>Learner admissibility profile preview</h2>
+        <pre>{JSON.stringify(admissibilityProfile, null, 2)}</pre>
       </section>
 
       <section className="card full">
