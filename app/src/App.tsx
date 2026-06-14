@@ -1,18 +1,25 @@
 import { useMemo, useState } from 'react';
 import MediaEvidence from './MediaEvidence';
 import SpeechCapture from './SpeechCapture';
-import { evidenceModes, updateLearnerAdmissibilityProfile } from './admissibility';
-import type { EvidenceMode, LearnerAdmissibilityProfile } from './admissibility';
+import {
+  createAdmissibilityDecision,
+  evidenceModes,
+  previewAdmissibilityDecision,
+  updateLearnerAdmissibilityProfile,
+} from './admissibility';
+import type { AdmissibilityDecision, EvidenceMode, LearnerAdmissibilityProfile } from './admissibility';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, PortfolioRecord, SubjectMapping } from './types';
 import {
   exportJson,
+  loadAdmissibilityDecisions,
   loadEntityLearningHistory,
   loadLearnerAdmissibilityProfile,
   loadLearningTransitionEvents,
   loadPortfolio,
   loadReceipts,
+  saveAdmissibilityDecisions,
   saveEntityLearningHistory,
   saveLearnerAdmissibilityProfile,
   saveLearningTransitionEvents,
@@ -155,10 +162,18 @@ export default function App() {
   const [transitionEvents, setTransitionEvents] = useState<LearningTransitionEvent[]>(() => loadLearningTransitionEvents());
   const [entityHistory, setEntityHistory] = useState<EntityLearningHistory | null>(() => loadEntityLearningHistory());
   const [admissibilityProfile, setAdmissibilityProfile] = useState<LearnerAdmissibilityProfile | null>(() => loadLearnerAdmissibilityProfile());
+  const [admissibilityDecisions, setAdmissibilityDecisions] = useState<AdmissibilityDecision[]>(() => loadAdmissibilityDecisions());
 
   const sessionValidation = useMemo(() => validateSessionForReview(session, artifacts), [session, artifacts]);
+  const admissibilityPreview = useMemo(
+    () => previewAdmissibilityDecision(admissibilityProfile, evidenceMode, sessionValidation.ok),
+    [admissibilityProfile, evidenceMode, sessionValidation.ok],
+  );
   const canReview = Boolean(sessionValidation.ok && parentNote.trim() && subjects.trim());
   const latestReceipt = receipts.length ? receipts[receipts.length - 1] : null;
+  const latestAdmissibilityDecision = admissibilityDecisions.length
+    ? admissibilityDecisions[admissibilityDecisions.length - 1]
+    : null;
 
   function updateSession(patch: Partial<LearnerSession>) {
     setValidationErrors([]);
@@ -246,27 +261,40 @@ export default function App() {
       return;
     }
 
+    const decision = createAdmissibilityDecision(
+      session.learner_id,
+      evidenceMode,
+      admissibilityPreview.decision_class,
+      admissibilityPreview.reason,
+      'parent-local-001',
+      receipt.receipt_id,
+      admissibilityProfile?.profile_id,
+    );
+
     const nextAdmissibilityProfile = updateLearnerAdmissibilityProfile(
       admissibilityProfile,
       session.learner_id,
       evidenceMode,
       'parent-local-001',
-      parentNote,
+      `${parentNote}\n\nAdmissibility decision: ${decision.decision_class}. ${decision.reason}`,
     );
 
     const nextReceipts = [...receipts, receipt];
     const nextTransitionEvents = [...transitionEvents, transitionEvent];
+    const nextAdmissibilityDecisions = [...admissibilityDecisions, decision];
 
     setReceipts(nextReceipts);
     setTransitionEvents(nextTransitionEvents);
     setPortfolio(nextPortfolio);
     setEntityHistory(nextEntityHistory);
     setAdmissibilityProfile(nextAdmissibilityProfile);
+    setAdmissibilityDecisions(nextAdmissibilityDecisions);
     saveReceipts(nextReceipts);
     saveLearningTransitionEvents(nextTransitionEvents);
     savePortfolio(nextPortfolio);
     saveEntityLearningHistory(nextEntityHistory);
     saveLearnerAdmissibilityProfile(nextAdmissibilityProfile);
+    saveAdmissibilityDecisions(nextAdmissibilityDecisions);
     setValidationErrors([]);
     updateSession({ state: 'portfolio-saved' });
   }
@@ -343,6 +371,10 @@ export default function App() {
               ))}
             </select>
           </label>
+          <div className={`decision-panel ${admissibilityPreview.decision_class}`}>
+            <strong>Admissibility preview: {admissibilityPreview.decision_class}</strong>
+            <p>{admissibilityPreview.reason}</p>
+          </div>
           <label>
             Subject mappings, comma-separated
             <input value={subjects} onChange={(event) => setSubjects(event.target.value)} />
@@ -373,6 +405,7 @@ export default function App() {
           <h2>6. Portfolio/history/export</h2>
           <p>Accepted receipts: {receipts.length}</p>
           <p>Transition events: {transitionEvents.length}</p>
+          <p>Admissibility decisions: {admissibilityDecisions.length}</p>
           <p>Known accepted modes: {admissibilityProfile?.accepted_evidence_modes.join(', ') || 'none yet'}</p>
           <p>Current session state: {session.state}</p>
           <div className="actions">
@@ -391,6 +424,9 @@ export default function App() {
             <button type="button" disabled={!admissibilityProfile} onClick={() => exportJson('steglearn-admissibility-profile.json', admissibilityProfile)}>
               Export admissibility profile JSON
             </button>
+            <button type="button" disabled={!admissibilityDecisions.length} onClick={() => exportJson('steglearn-admissibility-decisions.json', admissibilityDecisions)}>
+              Export admissibility decisions JSON
+            </button>
           </div>
         </article>
       </section>
@@ -398,6 +434,11 @@ export default function App() {
       <section className="card full">
         <h2>Latest receipt preview</h2>
         <pre>{JSON.stringify(latestReceipt, null, 2)}</pre>
+      </section>
+
+      <section className="card full">
+        <h2>Latest admissibility decision preview</h2>
+        <pre>{JSON.stringify(latestAdmissibilityDecision, null, 2)}</pre>
       </section>
 
       <section className="card full">
