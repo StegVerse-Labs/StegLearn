@@ -15,6 +15,13 @@ import {
   savePortfolio,
   saveReceipts,
 } from './storage';
+import {
+  validateEntityHistory,
+  validatePortfolio,
+  validateReceipt,
+  validateSessionForReview,
+  validateTransitionEvent,
+} from './validation';
 
 const activityTypes: ActivityType[] = [
   'question',
@@ -137,16 +144,18 @@ export default function App() {
   const [artifacts, setArtifacts] = useState<ArtifactRecord[]>([]);
   const [parentNote, setParentNote] = useState('');
   const [subjects, setSubjects] = useState('language arts, science');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [receipts, setReceipts] = useState<LearningReceipt[]>(() => loadReceipts());
   const [portfolio, setPortfolio] = useState<PortfolioRecord | null>(() => loadPortfolio());
   const [transitionEvents, setTransitionEvents] = useState<LearningTransitionEvent[]>(() => loadLearningTransitionEvents());
   const [entityHistory, setEntityHistory] = useState<EntityLearningHistory | null>(() => loadEntityLearningHistory());
 
-  const canReview = useMemo(() => {
-    return Boolean(session.wonder.trim() && session.learner_explanation.trim() && parentNote.trim());
-  }, [session.wonder, session.learner_explanation, parentNote]);
+  const sessionValidation = useMemo(() => validateSessionForReview(session, artifacts), [session, artifacts]);
+  const canReview = Boolean(sessionValidation.ok && parentNote.trim() && subjects.trim());
+  const latestReceipt = receipts.length ? receipts[receipts.length - 1] : null;
 
   function updateSession(patch: Partial<LearnerSession>) {
+    setValidationErrors([]);
     setSession((current) => ({
       ...current,
       ...patch,
@@ -183,6 +192,7 @@ export default function App() {
   }
 
   function addArtifact(artifact: ArtifactRecord) {
+    setValidationErrors([]);
     setArtifacts((current) => [...current, artifact]);
     updateSession({
       artifacts: [...session.artifacts, artifact.artifact_id],
@@ -191,14 +201,47 @@ export default function App() {
   }
 
   function acceptReceipt() {
-    if (!canReview) return;
+    const precheck = validateSessionForReview(session, artifacts);
+    if (!precheck.ok) {
+      setValidationErrors(precheck.errors);
+      return;
+    }
+
+    if (!parentNote.trim()) {
+      setValidationErrors(['Parent review note is required.']);
+      return;
+    }
 
     const receipt = buildReceipt(session, artifacts, parentNote, subjects);
+    const receiptValidation = validateReceipt(receipt);
+    if (!receiptValidation.ok) {
+      setValidationErrors(receiptValidation.errors);
+      return;
+    }
+
     const transitionEvent = createReceiptAcceptedEvent(receipt, artifacts);
+    const eventValidation = validateTransitionEvent(transitionEvent);
+    if (!eventValidation.ok) {
+      setValidationErrors(eventValidation.errors);
+      return;
+    }
+
+    const nextPortfolio = updatePortfolio(portfolio, receipt, artifacts.map((artifact) => artifact.artifact_id));
+    const portfolioValidation = validatePortfolio(nextPortfolio);
+    if (!portfolioValidation.ok) {
+      setValidationErrors(portfolioValidation.errors);
+      return;
+    }
+
+    const nextEntityHistory = updateEntityHistory(entityHistory, transitionEvent, receipt, artifacts);
+    const historyValidation = validateEntityHistory(nextEntityHistory);
+    if (!historyValidation.ok) {
+      setValidationErrors(historyValidation.errors);
+      return;
+    }
+
     const nextReceipts = [...receipts, receipt];
     const nextTransitionEvents = [...transitionEvents, transitionEvent];
-    const nextPortfolio = updatePortfolio(portfolio, receipt, artifacts.map((artifact) => artifact.artifact_id));
-    const nextEntityHistory = updateEntityHistory(entityHistory, transitionEvent, receipt, artifacts);
 
     setReceipts(nextReceipts);
     setTransitionEvents(nextTransitionEvents);
@@ -208,6 +251,7 @@ export default function App() {
     saveLearningTransitionEvents(nextTransitionEvents);
     savePortfolio(nextPortfolio);
     saveEntityLearningHistory(nextEntityHistory);
+    setValidationErrors([]);
     updateSession({ state: 'portfolio-saved' });
   }
 
@@ -216,6 +260,7 @@ export default function App() {
     setArtifacts([]);
     setParentNote('');
     setSubjects('language arts, science');
+    setValidationErrors([]);
   }
 
   return (
@@ -285,6 +330,16 @@ export default function App() {
               placeholder="Accepted as evidence of..."
             />
           </label>
+          {validationErrors.length ? (
+            <div className="validation-panel">
+              <strong>Validation needs attention</strong>
+              <ul>
+                {validationErrors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           <button type="button" disabled={!canReview} onClick={acceptReceipt}>Accept receipt</button>
           <button type="button" onClick={resetSession}>Start new session</button>
         </article>
@@ -313,7 +368,7 @@ export default function App() {
 
       <section className="card full">
         <h2>Latest receipt preview</h2>
-        <pre>{JSON.stringify(receipts.at(-1) ?? null, null, 2)}</pre>
+        <pre>{JSON.stringify(latestReceipt, null, 2)}</pre>
       </section>
 
       <section className="card full">
