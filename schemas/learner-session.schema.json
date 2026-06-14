@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/learner-session.schema.json",
+  "title": "StegLearn Learner Session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "created_at",
+    "updated_at",
+    "learner_id",
+    "state",
+    "wonder",
+    "activity_types",
+    "artifacts",
+    "learner_explanation"
+  ],
+  "properties": {
+    "session_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "state": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "wonder-captured",
+        "activity-selected",
+        "artifact-added",
+        "explanation-captured",
+        "parent-review-pending",
+        "receipt-draft",
+        "receipt-accepted",
+        "receipt-rejected",
+        "receipt-needs-follow-up",
+        "portfolio-saved"
+      ]
+    },
+    "wonder": { "type": "string" },
+    "activity_types": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "learner_explanation": { "type": "string" },
+    "parent_note": { "type": "string" },
+    "ai_suggestions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "next_questions": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
