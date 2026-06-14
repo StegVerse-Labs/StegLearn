@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/admissibility-decision.schema.json",
+  "title": "StegLearn Admissibility Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision_id",
+    "created_at",
+    "learner_id",
+    "evidence_mode",
+    "decision_class",
+    "reason",
+    "reviewed_by",
+    "source_receipt_id",
+    "privacy"
+  ],
+  "properties": {
+    "decision_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "evidence_mode": { "type": "string" },
+    "decision_class": {
+      "type": "string",
+      "enum": ["known-accepted", "new-emerging", "needs-support", "insufficient"]
+    },
+    "reason": { "type": "string" },
+    "reviewed_by": { "type": "string" },
+    "source_receipt_id": { "type": "string" },
+    "source_profile_id": { "type": "string" },
+    "privacy": {
+      "type": "string",
+      "enum": ["private", "parent-approved-export", "public"]
+    },
+    "non_capture_note": { "type": "string" }
+  }
+}
