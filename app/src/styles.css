@@ -42,6 +42,10 @@ textarea {
   color: #172033;
 }
 
+input[type="file"] {
+  padding: 0.65rem;
+}
+
 textarea {
   min-height: 7rem;
   resize: vertical;
@@ -51,6 +55,13 @@ label {
   display: grid;
   gap: 0.5rem;
   font-weight: 700;
+}
+
+audio,
+video,
+img {
+  max-width: 100%;
+  border-radius: 1rem;
 }
 
 pre {
@@ -137,5 +148,34 @@ pre {
 .actions {
   display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.speech-capture,
+.media-evidence {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.hint {
+  margin: 0;
+  color: #4b5874;
+  font-size: 0.9rem;
+}
+
+.error {
+  margin: 0;
+  color: #a32020;
+  font-weight: 700;
+}
+
+.artifact-list {
+  display: grid;
+  gap: 1rem;
+  padding-left: 1.25rem;
+}
+
+.artifact-list li {
+  display: grid;
   gap: 0.5rem;
 }
