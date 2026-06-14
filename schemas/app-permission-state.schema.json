@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/app-permission-state.schema.json",
+  "title": "StegLearn App Permission State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "created_at",
+    "updated_at",
+    "learner_id",
+    "microphone",
+    "camera",
+    "media_library",
+    "local_storage",
+    "notifications",
+    "network"
+  ],
+  "properties": {
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "microphone": { "type": "string", "enum": ["unknown", "requested", "granted", "denied", "disabled-by-parent"] },
+    "camera": { "type": "string", "enum": ["unknown", "requested", "granted", "denied", "disabled-by-parent"] },
+    "media_library": { "type": "string", "enum": ["unknown", "requested", "granted", "denied", "disabled-by-parent"] },
+    "local_storage": { "type": "string", "enum": ["required", "available", "unavailable"] },
+    "notifications": { "type": "string", "enum": ["off", "requested", "on", "denied", "disabled-by-parent"] },
+    "network": { "type": "string", "enum": ["offline", "limited", "available", "disabled-by-parent"] },
+    "parent_note": { "type": "string" }
+  }
+}
