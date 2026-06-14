@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/speech-event.schema.json",
+  "title": "StegLearn Speech Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "speech_event_id",
+    "created_at",
+    "learner_id",
+    "mode",
+    "transcript_status",
+    "privacy"
+  ],
+  "properties": {
+    "speech_event_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["listen-for-wonder", "record-explanation", "read-prompt-aloud", "parent-transcribe", "parent-review-transcript"]
+    },
+    "raw_audio_uri": { "type": "string" },
+    "automatic_transcript": { "type": "string" },
+    "parent_reviewed_transcript": { "type": "string" },
+    "transcript_status": {
+      "type": "string",
+      "enum": ["automatic", "parent-reviewed", "parent-corrected", "uncertain", "rejected"]
+    },
+    "linked_session_id": { "type": "string" },
+    "linked_receipt_id": { "type": "string" },
+    "privacy": {
+      "type": "string",
+      "enum": ["private", "parent-approved-export", "public"]
+    },
+    "parent_note": { "type": "string" },
+    "ai_summary": { "type": "string" }
+  }
+}
