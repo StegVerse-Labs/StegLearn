@@ -1,6 +1,18 @@
 import { useMemo, useState } from 'react';
+import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
+import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, PortfolioRecord, SubjectMapping } from './types';
-import { exportJson, loadPortfolio, loadReceipts, savePortfolio, saveReceipts } from './storage';
+import {
+  exportJson,
+  loadEntityLearningHistory,
+  loadLearningTransitionEvents,
+  loadPortfolio,
+  loadReceipts,
+  saveEntityLearningHistory,
+  saveLearningTransitionEvents,
+  savePortfolio,
+  saveReceipts,
+} from './storage';
 
 const activityTypes: ActivityType[] = [
   'question',
@@ -125,6 +137,8 @@ export default function App() {
   const [subjects, setSubjects] = useState('language arts, science');
   const [receipts, setReceipts] = useState<LearningReceipt[]>(() => loadReceipts());
   const [portfolio, setPortfolio] = useState<PortfolioRecord | null>(() => loadPortfolio());
+  const [transitionEvents, setTransitionEvents] = useState<LearningTransitionEvent[]>(() => loadLearningTransitionEvents());
+  const [entityHistory, setEntityHistory] = useState<EntityLearningHistory | null>(() => loadEntityLearningHistory());
 
   const canReview = useMemo(() => {
     return Boolean(session.wonder.trim() && session.learner_explanation.trim() && parentNote.trim());
@@ -174,13 +188,20 @@ export default function App() {
     if (!canReview) return;
 
     const receipt = buildReceipt(session, artifacts, parentNote, subjects);
+    const transitionEvent = createReceiptAcceptedEvent(receipt, artifacts);
     const nextReceipts = [...receipts, receipt];
+    const nextTransitionEvents = [...transitionEvents, transitionEvent];
     const nextPortfolio = updatePortfolio(portfolio, receipt, artifacts.map((artifact) => artifact.artifact_id));
+    const nextEntityHistory = updateEntityHistory(entityHistory, transitionEvent, receipt, artifacts);
 
     setReceipts(nextReceipts);
+    setTransitionEvents(nextTransitionEvents);
     setPortfolio(nextPortfolio);
+    setEntityHistory(nextEntityHistory);
     saveReceipts(nextReceipts);
+    saveLearningTransitionEvents(nextTransitionEvents);
     savePortfolio(nextPortfolio);
+    saveEntityLearningHistory(nextEntityHistory);
     updateSession({ state: 'portfolio-saved' });
   }
 
@@ -195,9 +216,9 @@ export default function App() {
     <main className="shell">
       <header className="hero">
         <p className="eyebrow">StegLearn prototype</p>
-        <h1>Wonder → Evidence → Receipt</h1>
+        <h1>Wonder → Evidence → Receipt → History</h1>
         <p>
-          Local-first learner loop. No account. No cloud requirement. Parent review before portfolio save.
+          Local-first learner loop. No account. No cloud requirement. Parent review before portfolio and entity history save.
         </p>
       </header>
 
@@ -271,8 +292,9 @@ export default function App() {
         </article>
 
         <article className="card">
-          <h2>6. Portfolio/export</h2>
+          <h2>6. Portfolio/history/export</h2>
           <p>Accepted receipts: {receipts.length}</p>
+          <p>Transition events: {transitionEvents.length}</p>
           <p>Current session state: {session.state}</p>
           <div className="actions">
             <button type="button" disabled={!receipts.length} onClick={() => exportJson('steglearn-receipts.json', receipts)}>
@@ -281,6 +303,12 @@ export default function App() {
             <button type="button" disabled={!portfolio} onClick={() => exportJson('steglearn-portfolio.json', portfolio)}>
               Export portfolio JSON
             </button>
+            <button type="button" disabled={!transitionEvents.length} onClick={() => exportJson('steglearn-transition-events.json', transitionEvents)}>
+              Export transition events JSON
+            </button>
+            <button type="button" disabled={!entityHistory} onClick={() => exportJson('steglearn-entity-history.json', entityHistory)}>
+              Export entity history JSON
+            </button>
           </div>
         </article>
       </section>
@@ -288,6 +316,11 @@ export default function App() {
       <section className="card full">
         <h2>Latest receipt preview</h2>
         <pre>{JSON.stringify(receipts.at(-1) ?? null, null, 2)}</pre>
+      </section>
+
+      <section className="card full">
+        <h2>Entity learning history preview</h2>
+        <pre>{JSON.stringify(entityHistory, null, 2)}</pre>
       </section>
     </main>
   );
