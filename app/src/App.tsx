@@ -15,6 +15,7 @@ import type {
   LearnerAdmissibilityProfile,
   ProfileUpdateDisposition,
 } from './admissibility';
+import { buildAdmissibilityConsistencyReport } from './admissibilityConsistency';
 import { buildAdmissibilityReplayReport } from './admissibilityReplay';
 import { createAdmissibilityProfileSnapshot } from './admissibilitySnapshot';
 import type { AdmissibilityProfileSnapshot } from './admissibilitySnapshot';
@@ -191,6 +192,10 @@ export default function App() {
   const admissibilityReplay = useMemo(
     () => buildAdmissibilityReplayReport(admissibilityDecisions, admissibilitySnapshots),
     [admissibilityDecisions, admissibilitySnapshots],
+  );
+  const admissibilityConsistency = useMemo(
+    () => buildAdmissibilityConsistencyReport(admissibilityProfile, admissibilityReplay),
+    [admissibilityProfile, admissibilityReplay],
   );
   const recommendedProfileDisposition = recommendedProfileUpdate(admissibilityPreview.decision_class);
   const canReview = Boolean(sessionValidation.ok && parentNote.trim() && subjects.trim());
@@ -455,6 +460,7 @@ export default function App() {
           <p>Admissibility decisions: {admissibilityDecisions.length}</p>
           <p>Profile snapshots: {admissibilitySnapshots.length}</p>
           <p>Replay steps: {admissibilityReplay.total_steps}</p>
+          <p>Consistency: {admissibilityConsistency.consistent ? 'consistent' : 'needs review'}</p>
           <p>Known accepted modes: {admissibilityProfile?.accepted_evidence_modes.join(', ') || 'none yet'}</p>
           <p>Emerging modes: {admissibilityProfile?.emerging_evidence_modes.join(', ') || 'none yet'}</p>
           <p>Modes needing support: {admissibilityProfile?.modes_needing_support.join(', ') || 'none yet'}</p>
@@ -469,8 +475,17 @@ export default function App() {
             <button type="button" disabled={!admissibilityDecisions.length} onClick={() => exportJson('steglearn-admissibility-timeline.json', admissibilityTimeline)}>Export admissibility timeline JSON</button>
             <button type="button" disabled={!admissibilitySnapshots.length} onClick={() => exportJson('steglearn-admissibility-snapshots.json', admissibilitySnapshots)}>Export profile snapshots JSON</button>
             <button type="button" disabled={!admissibilityReplay.total_steps} onClick={() => exportJson('steglearn-admissibility-replay.json', admissibilityReplay)}>Export replay report JSON</button>
+            <button type="button" disabled={!admissibilityProfile && !admissibilityReplay.total_steps} onClick={() => exportJson('steglearn-admissibility-consistency.json', admissibilityConsistency)}>Export consistency report JSON</button>
           </div>
         </article>
+      </section>
+
+      <section className="card full">
+        <h2>Admissibility consistency report</h2>
+        <p>Status: {admissibilityConsistency.consistent ? 'consistent' : 'needs review'}</p>
+        <p>Differences: {admissibilityConsistency.differences.length}</p>
+        <p>Warnings: {admissibilityConsistency.warnings.length}</p>
+        <pre>{JSON.stringify(admissibilityConsistency, null, 2)}</pre>
       </section>
 
       <section className="card full">
