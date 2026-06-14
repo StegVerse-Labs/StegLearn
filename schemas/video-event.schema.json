@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StegVerse-Labs/StegLearn/schemas/video-event.schema.json",
+  "title": "StegLearn Video Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "video_event_id",
+    "created_at",
+    "learner_id",
+    "mode",
+    "description",
+    "privacy",
+    "review_status"
+  ],
+  "properties": {
+    "video_event_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "learner_id": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["playback", "capture", "review", "artifact", "reflection"]
+    },
+    "video_uri": { "type": "string" },
+    "description": { "type": "string" },
+    "timestamp_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["timestamp", "note"],
+        "properties": {
+          "timestamp": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "transcript_uri": { "type": "string" },
+    "linked_session_id": { "type": "string" },
+    "linked_receipt_id": { "type": "string" },
+    "privacy": {
+      "type": "string",
+      "enum": ["private", "parent-approved-export", "public"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["draft", "parent-reviewed", "accepted", "rejected", "needs-edit"]
+    },
+    "parent_note": { "type": "string" },
+    "ai_summary": { "type": "string" }
+  }
+}
