@@ -214,6 +214,26 @@ pre {
   background: #fff8e8;
 }
 
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.timeline-card {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid #d6ddec;
+  border-radius: 1rem;
+  padding: 0.85rem;
+  background: #f8faff;
+}
+
+.timeline-card span {
+  color: #4b5874;
+  font-size: 0.9rem;
+}
+
 .artifact-list {
   display: grid;
   gap: 1rem;
