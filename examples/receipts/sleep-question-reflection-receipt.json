@@ -1,0 +1,45 @@
+{
+  "receipt_id": "example-sleep-question-reflection-001",
+  "created_at": "2026-06-14T00:00:00Z",
+  "learner_id": "learner-example-001",
+  "wonder": "Why does sleep feel instant after falling asleep, even though falling asleep can feel slow?",
+  "activity_summary": "Learner discussed the difference between the process of falling asleep and the experience of being asleep. The discussion connected subjective time, consciousness, rest, and waking up in the morning.",
+  "learner_explanation": "Sleep feels instant after you fall asleep, but getting there can feel slow. If you had to feel every second of the night, it would feel horrible.",
+  "parent_review": {
+    "reviewed_by": "parent-example",
+    "reviewed_at": "2026-06-14T00:05:00Z",
+    "review_note": "Accepted as evidence of reflective reasoning about time perception, consciousness, and lived experience.",
+    "accepted": true
+  },
+  "subject_mappings": [
+    {
+      "subject": "science",
+      "evidence_note": "Learner discussed sleep, waking, and subjective experience."
+    },
+    {
+      "subject": "language arts",
+      "evidence_note": "Learner expressed a multi-part idea and used comparison to explain it."
+    },
+    {
+      "subject": "philosophy",
+      "evidence_note": "Learner considered whether conscious experience changes the meaning of time."
+    }
+  ],
+  "evidence_items": [
+    {
+      "type": "parent_note",
+      "description": "Parent-recorded conversation summary."
+    },
+    {
+      "type": "learner_quote",
+      "description": "Learner described sleep as instant after falling asleep and imagined the opposite case as unbearable."
+    }
+  ],
+  "status": "accepted",
+  "next_questions": [
+    "What happens to our sense of time during dreams?",
+    "Why does waiting feel slow but sleeping feels fast?",
+    "How could we keep a sleep journal without making sleep harder?"
+  ],
+  "non_capture_note": "This receipt records one learning event and should not be used as a fixed identity label."
+}
