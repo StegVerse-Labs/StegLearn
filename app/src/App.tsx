@@ -15,6 +15,7 @@ import type {
   LearnerAdmissibilityProfile,
   ProfileUpdateDisposition,
 } from './admissibility';
+import { buildAdmissibilityTimeline } from './admissibilityTimeline';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, PortfolioRecord, SubjectMapping } from './types';
@@ -177,6 +178,10 @@ export default function App() {
     () => previewAdmissibilityDecision(admissibilityProfile, evidenceMode, sessionValidation.ok),
     [admissibilityProfile, evidenceMode, sessionValidation.ok],
   );
+  const admissibilityTimeline = useMemo(
+    () => buildAdmissibilityTimeline(admissibilityDecisions),
+    [admissibilityDecisions],
+  );
   const recommendedProfileDisposition = recommendedProfileUpdate(admissibilityPreview.decision_class);
   const canReview = Boolean(sessionValidation.ok && parentNote.trim() && subjects.trim());
   const latestReceipt = receipts.length ? receipts[receipts.length - 1] : null;
@@ -330,9 +335,7 @@ export default function App() {
       <header className="hero">
         <p className="eyebrow">StegLearn prototype</p>
         <h1>Wonder → Evidence → Receipt → History</h1>
-        <p>
-          Local-first learner loop. Admissibility changes by learner as reviewed evidence modes become known.
-        </p>
+        <p>Local-first learner loop. Admissibility changes by learner as reviewed evidence modes become known.</p>
       </header>
 
       <section className="grid">
@@ -440,26 +443,31 @@ export default function App() {
           <p>Modes needing support: {admissibilityProfile?.modes_needing_support.join(', ') || 'none yet'}</p>
           <p>Current session state: {session.state}</p>
           <div className="actions">
-            <button type="button" disabled={!receipts.length} onClick={() => exportJson('steglearn-receipts.json', receipts)}>
-              Export receipts JSON
-            </button>
-            <button type="button" disabled={!portfolio} onClick={() => exportJson('steglearn-portfolio.json', portfolio)}>
-              Export portfolio JSON
-            </button>
-            <button type="button" disabled={!transitionEvents.length} onClick={() => exportJson('steglearn-transition-events.json', transitionEvents)}>
-              Export transition events JSON
-            </button>
-            <button type="button" disabled={!entityHistory} onClick={() => exportJson('steglearn-entity-history.json', entityHistory)}>
-              Export entity history JSON
-            </button>
-            <button type="button" disabled={!admissibilityProfile} onClick={() => exportJson('steglearn-admissibility-profile.json', admissibilityProfile)}>
-              Export admissibility profile JSON
-            </button>
-            <button type="button" disabled={!admissibilityDecisions.length} onClick={() => exportJson('steglearn-admissibility-decisions.json', admissibilityDecisions)}>
-              Export admissibility decisions JSON
-            </button>
+            <button type="button" disabled={!receipts.length} onClick={() => exportJson('steglearn-receipts.json', receipts)}>Export receipts JSON</button>
+            <button type="button" disabled={!portfolio} onClick={() => exportJson('steglearn-portfolio.json', portfolio)}>Export portfolio JSON</button>
+            <button type="button" disabled={!transitionEvents.length} onClick={() => exportJson('steglearn-transition-events.json', transitionEvents)}>Export transition events JSON</button>
+            <button type="button" disabled={!entityHistory} onClick={() => exportJson('steglearn-entity-history.json', entityHistory)}>Export entity history JSON</button>
+            <button type="button" disabled={!admissibilityProfile} onClick={() => exportJson('steglearn-admissibility-profile.json', admissibilityProfile)}>Export admissibility profile JSON</button>
+            <button type="button" disabled={!admissibilityDecisions.length} onClick={() => exportJson('steglearn-admissibility-decisions.json', admissibilityDecisions)}>Export admissibility decisions JSON</button>
+            <button type="button" disabled={!admissibilityDecisions.length} onClick={() => exportJson('steglearn-admissibility-timeline.json', admissibilityTimeline)}>Export admissibility timeline JSON</button>
           </div>
         </article>
+      </section>
+
+      <section className="card full">
+        <h2>Admissibility timeline summary</h2>
+        <div className="timeline-grid">
+          {admissibilityTimeline.modes.map((entry) => (
+            <div className="timeline-card" key={entry.evidence_mode}>
+              <strong>{entry.evidence_mode}</strong>
+              <span>decisions: {entry.decision_count}</span>
+              <span>accepted: {entry.accepted_count}</span>
+              <span>emerging: {entry.emerging_count}</span>
+              <span>needs support: {entry.needs_support_count}</span>
+              <span>latest update: {entry.latest_profile_update}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="card full">
