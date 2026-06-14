@@ -1,0 +1,41 @@
+{
+  "receipt_id": "example-toddler-sentence-construction-001",
+  "created_at": "2026-06-14T00:30:00Z",
+  "learner_id": "learner-example-002",
+  "wonder": "How is the learner using known words to express new ideas?",
+  "activity_summary": "Learner constructed an original sentence from known words to express a specific event or idea rather than only repeating memorized phrases.",
+  "learner_explanation": "Parent-transcribed expression should be entered here using the learner's words when available.",
+  "parent_review": {
+    "reviewed_by": "parent-example",
+    "reviewed_at": "2026-06-14T00:35:00Z",
+    "review_note": "Accepted as evidence of generative language use: selecting known words and arranging them to express meaning.",
+    "accepted": true
+  },
+  "subject_mappings": [
+    {
+      "subject": "language arts",
+      "evidence_note": "Learner combined known words into an original sentence."
+    },
+    {
+      "subject": "social-emotional learning",
+      "evidence_note": "Learner used language to communicate a specific experience or event."
+    }
+  ],
+  "evidence_items": [
+    {
+      "type": "parent_note",
+      "description": "Parent-recorded note about sentence construction."
+    },
+    {
+      "type": "learner_quote",
+      "description": "Exact learner sentence may be added when recorded."
+    }
+  ],
+  "status": "accepted",
+  "next_questions": [
+    "What new sentence forms are appearing?",
+    "Which events does the learner choose to describe?",
+    "How does the learner combine words to request, narrate, or explain?"
+  ],
+  "non_capture_note": "This receipt records one learning event and should not be used as a fixed identity label."
+}
