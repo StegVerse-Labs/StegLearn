@@ -15,6 +15,8 @@ import type {
   LearnerAdmissibilityProfile,
   ProfileUpdateDisposition,
 } from './admissibility';
+import { createAdmissibilityProfileSnapshot } from './admissibilitySnapshot';
+import type { AdmissibilityProfileSnapshot } from './admissibilitySnapshot';
 import { buildAdmissibilityTimeline } from './admissibilityTimeline';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
@@ -22,12 +24,14 @@ import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, Por
 import {
   exportJson,
   loadAdmissibilityDecisions,
+  loadAdmissibilityProfileSnapshots,
   loadEntityLearningHistory,
   loadLearnerAdmissibilityProfile,
   loadLearningTransitionEvents,
   loadPortfolio,
   loadReceipts,
   saveAdmissibilityDecisions,
+  saveAdmissibilityProfileSnapshots,
   saveEntityLearningHistory,
   saveLearnerAdmissibilityProfile,
   saveLearningTransitionEvents,
@@ -172,6 +176,7 @@ export default function App() {
   const [entityHistory, setEntityHistory] = useState<EntityLearningHistory | null>(() => loadEntityLearningHistory());
   const [admissibilityProfile, setAdmissibilityProfile] = useState<LearnerAdmissibilityProfile | null>(() => loadLearnerAdmissibilityProfile());
   const [admissibilityDecisions, setAdmissibilityDecisions] = useState<AdmissibilityDecision[]>(() => loadAdmissibilityDecisions());
+  const [admissibilitySnapshots, setAdmissibilitySnapshots] = useState<AdmissibilityProfileSnapshot[]>(() => loadAdmissibilityProfileSnapshots());
 
   const sessionValidation = useMemo(() => validateSessionForReview(session, artifacts), [session, artifacts]);
   const admissibilityPreview = useMemo(
@@ -188,6 +193,7 @@ export default function App() {
   const latestAdmissibilityDecision = admissibilityDecisions.length
     ? admissibilityDecisions[admissibilityDecisions.length - 1]
     : null;
+  const latestSnapshot = admissibilitySnapshots.length ? admissibilitySnapshots[admissibilitySnapshots.length - 1] : null;
 
   function updateSession(patch: Partial<LearnerSession>) {
     setValidationErrors([]);
@@ -300,9 +306,11 @@ export default function App() {
       profileUpdateDisposition,
     );
 
+    const snapshot = createAdmissibilityProfileSnapshot(nextAdmissibilityProfile, decision);
     const nextReceipts = [...receipts, receipt];
     const nextTransitionEvents = [...transitionEvents, transitionEvent];
     const nextAdmissibilityDecisions = [...admissibilityDecisions, decision];
+    const nextAdmissibilitySnapshots = [...admissibilitySnapshots, snapshot];
 
     setReceipts(nextReceipts);
     setTransitionEvents(nextTransitionEvents);
@@ -310,12 +318,14 @@ export default function App() {
     setEntityHistory(nextEntityHistory);
     setAdmissibilityProfile(nextAdmissibilityProfile);
     setAdmissibilityDecisions(nextAdmissibilityDecisions);
+    setAdmissibilitySnapshots(nextAdmissibilitySnapshots);
     saveReceipts(nextReceipts);
     saveLearningTransitionEvents(nextTransitionEvents);
     savePortfolio(nextPortfolio);
     saveEntityLearningHistory(nextEntityHistory);
     saveLearnerAdmissibilityProfile(nextAdmissibilityProfile);
     saveAdmissibilityDecisions(nextAdmissibilityDecisions);
+    saveAdmissibilityProfileSnapshots(nextAdmissibilitySnapshots);
     setValidationErrors([]);
     updateSession({ state: 'portfolio-saved' });
   }
@@ -438,6 +448,7 @@ export default function App() {
           <p>Accepted receipts: {receipts.length}</p>
           <p>Transition events: {transitionEvents.length}</p>
           <p>Admissibility decisions: {admissibilityDecisions.length}</p>
+          <p>Profile snapshots: {admissibilitySnapshots.length}</p>
           <p>Known accepted modes: {admissibilityProfile?.accepted_evidence_modes.join(', ') || 'none yet'}</p>
           <p>Emerging modes: {admissibilityProfile?.emerging_evidence_modes.join(', ') || 'none yet'}</p>
           <p>Modes needing support: {admissibilityProfile?.modes_needing_support.join(', ') || 'none yet'}</p>
@@ -450,6 +461,7 @@ export default function App() {
             <button type="button" disabled={!admissibilityProfile} onClick={() => exportJson('steglearn-admissibility-profile.json', admissibilityProfile)}>Export admissibility profile JSON</button>
             <button type="button" disabled={!admissibilityDecisions.length} onClick={() => exportJson('steglearn-admissibility-decisions.json', admissibilityDecisions)}>Export admissibility decisions JSON</button>
             <button type="button" disabled={!admissibilityDecisions.length} onClick={() => exportJson('steglearn-admissibility-timeline.json', admissibilityTimeline)}>Export admissibility timeline JSON</button>
+            <button type="button" disabled={!admissibilitySnapshots.length} onClick={() => exportJson('steglearn-admissibility-snapshots.json', admissibilitySnapshots)}>Export profile snapshots JSON</button>
           </div>
         </article>
       </section>
@@ -478,6 +490,11 @@ export default function App() {
       <section className="card full">
         <h2>Latest admissibility decision preview</h2>
         <pre>{JSON.stringify(latestAdmissibilityDecision, null, 2)}</pre>
+      </section>
+
+      <section className="card full">
+        <h2>Latest admissibility profile snapshot</h2>
+        <pre>{JSON.stringify(latestSnapshot, null, 2)}</pre>
       </section>
 
       <section className="card full">
