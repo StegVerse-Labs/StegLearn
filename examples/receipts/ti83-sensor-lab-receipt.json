@@ -1,0 +1,57 @@
+{
+  "receipt_id": "example-ti83-sensor-lab-001",
+  "created_at": "2026-09-02T17:00:00Z",
+  "learner_id": "learner-example-001",
+  "wonder": "Can an old calculator help me understand a real sensor and decide when an action should happen?",
+  "activity_summary": "The learner inspected a restored TI-83 Plus, wrote a TI-BASIC decision program, entered Arduino sensor readings into a calculator list, graphed the readings, and explained why the Arduino must retain the safety gate for any physical action.",
+  "learner_explanation": "The sensor turns something in the room into numbers. The Arduino reads the sensor. The calculator can show the numbers and ask for an action, but the Arduino checks the rules before it turns on the LED.",
+  "parent_review": {
+    "reviewed_by": "parent-example",
+    "reviewed_at": "2026-09-02T17:10:00Z",
+    "review_note": "Accepted as evidence of supervised electronics care, early programming, data representation, system-boundary reasoning and an emerging distinction between capability and authority. This does not establish independent electrical-work permission.",
+    "accepted": true
+  },
+  "subject_mappings": [
+    {
+      "subject": "computer science",
+      "evidence_note": "Learner used variables, input, conditional logic and output in TI-BASIC."
+    },
+    {
+      "subject": "mathematics",
+      "evidence_note": "Learner represented a sequence of sensor readings as a list and graph."
+    },
+    {
+      "subject": "engineering",
+      "evidence_note": "Learner distinguished the roles of sensor, Arduino, communication bridge, calculator and actuator."
+    },
+    {
+      "subject": "responsible technology use",
+      "evidence_note": "Learner explained why a command may be refused when a safety condition is not satisfied."
+    }
+  ],
+  "evidence_items": [
+    {
+      "type": "image",
+      "description": "Before-and-after photographs of the calculator battery compartment after adult-controlled cleanup."
+    },
+    {
+      "type": "code",
+      "description": "TI-BASIC program producing both allowed and denied decisions from three conditions."
+    },
+    {
+      "type": "experiment_result",
+      "description": "Calculator list and graph created from a short series of Arduino sensor readings."
+    },
+    {
+      "type": "learner_quote",
+      "description": "Learner explanation distinguishing an action request from execution authority."
+    }
+  ],
+  "status": "accepted",
+  "next_questions": [
+    "How can the Arduino send a validated reading directly to the calculator?",
+    "What should happen if the sensor disconnects during an action request?",
+    "Which evidence should be recorded when the Arduino refuses a request?"
+  ],
+  "non_capture_note": "This receipt records one supervised learning event and must not be treated as a fixed learner identity, mastery claim, or permission for unsupervised electrical work."
+}
