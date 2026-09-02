@@ -55,13 +55,29 @@ docs/
   homeschool-receipt-model.md
   ai-scaffold-policy.md
 
+lessons/
+  README.md
+  ti83-arduino-sensor-lab/
+    README.md
+    lesson.json
+
 schemas/
+  learning-path.schema.json
   learning-receipt.schema.json
 
 examples/
   receipts/
     sleep-question-reflection-receipt.json
+    ti83-sensor-lab-receipt.json
 ```
+
+## Learning Paths
+
+StegLearn keeps reusable lessons inside a governed `lessons/` catalog rather than splitting each subject or project into a separate repository.
+
+A learning path is an adaptable scaffold, not a fixed curriculum lane or learner identity. Each path includes supervision guidance, safety gates, evidence opportunities, reflection prompts, subject mappings, and a machine-readable manifest.
+
+The first materialized path is the [TI-83 Plus and Arduino Sensor Lab](lessons/ti83-arduino-sensor-lab/README.md), which moves from electronics restoration through TI-BASIC, sensor observations, a protected Arduino bridge, and governed low-voltage action.
 
 ## Relationship to Learning Transition Governance
 
@@ -73,8 +89,8 @@ The doctrine asks what makes a learning transition admissible.
 
 StegLearn captures the learning loop, preserves evidence, and produces parent-reviewed receipts.
 
-## Initial Status
+## Implementation Status
 
-This repository begins as a design and documentation foundation.
+The repository contains a local-first web prototype, schemas, example receipts, governance documentation, and reusable learning-path foundations.
 
-The first implementation target is a minimal learner loop that can record a child question, connect it to an activity, capture the learner explanation, allow parent review, and generate a portable learning receipt.
+The current implementation target remains a complete learner loop that records a question, connects it to an activity, captures the learner explanation, requires parent review, produces a portable receipt, and preserves it in a portfolio.

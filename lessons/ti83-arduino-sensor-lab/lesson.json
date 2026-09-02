@@ -1,0 +1,105 @@
+{
+  "learning_path_id": "ti83-arduino-sensor-lab-v1",
+  "version": "1.0.0",
+  "title": "TI-83 Plus and Arduino Sensor Lab",
+  "summary": "Restore a TI-83 Plus, learn TI-BASIC, graph sensor observations, connect an Arduino bridge, and distinguish an action request from authorized execution.",
+  "audience": {
+    "minimum_age_guidance": 8,
+    "adult_supervision_required": true,
+    "adult_only_tasks": [
+      "Remove leaking batteries and complete the initial residue cleanup.",
+      "Perform soldering or exposed-circuit work.",
+      "Verify electrical protection for the TI link interface.",
+      "Investigate electrical faults."
+    ]
+  },
+  "equipment": {
+    "required": [
+      "TI-83 Plus",
+      "Four fresh matching AAA batteries",
+      "Arduino Mega 2560 or Nano",
+      "Breadboard and low-voltage LED",
+      "At least one low-voltage sensor"
+    ],
+    "optional": [
+      "CR1616 backup battery",
+      "TI 2.5 mm data cable",
+      "Photoresistor",
+      "BMP180",
+      "Humiture sensor",
+      "PIR motion sensor",
+      "MQ-2 gas-response sensor",
+      "RC522 RFID reader",
+      "nRF24L01 radio",
+      "W5100 Ethernet module",
+      "Four-channel relay module"
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "restore",
+      "title": "Restore the calculator",
+      "activity_types": ["build", "observation", "care-task"],
+      "objectives": [
+        "Observe how batteries supply a circuit.",
+        "Document restoration without overstating operational proof."
+      ],
+      "safety_gate": "An adult removes leaking batteries and completes initial cleanup before learner handling.",
+      "evidence": ["Before-and-after image", "Condition checklist", "Learner explanation", "Boot result"]
+    },
+    {
+      "stage_id": "program",
+      "title": "Make the calculator behave",
+      "activity_types": ["code", "logic-puzzle", "experiment"],
+      "objectives": [
+        "Use variables, input, conditionals and output.",
+        "Produce and explain both allowed and denied outcomes."
+      ],
+      "safety_gate": "Programs remain simulations and do not control physical loads.",
+      "evidence": ["TI-BASIC program", "Corrected bug", "Learner explanation"]
+    },
+    {
+      "stage_id": "observe",
+      "title": "Graph sensor observations",
+      "activity_types": ["observation", "experiment", "code"],
+      "objectives": [
+        "Collect a short series of physical measurements.",
+        "Graph data and describe uncertainty or limitations."
+      ],
+      "safety_gate": "Use low-voltage sensors only; MQ-2 results are never treated as a certified safety alarm.",
+      "evidence": ["Prediction", "Reading list", "Graph", "Observation note"]
+    },
+    {
+      "stage_id": "connect",
+      "title": "Build the Arduino/TI bridge",
+      "activity_types": ["build", "code", "experiment"],
+      "objectives": [
+        "Distinguish sensor acquisition, translation, transfer and interpretation.",
+        "Transfer a validated value or list to the calculator."
+      ],
+      "safety_gate": "An adult verifies a protected link interface; sensors never connect directly to the calculator port.",
+      "evidence": ["Interface diagram", "Transmitted test value", "Received value", "Failure observation"]
+    },
+    {
+      "stage_id": "govern",
+      "title": "Govern a low-voltage action",
+      "activity_types": ["code", "experiment", "reflection"],
+      "objectives": [
+        "Distinguish an action proposal from execution authority.",
+        "Demonstrate one allowed and one refused low-voltage LED request."
+      ],
+      "safety_gate": "Only an isolated battery-powered LED load is permitted; household voltage is excluded.",
+      "evidence": ["Action request", "Gate inputs", "Allowed result", "Refused result", "Learner explanation"]
+    }
+  ],
+  "subject_mappings": [
+    "mathematics",
+    "computer science",
+    "engineering",
+    "physical science",
+    "data literacy",
+    "systems thinking",
+    "responsible technology use"
+  ],
+  "non_capture_note": "This path provides adaptable learning opportunities and must not be used as a fixed learner identity, ranking, destiny, or autonomous permission."
+}
