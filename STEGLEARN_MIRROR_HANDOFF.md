@@ -39,6 +39,8 @@ TI-83 Plus restoration
 - Complete staged lesson guide for an approximately eight-year-old learner.
 - Example parent-reviewed learning receipt.
 - Root README navigation and repository structure updates.
+- Application catalog rendering for machine-readable learning paths.
+- One-click path selection that prefills the learner wonder, first-stage activity types, subject mappings, and next-stage questions.
 
 ## Validation Completed
 
