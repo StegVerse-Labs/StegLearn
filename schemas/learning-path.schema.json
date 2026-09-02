@@ -9,6 +9,7 @@
     "version",
     "title",
     "summary",
+    "starter_wonder",
     "audience",
     "equipment",
     "stages",
@@ -20,6 +21,7 @@
     "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
     "title": { "type": "string", "minLength": 1 },
     "summary": { "type": "string", "minLength": 1 },
+    "starter_wonder": { "type": "string", "minLength": 1 },
     "audience": {
       "type": "object",
       "additionalProperties": false,

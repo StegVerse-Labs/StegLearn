@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "title": "TI-83 Plus and Arduino Sensor Lab",
   "summary": "Restore a TI-83 Plus, learn TI-BASIC, graph sensor observations, connect an Arduino bridge, and distinguish an action request from authorized execution.",
+  "starter_wonder": "Can an old calculator help me understand a real sensor and decide when an action should happen?",
   "audience": {
     "minimum_age_guidance": 8,
     "adult_supervision_required": true,

@@ -22,6 +22,8 @@ import type { AdmissibilityProfileSnapshot } from './admissibilitySnapshot';
 import { buildAdmissibilityTimeline } from './admissibilityTimeline';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
+import { learningPaths } from './learningPaths';
+import type { LearningPath } from './learningPaths';
 import type { ActivityType, ArtifactRecord, LearnerSession, LearningReceipt, PortfolioRecord, SubjectMapping } from './types';
 import {
   exportJson,
@@ -350,6 +352,22 @@ export default function App() {
     setValidationErrors([]);
   }
 
+  function startLearningPath(path: LearningPath) {
+    const firstStage = path.stages[0];
+
+    setArtifacts([]);
+    setParentNote('');
+    setSubjects(path.subject_mappings.join(', '));
+    setValidationErrors([]);
+    setSession({
+      ...createSession(),
+      wonder: path.starter_wonder,
+      activity_types: firstStage?.activity_types ?? [],
+      state: firstStage ? 'activity-selected' : 'wonder-captured',
+      next_questions: path.stages.slice(1).map((stage) => `What will we discover during: ${stage.title}?`),
+    });
+  }
+
   return (
     <main className="shell">
       <header className="hero">
@@ -357,6 +375,34 @@ export default function App() {
         <h1>Wonder → Evidence → Receipt → History</h1>
         <p>Local-first learner loop. Admissibility changes by learner as reviewed evidence modes become known.</p>
       </header>
+
+      <section className="card full">
+        <p className="eyebrow">Reusable scaffolds</p>
+        <h2>Learning paths</h2>
+        <p className="hint">Choose a path to prefill the learner loop. The learner and parent may change, pause, reorder or abandon it at any time.</p>
+        <div className="timeline-grid">
+          {learningPaths.map((path) => (
+            <article className="timeline-card" key={path.learning_path_id}>
+              <strong>{path.title}</strong>
+              <span>Version {path.version} · Age guidance {path.audience.minimum_age_guidance}+</span>
+              <p>{path.summary}</p>
+              <p className="hint">{path.stages.length} stages · Adult supervision {path.audience.adult_supervision_required ? 'required' : 'optional'}</p>
+              <details>
+                <summary>View stages and safety gates</summary>
+                <ol>
+                  {path.stages.map((stage) => (
+                    <li key={stage.stage_id}>
+                      <strong>{stage.title}</strong>
+                      <p>{stage.safety_gate}</p>
+                    </li>
+                  ))}
+                </ol>
+              </details>
+              <button type="button" onClick={() => startLearningPath(path)}>Use this learning path</button>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="grid">
         <article className="card">
