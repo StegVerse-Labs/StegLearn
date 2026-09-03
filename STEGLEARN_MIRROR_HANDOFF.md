@@ -82,15 +82,16 @@ The public repository may contain only anonymized, synthetic, or generalized exa
 - The application production build previously passed with TypeScript and Vite.
 - The obsolete TypeScript `moduleResolution` setting was updated to the current bundler mode.
 - The standard Vite client type declaration and generated-directory ignore rules were added.
-- The early-language revision example was authored against the existing `schemas/learning-receipt.schema.json` field contract; repository-level automated validation of the new artifact remains to be run before any release claim.
+- The early-language revision example is covered by the committed receipt fixture validator wired into the production build command.
+- Acceptance tests now include longitudinal comparison and committed-receipt fixture validation.
+- No production-build success claim is made until an observed build/CI result is available.
 
 ## Remaining Machine Work
 
-- Add repository validation coverage for `examples/receipts/early-language-revision-receipt.json`.
-- Add UI support that makes evidence mode selection and longitudinal comparison visible without requiring public export.
-- Add local portfolio filtering/comparison for parent-reviewed early-language receipts.
+- Observe a successful production build that executes the new committed-receipt validator; source installation alone is not runtime/build evidence.
 - Ensure any future AI-generated developmental summary cites underlying learner quote/parent note records and remains distinguishable from raw evidence.
-- Decide release/tag state only after repository validation of the new lane.
+- Consider richer comparison filters only after actual private/local longitudinal records exist; do not invent family evidence.
+- Decide release/tag state only after observed repository validation of the new lane.
 
 ## Remaining Physical / User Work
 
