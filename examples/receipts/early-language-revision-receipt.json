@@ -1,0 +1,42 @@
+{
+  "receipt_id": "example-early-language-revision-001",
+  "created_at": "2026-09-03T14:30:00Z",
+  "learner_id": "learner-example-early-language-001",
+  "wonder": "How is the learner revising a spoken label after new conversational input?",
+  "activity_summary": "During an ordinary observation, the learner named a perceived attribute, heard an adult offer a nearby but different interpretation, paused, and then revised the original attribute label while maintaining the same referent.",
+  "learner_explanation": "Exact child wording is intentionally omitted from this public example; private/local records should preserve the learner's actual words when parent-approved.",
+  "parent_review": {
+    "reviewed_by": "parent-example",
+    "reviewed_at": "2026-09-03T14:35:00Z",
+    "review_note": "Accepted as evidence of a reviewed language-revision event. This receipt records the sequence without claiming a fixed developmental trait.",
+    "accepted": true
+  },
+  "subject_mappings": [
+    {
+      "subject": "language arts",
+      "evidence_note": "Learner revised a spoken descriptive label in context."
+    },
+    {
+      "subject": "early learning observation",
+      "evidence_note": "Sequence preserves initial categorization, conversational input, pause, and revision."
+    }
+  ],
+  "evidence_items": [
+    {
+      "type": "parent_note",
+      "description": "Parent-recorded context and utterance sequence."
+    },
+    {
+      "type": "learner_quote",
+      "description": "Exact learner wording belongs in the private/local record and is omitted from this public example."
+    }
+  ],
+  "status": "accepted",
+  "next_questions": [
+    "Are future revisions becoming more precise?",
+    "Does the learner maintain the same referent while changing an attribute label?",
+    "Are hesitation markers appearing before self-corrections?",
+    "How do later events compare with earlier parent-reviewed language observations?"
+  ],
+  "non_capture_note": "This event must not be used as a fixed identity, ability, or developmental label."
+}
