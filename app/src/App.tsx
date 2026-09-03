@@ -21,6 +21,7 @@ import { createAdmissibilityProfileSnapshot } from './admissibilitySnapshot';
 import type { AdmissibilityProfileSnapshot } from './admissibilitySnapshot';
 import { buildAdmissibilityTimeline } from './admissibilityTimeline';
 import { createReceiptAcceptedEvent, updateEntityHistory } from './history';
+import { buildEarlyLanguageComparison } from './earlyLanguageComparison';
 import type { EntityLearningHistory, LearningTransitionEvent } from './history';
 import { learningPaths } from './learningPaths';
 import type { LearningPath } from './learningPaths';
@@ -198,6 +199,10 @@ export default function App() {
   const admissibilityConsistency = useMemo(
     () => buildAdmissibilityConsistencyReport(admissibilityProfile, admissibilityReplay),
     [admissibilityProfile, admissibilityReplay],
+  );
+  const earlyLanguageComparison = useMemo(
+    () => buildEarlyLanguageComparison(receipts, admissibilityDecisions),
+    [receipts, admissibilityDecisions],
   );
   const recommendedProfileDisposition = recommendedProfileUpdate(admissibilityPreview.decision_class);
   const canReview = Boolean(sessionValidation.ok && parentNote.trim() && subjects.trim());
@@ -569,6 +574,25 @@ export default function App() {
       <section className="card full">
         <h2>Replay final profile summary</h2>
         <pre>{JSON.stringify(admissibilityReplay.final_profile_summary, null, 2)}</pre>
+      </section>
+
+      <section className="card full">
+        <h2>Early-language longitudinal comparison</h2>
+        <p>Reviewed observations: {earlyLanguageComparison.observation_count}</p>
+        <p>Revision events: {earlyLanguageComparison.revision_event_count}</p>
+        <p>First observed: {earlyLanguageComparison.first_observed_at ?? 'none yet'}</p>
+        <p>Latest observed: {earlyLanguageComparison.latest_observed_at ?? 'none yet'}</p>
+        <p className="hint">{earlyLanguageComparison.non_capture_note}</p>
+        <div className="actions">
+          <button
+            type="button"
+            disabled={!earlyLanguageComparison.observation_count}
+            onClick={() => exportJson('steglearn-early-language-comparison.json', earlyLanguageComparison)}
+          >
+            Export private comparison JSON
+          </button>
+        </div>
+        <pre>{JSON.stringify(earlyLanguageComparison.observations, null, 2)}</pre>
       </section>
 
       <section className="card full">
