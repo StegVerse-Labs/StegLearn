@@ -70,3 +70,26 @@ then the system can still generate a parent-reviewed receipt.
 Given multiple receipts show recurring interests,
 when the portfolio summarizes them,
 then the summary must describe evidence patterns without declaring fixed learner identity.
+
+
+## Test 11: Early-Language Longitudinal Comparison
+
+Given multiple parent-reviewed language receipts exist for the same local learner,
+when the portfolio/history view is rendered,
+then the system identifies eligible language observations chronologically without converting the pattern into a fixed developmental label.
+
+Required evidence:
+
+```text
+accepted learning receipts
+admissibility decisions or language subject mapping
+chronological observation comparison
+private-by-default export
+non-capture note
+```
+
+## Test 12: Committed Receipt Fixture Validation
+
+Given one or more JSON receipt examples are committed under `examples/receipts/`,
+when the application production build runs,
+then every committed receipt example must pass the repository fixture validator before TypeScript/Vite build execution.
