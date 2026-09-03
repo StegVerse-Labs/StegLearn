@@ -84,11 +84,14 @@ The public repository may contain only anonymized, synthetic, or generalized exa
 - The standard Vite client type declaration and generated-directory ignore rules were added.
 - The early-language revision example is covered by the committed receipt fixture validator wired into the production build command.
 - Acceptance tests now include longitudinal comparison and committed-receipt fixture validation.
+- `.github/workflows/validate.yml` is installed as a validation-only GitHub Actions lane that runs `npm ci` and the existing `npm run build` gate on push, pull request, or manual dispatch.
 - No production-build success claim is made until an observed build/CI result is available.
 
 ## Remaining Machine Work
 
 - Observe a successful production build that executes the new committed-receipt validator; source installation alone is not runtime/build evidence.
+- GitHub currently reports no combined status/check contexts or workflow run receipt for validation commit `3c90f95ea4328617c627d83428aeb4fcf34c102a`.
+- A fresh-checkout build was attempted from the session execution container but could not reach `github.com` because DNS/network access was unavailable; this is an execution-environment access failure, not repository validation evidence and not a code failure.
 - Ensure any future AI-generated developmental summary cites underlying learner quote/parent note records and remains distinguishable from raw evidence.
 - Consider richer comparison filters only after actual private/local longitudinal records exist; do not invent family evidence.
 - Decide release/tag state only after observed repository validation of the new lane.
@@ -110,4 +113,4 @@ The public repository may contain only anonymized, synthetic, or generalized exa
 
 ## Release State
 
-Not release-tagged by this lane. The early-language continuity documentation and anonymized example are installed, but validation and UI/local-portfolio integration remain before a release decision.
+Not release-tagged by this lane. The early-language continuity implementation, local longitudinal UI, anonymized example, build gate, and validation workflow are installed. Release remains blocked only on observed successful validation evidence and any release-specific review.
