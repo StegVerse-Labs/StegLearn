@@ -13,6 +13,8 @@ import type {
 } from './curriculum';
 import { createBoundedCurriculumDraft } from './curriculumGeneration';
 import type { GeneratedCurriculum } from './curriculumGeneration';
+import { createCurriculumReviewPackage } from './curriculumReview';
+import type { CurriculumReviewPackage } from './curriculumReview';
 import { exportJson } from './storage';
 
 function splitList(value: string): string[] {
@@ -37,6 +39,7 @@ export default function GoalIntakePanel() {
   const [reviewerIds, setReviewerIds] = useState('teacher-local-001');
   const [admittedGoal, setAdmittedGoal] = useState<ParticipantGoalIntake | null>(null);
   const [generatedCurriculum, setGeneratedCurriculum] = useState<GeneratedCurriculum | null>(null);
+  const [reviewPackage, setReviewPackage] = useState<CurriculumReviewPackage | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
 
   const canAdmit = useMemo(
@@ -82,6 +85,7 @@ export default function GoalIntakePanel() {
 
     setAdmittedGoal(goal);
     setGeneratedCurriculum(null);
+    setReviewPackage(null);
     setErrors([]);
   }
 
@@ -92,16 +96,31 @@ export default function GoalIntakePanel() {
     }
 
     setGeneratedCurriculum(createBoundedCurriculumDraft(admittedGoal));
+    setReviewPackage(null);
     setErrors([]);
+  }
+
+  function materializeReviewPackage() {
+    if (!admittedGoal || !generatedCurriculum) {
+      setErrors(['Create a governed goal intake and generated curriculum before materializing review.']);
+      return;
+    }
+
+    try {
+      setReviewPackage(createCurriculumReviewPackage(admittedGoal, generatedCurriculum));
+      setErrors([]);
+    } catch (error) {
+      setErrors([error instanceof Error ? error.message : 'Curriculum review package could not be materialized.']);
+    }
   }
 
   return (
     <div className="shell">
       <section className="card full">
-        <p className="eyebrow">StegLearn goal conversation</p>
+        <p className="eyebrow">StegLearn goal → curriculum → review</p>
         <h1>What do you want to know or be able to do?</h1>
         <p className="hint">
-          This surface creates the governed participant goal record and can materialize a bounded, reviewable curriculum draft that consumes that exact record. It does not yet claim AI-authored expert curriculum quality or teaching execution.
+          This surface creates a governed goal record, a bounded generated curriculum, and synchronized human/machine review views of that exact curriculum version. It does not yet claim AI-authored expert curriculum quality, approval, or teaching execution.
         </p>
 
         <div className="grid">
@@ -201,21 +220,29 @@ export default function GoalIntakePanel() {
         ) : null}
 
         <div className="actions">
-          <button type="button" disabled={!canAdmit} onClick={admitGoal}>Create governed goal intake</button>
+          <button type="button" disabled={!canAdmit} onClick={admitGoal}>1. Create governed goal intake</button>
           <button
             type="button"
             disabled={!admittedGoal}
             onClick={() => admittedGoal && exportJson('steglearn-participant-goal-intake.json', admittedGoal)}
           >
-            Export goal intake JSON
+            Export goal JSON
           </button>
-          <button type="button" disabled={!admittedGoal} onClick={generateCurriculum}>Generate bounded curriculum draft</button>
+          <button type="button" disabled={!admittedGoal} onClick={generateCurriculum}>2. Generate bounded curriculum</button>
           <button
             type="button"
             disabled={!generatedCurriculum}
             onClick={() => generatedCurriculum && exportJson('steglearn-generated-curriculum.json', generatedCurriculum)}
           >
             Export curriculum JSON
+          </button>
+          <button type="button" disabled={!generatedCurriculum} onClick={materializeReviewPackage}>3. Materialize review package</button>
+          <button
+            type="button"
+            disabled={!reviewPackage}
+            onClick={() => reviewPackage && exportJson('steglearn-curriculum-review-package.json', reviewPackage)}
+          >
+            Export review package JSON
           </button>
         </div>
 
@@ -224,9 +251,39 @@ export default function GoalIntakePanel() {
 
         <h2>Generated curriculum preview</h2>
         <p className="hint">
-          This is a deterministic bounded prototype proving goal-intake → generated-curriculum contract flow. Subject-matter generation quality and live AI teaching remain separate implementation/evidence predicates.
+          Deterministic bounded prototype proving goal-intake → generated-curriculum contract flow. Subject-matter generation quality and live AI teaching remain separate implementation/evidence predicates.
         </p>
         <pre>{JSON.stringify(generatedCurriculum, null, 2)}</pre>
+
+        {reviewPackage ? (
+          <>
+            <h2>Human-readable curriculum review</h2>
+            <p><strong>Curriculum:</strong> {reviewPackage.curriculum_id} · version {reviewPackage.curriculum_version}</p>
+            <p><strong>Learning goal:</strong> {reviewPackage.learning_goal}</p>
+            <p><strong>Requested depth:</strong> {reviewPackage.requested_depth}</p>
+            <p><strong>Review state:</strong> {reviewPackage.review_surface.review_state}</p>
+            <p><strong>Teaching binding:</strong> {reviewPackage.teaching_binding.bound_curriculum_id} @ {reviewPackage.teaching_binding.bound_curriculum_version}</p>
+            <p><strong>Review requirement:</strong> {reviewPackage.teaching_binding.review_requirement}</p>
+            <div className="timeline-grid">
+              {reviewPackage.canonical_curriculum.sequence.map((unit) => (
+                <article className="timeline-card" key={unit.unit_id}>
+                  <strong>{unit.title}</strong>
+                  <span>{unit.unit_id}</span>
+                  <p><strong>Outcomes</strong></p>
+                  <ul>{unit.outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}</ul>
+                  <p><strong>Activities</strong></p>
+                  <ul>{unit.activities.map((activity) => <li key={activity}>{activity}</li>)}</ul>
+                  <p><strong>Evidence</strong></p>
+                  <ul>{unit.evidence_expectations.map((expectation) => <li key={expectation}>{expectation}</li>)}</ul>
+                </article>
+              ))}
+            </div>
+
+            <h2>Machine-readable synchronized review package</h2>
+            <p className="hint">The human-readable review above and the JSON below are projections of the same curriculum ID/version. Review state begins UNREVIEWED; this surface does not mint approval.</p>
+            <pre>{JSON.stringify(reviewPackage, null, 2)}</pre>
+          </>
+        ) : null}
       </section>
     </div>
   );
