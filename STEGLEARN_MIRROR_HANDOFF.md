@@ -59,11 +59,33 @@ Curriculum: `steglearn.stegverse-foundations.v1`
 
 Current state:
 
-`SOURCE_CURRICULUM_CONTRACT_AND_MATERIALIZED_LESSON_01_INSTALLED_VALIDATION_PENDING`
+`SOURCE_CURRICULUM_CONTRACT_AND_MATERIALIZED_LESSON_01_VALIDATED`
 
-StegVerse Foundations teaches ecosystem purpose, principles, mechanics, authority boundaries, evidence, and practical operation through source-bound guided tutorials. The first materialized module is `SVF-01 / What Is StegVerse?` and is grounded in the canonical organization-level `StegVerse-Labs/.github/docs/ECOSYSTEM_PURPOSE_INVARIANT.md`.
+StegVerse Foundations teaches ecosystem purpose, principles, mechanics, authority boundaries, evidence, and practical operation through source-bound guided tutorials. The first materialized module is `SVF-01 / What Is StegVerse?`, grounded in `StegVerse-Labs/.github/docs/ECOSYSTEM_PURPOSE_INVARIANT.md`.
 
 The curriculum uses canonical `lesson.json`, `scenes.json`, and `captions.json` packages. AI SiteFlow is the intended first static renderer target, but generated presentation does not become instructional authority.
+
+### Goal → curriculum → review → teaching lane (adjacent open PR)
+
+Open PR: `StegVerse-Labs/StegLearn#3`
+
+Branch: `feature/teacher-first-public-model`
+
+The PR implements a generalized governed product path:
+
+```text
+participant goal conversation
+→ governed goal-intake record
+→ generated curriculum
+→ deterministic curriculum hash
+→ synchronized review package
+→ contextual approval / revision
+→ exact-version/hash teaching session
+```
+
+This is complementary to StegVerse Foundations: PR #3 owns generalized participant-goal/curriculum/review/teaching mechanics; Foundations owns source-bound ecosystem tutorial content and renderer-neutral presentation packages. They must converge without creating duplicate curriculum authority or losing either exact-source lesson provenance or exact-version teaching semantics.
+
+Because Foundations changed `README.md`, `STEGLEARN_MIRROR_HANDOFF.md`, and workflow validation after PR #3 branched, the PR is currently adjacent/conflicting work that requires reconciliation before merge. Do not resolve that by deleting either lane or by creating a second review/teaching mechanism.
 
 ## Governing Boundaries
 
@@ -74,18 +96,15 @@ The curriculum uses canonical `lesson.json`, `scenes.json`, and `captions.json` 
 - Do not overwrite earlier observations with later developmental conclusions.
 - Public repository artifacts must not expose a child's public name, exact birth date, school, routine location, or unnecessary identifying context.
 - Local learner identifiers are preferred for actual family records.
-- Battery-leak cleanup, soldering, exposed circuitry, and electrical interfaces require adult control.
-- No household voltage, weapon construction, exposed high-voltage experiments, or safety-critical sensor claims.
-- The TI-83 Plus is a learner interface; it does not acquire independent actuator authority.
-- An Arduino bridge must validate any actuator request and fail closed.
 - External educational-system interaction must cross the applicable Interlock/InTr boundary before becoming StegLearn state.
 - Public-source evaluation does not imply partnership, endorsement, curriculum adoption, authenticated access, or production integration.
-- Edukors or any other external educational system cannot directly mutate learner records, Master Records, SKAP Vault, repositories, publication, finance, or governance state.
+- Edukors or any external educational system cannot directly mutate learner records, Master Records, SKAP Vault, repositories, publication, finance, or governance state.
 - Ordinary public web retrieval is not authentic InTr execution evidence.
 - Task Registry owns work intent; WorkerCoordinator owns executable claims/fences; Master Records owns observed/reconstructable reality; Interlock/InTr governs ingress/egress. Source and CI do not manufacture those authorities.
 - Canonical lesson claims must bind declared sources. A renderer may not invent claims or change authority/runtime semantics.
 - Captions are first-class canonical lesson data for the static guided-tutorial package, not post-hoc transcription authority.
 - Generated video/audio/transcripts/thumbnails are downstream presentation artifacts and do not become canonical lesson sources by generation alone.
+- Generalized curriculum generation/review/teaching must bind exact curriculum identity/version/hash and must not silently replace source-bound lesson provenance.
 
 ## Implemented
 
@@ -103,7 +122,6 @@ The curriculum uses canonical `lesson.json`, `scenes.json`, and `captions.json` 
 - Learning receipts support learner quote and parent note.
 - `docs/early-language-longitudinal-continuity.md` defines evidence/privacy/revision/comparison rules.
 - An anonymized revision example is committed; family-specific observations remain private/local.
-- TypeScript target compatibility was repaired without changing evidence semantics.
 
 ### Edukors lane
 
@@ -114,94 +132,89 @@ The curriculum uses canonical `lesson.json`, `scenes.json`, and `captions.json` 
 
 ### StegVerse Foundations lane
 
-- Added `lessons/stegverse-foundations/README.md` and `path.json` with twelve ordered roadmap modules.
-- Materialized `01-what-is-stegverse/{README.md,lesson.json,scenes.json,captions.json}`.
-- Added `schemas/video-lesson.schema.json`, `schemas/lesson-scene.schema.json`, and `schemas/caption-track.schema.json`.
-- Added `generated/README.md` defining generated output as non-authoritative.
-- Added `scripts/validate-stegverse-foundations.mjs` enforcing source binding, module state, claim/scene/caption integrity, renderer fail-closed behavior, README completeness, and preflight markers.
-- Bound the Foundations validator into `.github/workflows/validate.yml` before the existing Edukors/build gates.
-- README and `lessons/README.md` are updated in the same material source change set because the new curriculum/rendering contract changes repository capability meaning.
+- `lessons/stegverse-foundations/path.json` defines twelve ordered ecosystem modules.
+- `01-what-is-stegverse/{README.md,lesson.json,scenes.json,captions.json}` is materialized.
+- `schemas/video-lesson.schema.json`, `schemas/lesson-scene.schema.json`, and `schemas/caption-track.schema.json` are installed.
+- `generated/README.md` defines generated output as non-authoritative.
+- `scripts/validate-stegverse-foundations.mjs` enforces source binding, module state, claim/scene/caption integrity, renderer fail-closed behavior, README completeness, and preflight markers.
+- `.github/workflows/validate.yml` runs the Foundations validator before the existing Edukors/build gates.
+- README and `lessons/README.md` were updated in the same material source change set because the new curriculum/rendering contract changes repository capability meaning.
 - No AI SiteFlow runtime connection, generated video, public Site page, learner completion, or release is claimed by source installation.
+
+### Adjacent PR #3 lane
+
+- The open branch contains source for participant-goal intake, generated curriculum, curriculum review, deterministic content hash, exact-version/hash teaching sessions, UI surfaces, schemas, and validation.
+- Its latest observed PR validation is successful, but the branch predates the Foundations mainline commit and now conflicts on shared documentation/validation surfaces.
+- No merge, release, or replacement of Foundations is implied by the PR's successful CI.
 
 ## Validation Completed
 
-Historical validated facts retained:
-
-- repository JSON/schema/build gates for the pre-existing learning paths and receipts;
-- production TypeScript/Vite build passes;
-- committed receipt validation is wired into the build;
-- Edukors source validator and public-observation binding have observed passing repository validation/build runs.
-
-StegVerse Foundations source validation is pending the first workflow run containing `scripts/validate-stegverse-foundations.mjs`.
+- Existing repository JSON/schema/build gates pass.
+- Edukors source validator and public-observation binding have observed passing validation/build runs.
+- StegVerse Foundations commit `44e59faac44c5acd81bf43465e99eb4751c6c21f` produced GitHub Actions run `34048210035` with conclusion `SUCCESS`, including Foundations validation, Edukors validation, committed-receipt validation, TypeScript, and Vite build.
+- PR #3 has its own successful branch validation, but branch CI does not resolve its current convergence/conflict with main.
 
 ## Resolved Machine Preflight State
 
-Current coordination resolved before the StegVerse Foundations mutation:
+Current coordination resolved before Foundations mutation:
 
 - `StegVerse-Labs/.github/data/canonical-task-registry.json` generation `15`;
 - `StegVerse-Labs/.github/docs/CANONICAL_WORK_COORDINATION_SYSTEM_MIRROR_HANDOFF.md`;
-- WorkerCoordinator registry generation `22` reported by the canonical coordination reconciliation;
-- Master Records custody/reconstruction source paths are present, while authentic lifecycle input remains evidence-dependent;
-- cross-task search found no existing StegVerse Foundations / SiteFlow video-lesson / caption-track implementation in StegLearn;
-- the stale COSV StegLearn pre-audit classification is not treated as execution authority;
+- WorkerCoordinator registry generation `22` reported by canonical coordination reconciliation;
+- Master Records custody/reconstruction source paths exist while authentic lifecycle input remains evidence-dependent;
+- initial cross-task search found no pre-existing Foundations/SiteFlow lesson package;
+- after the mainline commit, PR #3 was observed as adjacent/convergent work and is now explicitly registered here for reconciliation;
 - canonical ecosystem-purpose source is `StegVerse-Labs/.github/docs/ECOSYSTEM_PURPOSE_INVARIANT.md`.
 
-README impact for the Foundations implementation: `README_UPDATE_REQUIRED`, satisfied in the source change set.
+README impact for the material Foundations implementation: `README_UPDATE_REQUIRED`, satisfied in the source change set.
+
+README impact for this post-validation/adjacency handoff reconciliation: `NO_README_CHANGE_REQUIRED`; it changes status/coordination truth only, not repository behavior or capability meaning.
 
 ## Remaining Machine Work
 
-### StegVerse Foundations — current highest source lane
+### Highest priority — converge Foundations with PR #3
 
-1. Observe a passing CI run containing the Foundations validator plus the existing repository gates.
-2. Materialize modules 02–12 one at a time from current canonical component handoffs/sources; do not fill gaps from model memory.
-3. Build a provider-neutral or actual AI SiteFlow export package only when its input contract is known.
-4. Preserve lesson/version/source/renderer provenance for generated outputs.
-5. Add interactive checkpoints and accepted learning receipts only when the actual learner interaction path exists.
-6. When admitted, publish `StegVerse.org/steglearn` as a public explanation/roadmap derived from canonical StegLearn sources rather than as an independent truth store.
+1. Reconcile PR #3 against current main without discarding either generalized teaching mechanics or Foundations source-bound lesson/rendering contracts.
+2. Preserve one curriculum authority model: source-bound canonical lesson claims can feed a generalized curriculum/review/teaching session, but neither representation silently overrides the other.
+3. Ensure the merged workflow validates both the Foundations contract and PR #3 curriculum/teaching contracts.
+4. Re-run full CI on the reconciled result before merge.
+
+### StegVerse Foundations after convergence
+
+- Materialize modules 02–12 one at a time from current canonical component handoffs/sources; do not fill gaps from model memory.
+- Build a provider-neutral or actual AI SiteFlow export package only when its input contract is known.
+- Preserve lesson/version/source/renderer provenance for generated outputs.
+- Connect Foundations checkpoints to the generalized teaching/evidence/receipt path only after exact-version and authority boundaries are reconciled.
+- When admitted, publish `StegVerse.org/steglearn` as a public explanation/roadmap derived from canonical StegLearn sources rather than an independent truth store.
 
 ### Edukors lane
 
-Authentic runtime sequence remains:
-
-1. canonical task/WorkerCoordinator/Interlock substrate admits the executable observation task;
-2. Universal InTr executes public observation through the existing `external-api-observation` profile;
-3. exact egress/ingress correlation and a StegLearn evaluation record are preserved;
-4. retained evidence is reconciled through Master Records;
-5. privileged API/MCP/authenticated/AI-agent capability is separately admitted only if collaboration requires it.
-
-### Other StegLearn lanes
-
-- Future AI-generated developmental summaries must cite underlying learner evidence and remain distinct from raw observations.
-- Richer longitudinal filters should wait for actual private/local records.
-- Release/tag decisions require lane-specific evidence predicates and release review.
+Authentic runtime sequence remains task admission → Universal InTr observation → exact egress/ingress correlation → StegLearn evaluation record → Master Records reconciliation. Privileged API/MCP/authenticated/AI-agent capability remains separately admitted.
 
 ## Remaining Physical / User Work
 
 ### TI-83 / Arduino
 
-- Adult handles leaking-battery cleanup/restoration and protected low-voltage hardware work.
-- Identify the available calculator cable type.
-- Restrict the first actuator experiment to a low-voltage LED.
+Adult handles leaking-battery cleanup/restoration, protected low-voltage hardware work, cable identification, and first LED-only actuator work.
 
 ### Early-language
 
-- Parent-approved exact observations belong in the private/local learner record; unavailable historical exact quotes cannot be reconstructed without source records.
+Parent-approved exact observations belong in the private/local learner record; unavailable historical exact quotes cannot be reconstructed without source records.
 
 ### Edukors
 
-- No user action is required for source installation/profile reuse. Direct collaboration outreach remains human-mediated unless separately admitted.
+No user action is required for source installation/profile reuse. Direct collaboration outreach remains human-mediated unless separately admitted.
 
-### StegVerse Foundations
+### StegVerse Foundations / PR #3 convergence
 
-- No user action is required for the source curriculum implementation or repository validation.
-- A later real AI SiteFlow account/API/input-format decision may require user participation if no machine-authorized interface is available.
+No user action is required for source reconciliation or repository validation. A later real AI SiteFlow account/API/input-format decision may require user participation if no machine-authorized interface is available.
 
 ## Release State
 
-Not release-tagged by these lanes. Foundations source installation is not public Site publication, generated-video production, learner-completion evidence, runtime integration, or release authority. Edukors remains evaluation-only without authentic runtime evidence.
+Not release-tagged. Foundations source/build validation is not public Site publication, generated-video production, learner-completion evidence, runtime integration, or release authority. PR #3 remains open and unmerged. Edukors remains evaluation-only without authentic runtime evidence.
 
 When this repository reaches an actual tag/release predicate, verify pertinent propagation through existing contracts to `StegVerse-Labs/Site`, `GCAT-BCAT-Engine/Publisher`, `StegVerse-Labs/admissibility-wiki`, and `StegVerse-002/stegguardian-wiki` as applicable.
 
 ## Archive Readiness
 
-Current lane state, preflight, source files, evidence boundaries, and remaining predicates are repository-resident. Repository work itself is not complete because Foundations validation/materialization and the separate Edukors runtime predicates remain open.
+Current lanes, validation evidence, adjacency/conflict state, authority boundaries, and remaining predicates are repository-resident. Repository work is not complete because PR #3 convergence, additional Foundations materialization, public Site work, and separate Edukors runtime predicates remain open.
