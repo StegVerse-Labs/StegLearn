@@ -1,6 +1,7 @@
 import type { ParticipantGoalIntake } from './curriculum';
 import type { GeneratedCurriculum } from './curriculumGeneration';
 import type { CurriculumReviewPackage } from './curriculumReview';
+import { verifyCurriculumReviewContentHash } from './curriculumReview';
 
 export type TeachingSessionState = 'ACTIVE' | 'PAUSED' | 'COMPLETED';
 export type TeachingEventType = 'SESSION_STARTED' | 'UNIT_PRESENTED' | 'UNIT_ADVANCED' | 'SESSION_PAUSED' | 'SESSION_COMPLETED';
@@ -19,6 +20,7 @@ export interface TeachingSession {
   participant_entity_id: string;
   curriculum_id: string;
   curriculum_version: string;
+  curriculum_content_hash_sha256: string;
   review_state_at_start: CurriculumReviewPackage['review_surface']['review_state'];
   teaching_authority: {
     review_requirement: CurriculumReviewPackage['teaching_binding']['review_requirement'];
@@ -48,16 +50,30 @@ function event(type: TeachingEventType, unitId: string | null, description: stri
 }
 
 export function canStartTeaching(reviewPackage: CurriculumReviewPackage): { ok: boolean; reason: string } {
+  if (!verifyCurriculumReviewContentHash(reviewPackage)) {
+    return { ok: false, reason: 'Curriculum content hash or teaching hash binding does not verify.' };
+  }
   if (!reviewPackage.teaching_binding.teachable) {
     return { ok: false, reason: 'The selected curriculum is not marked teachable.' };
   }
-  if (reviewPackage.teaching_binding.review_requirement === 'APPROVAL_REQUIRED' && reviewPackage.review_surface.review_state !== 'APPROVED') {
-    return { ok: false, reason: 'Teaching requires an APPROVED curriculum review state.' };
+  if (reviewPackage.teaching_binding.review_requirement === 'APPROVAL_REQUIRED') {
+    if (reviewPackage.review_surface.review_state !== 'APPROVED') {
+      return { ok: false, reason: 'Teaching requires an APPROVED curriculum review state.' };
+    }
+    const approvedHash = reviewPackage.review_surface.content_hash_sha256;
+    const hasMatchingApproval = reviewPackage.review_surface.reviews.some((review) =>
+      review.decision === 'APPROVE'
+      && review.authority_effect === 'APPROVAL_WITHIN_CONTEXT'
+      && review.reviewed_content_hash_sha256 === approvedHash,
+    );
+    if (!hasMatchingApproval) {
+      return { ok: false, reason: 'Teaching requires an approval explicitly bound to the current curriculum content hash.' };
+    }
   }
   if (reviewPackage.review_surface.review_state === 'REJECTED' || reviewPackage.review_surface.review_state === 'CHANGES_REQUESTED') {
     return { ok: false, reason: `Teaching cannot start while review state is ${reviewPackage.review_surface.review_state}.` };
   }
-  return { ok: true, reason: 'Teaching may start within the recorded authority and exact curriculum version.' };
+  return { ok: true, reason: 'Teaching may start within the recorded authority, exact curriculum version, and verified content hash.' };
 }
 
 export function startTeachingSession(
@@ -71,6 +87,9 @@ export function startTeachingSession(
   if (reviewPackage.teaching_binding.bound_curriculum_id !== curriculum.curriculum_id || reviewPackage.teaching_binding.bound_curriculum_version !== curriculum.curriculum_version) {
     throw new Error('Teaching binding does not match the exact generated curriculum version.');
   }
+  if (reviewPackage.teaching_binding.bound_content_hash_sha256 !== reviewPackage.review_surface.content_hash_sha256) {
+    throw new Error('Teaching binding does not match the reviewed curriculum content hash.');
+  }
 
   const readiness = canStartTeaching(reviewPackage);
   if (!readiness.ok) throw new Error(readiness.reason);
@@ -78,7 +97,7 @@ export function startTeachingSession(
   const firstUnit = curriculum.units[0] ?? null;
   const startedAt = now();
   const events: TeachingEvent[] = [
-    event('SESSION_STARTED', firstUnit?.unit_id ?? null, `Teaching session started for ${curriculum.curriculum_id}@${curriculum.curriculum_version}.`),
+    event('SESSION_STARTED', firstUnit?.unit_id ?? null, `Teaching session started for ${curriculum.curriculum_id}@${curriculum.curriculum_version} hash ${reviewPackage.review_surface.content_hash_sha256}.`),
   ];
   if (firstUnit) {
     events.push(event('UNIT_PRESENTED', firstUnit.unit_id, `Presented unit: ${firstUnit.title}.`));
@@ -90,6 +109,7 @@ export function startTeachingSession(
     participant_entity_id: goal.participant.entity_id,
     curriculum_id: curriculum.curriculum_id,
     curriculum_version: curriculum.curriculum_version,
+    curriculum_content_hash_sha256: reviewPackage.review_surface.content_hash_sha256,
     review_state_at_start: reviewPackage.review_surface.review_state,
     teaching_authority: {
       review_requirement: reviewPackage.teaching_binding.review_requirement,
@@ -101,7 +121,7 @@ export function startTeachingSession(
     started_at: startedAt,
     updated_at: startedAt,
     events,
-    non_capture_note: 'This session records teaching activity for one curriculum version and must not be treated as a permanent participant identity or credential.',
+    non_capture_note: 'This session records teaching activity for one curriculum version and reviewed content hash and must not be treated as a permanent participant identity or credential.',
   };
 }
 
