@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "relationship_id": "steglearn.edukors.evaluation.v1",
+  "local_system": "StegVerse-Labs/StegLearn",
+  "external_system": {
+    "name": "Edukors",
+    "origin": "https://edukors.org/"
+  },
+  "mode": "EVALUATION",
+  "interaction_classes": [
+    "OBSERVATION",
+    "REQUEST",
+    "RECOMMENDATION",
+    "EVIDENCE",
+    "ARTIFACT"
+  ],
+  "capabilities": [
+    "observe_public_educational_content",
+    "record_public_source_identity_and_retrieval_context",
+    "compare_public_educational_structure_with_steglearn",
+    "prepare_human_mediated_collaboration_request",
+    "admit_human_supplied_response_or_artifact_for_review",
+    "create_internal_research_or_evaluation_proposal"
+  ],
+  "restrictions": {
+    "authenticated_access": false,
+    "automated_mutation_external": false,
+    "direct_mutation_steglearn": false,
+    "partnership_inferred": false,
+    "new_machine_transport_requires_admission": true
+  },
+  "privacy": {
+    "learner_private_data_egress": false,
+    "public_source_evaluation_allowed": true
+  },
+  "runtime_state": "SOURCE_ONLY"
+}
