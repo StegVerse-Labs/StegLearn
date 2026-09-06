@@ -3,154 +3,51 @@
   "$id": "https://stegverse.org/schemas/steglearn/curriculum-review-package.schema.json",
   "title": "StegLearn Curriculum Review Package",
   "type": "object",
-  "required": [
-    "schema_version",
-    "curriculum_id",
-    "curriculum_version",
-    "learning_goal",
-    "requested_depth",
-    "canonical_curriculum",
-    "review_surface",
-    "teaching_binding"
-  ],
+  "required": ["schema_version","curriculum_id","curriculum_version","learning_goal","requested_depth","canonical_curriculum","review_surface","teaching_binding"],
   "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "steglearn.curriculum-review-package/v1"
-    },
-    "curriculum_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "curriculum_version": {
-      "type": "string",
-      "minLength": 1
-    },
-    "learning_goal": {
-      "type": "string",
-      "minLength": 1
-    },
-    "requested_depth": {
-      "type": "string",
-      "minLength": 1
-    },
-    "starting_point_summary": {
-      "type": ["string", "null"]
-    },
-    "constraints": {
-      "type": "array",
-      "items": { "type": "string" },
-      "default": []
-    },
+    "schema_version": {"type":"string","const":"steglearn.curriculum-review-package/v1"},
+    "curriculum_id": {"type":"string","minLength":1},
+    "curriculum_version": {"type":"string","minLength":1},
+    "learning_goal": {"type":"string","minLength":1},
+    "requested_depth": {"type":"string","minLength":1},
+    "starting_point_summary": {"type":["string","null"]},
+    "constraints": {"type":"array","items":{"type":"string"},"default":[]},
     "canonical_curriculum": {
-      "type": "object",
-      "required": ["objectives", "sequence", "completion_criteria"],
+      "type":"object",
+      "required":["objectives","sequence","completion_criteria"],
       "properties": {
-        "objectives": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "type": "string", "minLength": 1 }
-        },
-        "prerequisites": {
-          "type": "array",
-          "items": { "type": "string" },
-          "default": []
-        },
-        "sequence": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "required": ["unit_id", "title", "outcomes"],
-            "properties": {
-              "unit_id": { "type": "string", "minLength": 1 },
-              "title": { "type": "string", "minLength": 1 },
-              "outcomes": {
-                "type": "array",
-                "minItems": 1,
-                "items": { "type": "string", "minLength": 1 }
-              },
-              "activities": {
-                "type": "array",
-                "items": { "type": "string" },
-                "default": []
-              },
-              "evidence_expectations": {
-                "type": "array",
-                "items": { "type": "string" },
-                "default": []
-              }
-            },
-            "additionalProperties": true
-          }
-        },
-        "completion_criteria": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "type": "string", "minLength": 1 }
-        }
+        "objectives":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+        "prerequisites":{"type":"array","items":{"type":"string"},"default":[]},
+        "sequence":{"type":"array","minItems":1,"items":{"type":"object","required":["unit_id","title","outcomes"],"properties":{"unit_id":{"type":"string","minLength":1},"title":{"type":"string","minLength":1},"outcomes":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},"activities":{"type":"array","items":{"type":"string"},"default":[]},"evidence_expectations":{"type":"array","items":{"type":"string"},"default":[]}},"additionalProperties":true}},
+        "completion_criteria":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}
       },
-      "additionalProperties": true
+      "additionalProperties":true
     },
     "review_surface": {
-      "type": "object",
-      "required": ["human_readable_available", "machine_readable_available", "review_state"],
+      "type":"object",
+      "required":["human_readable_available","machine_readable_available","content_hash_sha256","review_state","reviews"],
       "properties": {
-        "human_readable_available": { "type": "boolean", "const": true },
-        "machine_readable_available": { "type": "boolean", "const": true },
-        "content_hash_sha256": {
-          "type": ["string", "null"],
-          "pattern": "^[a-f0-9]{64}$"
-        },
-        "review_state": {
-          "type": "string",
-          "enum": ["UNREVIEWED", "IN_REVIEW", "REVIEWED", "CHANGES_REQUESTED", "REJECTED", "APPROVED"]
-        },
-        "reviews": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["reviewer_entity_id", "reviewer_entity_type", "review_role", "decision"],
-            "properties": {
-              "reviewer_entity_id": { "type": "string", "minLength": 1 },
-              "reviewer_entity_type": {
-                "type": "string",
-                "enum": ["HUMAN", "AI", "ORGANIZATION", "OTHER_ADMITTED_ENTITY"]
-              },
-              "review_role": { "type": "string", "minLength": 1 },
-              "decision": {
-                "type": "string",
-                "enum": ["COMMENT", "REQUEST_CHANGES", "REJECT", "APPROVE"]
-              },
-              "comments": { "type": ["string", "null"] },
-              "reviewed_at": { "type": ["string", "null"], "format": "date-time" },
-              "authority_effect": {
-                "type": "string",
-                "enum": ["NONE", "ADVISORY", "REVISION_REQUEST", "APPROVAL_WITHIN_CONTEXT"]
-              }
-            },
-            "additionalProperties": false
-          },
-          "default": []
-        }
+        "human_readable_available":{"type":"boolean","const":true},
+        "machine_readable_available":{"type":"boolean","const":true},
+        "content_hash_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "review_state":{"type":"string","enum":["UNREVIEWED","IN_REVIEW","REVIEWED","CHANGES_REQUESTED","REJECTED","APPROVED"]},
+        "reviews":{"type":"array","items":{"type":"object","required":["reviewer_entity_id","reviewer_entity_type","review_role","decision","authority_effect","reviewed_content_hash_sha256"],"properties":{"reviewer_entity_id":{"type":"string","minLength":1},"reviewer_entity_type":{"type":"string","enum":["HUMAN","AI","ORGANIZATION","OTHER_ADMITTED_ENTITY"]},"review_role":{"type":"string","minLength":1},"decision":{"type":"string","enum":["COMMENT","REQUEST_CHANGES","REJECT","APPROVE"]},"comments":{"type":["string","null"]},"reviewed_at":{"type":["string","null"],"format":"date-time"},"authority_effect":{"type":"string","enum":["NONE","ADVISORY","REVISION_REQUEST","APPROVAL_WITHIN_CONTEXT"]},"reviewed_content_hash_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}},"additionalProperties":false},"default":[]}
       },
-      "additionalProperties": false
+      "additionalProperties":false
     },
     "teaching_binding": {
-      "type": "object",
-      "required": ["teachable", "bound_curriculum_id", "bound_curriculum_version"],
+      "type":"object",
+      "required":["teachable","bound_curriculum_id","bound_curriculum_version","bound_content_hash_sha256","review_requirement","material_change_requires_new_version"],
       "properties": {
-        "teachable": { "type": "boolean" },
-        "bound_curriculum_id": { "type": "string", "minLength": 1 },
-        "bound_curriculum_version": { "type": "string", "minLength": 1 },
-        "review_requirement": {
-          "type": "string",
-          "enum": ["REVIEW_AVAILABLE", "REVIEW_REQUIRED", "APPROVAL_REQUIRED"]
-        },
-        "material_change_requires_new_version": { "type": "boolean", "default": true }
+        "teachable":{"type":"boolean"},
+        "bound_curriculum_id":{"type":"string","minLength":1},
+        "bound_curriculum_version":{"type":"string","minLength":1},
+        "bound_content_hash_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "review_requirement":{"type":"string","enum":["REVIEW_AVAILABLE","REVIEW_REQUIRED","APPROVAL_REQUIRED"]},
+        "material_change_requires_new_version":{"type":"boolean","const":true}
       },
-      "additionalProperties": false
+      "additionalProperties":false
     }
   },
-  "additionalProperties": false
+  "additionalProperties":false
 }
