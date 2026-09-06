@@ -1,0 +1,38 @@
+{
+  "schema_version": "steglearn.participant-goal-intake/v1",
+  "goal_intake_id": "goal-python-foundations-001",
+  "goal_intake_version": "1.0.0",
+  "participant": {
+    "entity_id": "example-human-participant",
+    "entity_type": "HUMAN",
+    "admission_state": "HUMAN_CONTEXT"
+  },
+  "desired_outcome": "Develop enough Python knowledge to read, write, test, and explain small programs.",
+  "requested_depth": "BEGINNER",
+  "starting_point": {
+    "basis": "PARTICIPANT_DECLARED",
+    "summary": "No prior Python experience; basic familiarity with files and web browsers.",
+    "evidence_refs": []
+  },
+  "learning_context": {
+    "mode": "TEACHER_LED",
+    "human_authority_required": true,
+    "authority_entity_ids": ["example-teacher"]
+  },
+  "constraints": {
+    "time": ["Three 45-minute sessions per week"],
+    "resources": ["Browser-based Python runtime"],
+    "safety_or_regulatory": [],
+    "accessibility": []
+  },
+  "evidence_expectations": [
+    "Participant can explain variables, conditionals, loops, and functions in their own words.",
+    "Participant can write and revise a small Python program from a stated requirement.",
+    "Participant can identify and correct at least one defect using evidence from program behavior."
+  ],
+  "review_requirements": {
+    "curriculum_review_required": true,
+    "reviewer_entity_ids": ["example-teacher"]
+  },
+  "non_capture_note": "This goal establishes a learning request, not a fixed identity or permanent ability classification."
+}
