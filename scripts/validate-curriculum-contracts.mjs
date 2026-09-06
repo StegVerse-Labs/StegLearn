@@ -18,6 +18,7 @@ const curriculum = readJson('examples/curricula/python-foundations-generated-cur
 const goalSchema = readJson('schemas/participant-goal-intake.schema.json');
 const curriculumSchema = readJson('schemas/generated-curriculum.schema.json');
 const reviewSchema = readJson('schemas/curriculum-review-package.schema.json');
+const teachingSchema = readJson('schemas/teaching-session.schema.json');
 
 if (goalSchema.properties?.schema_version?.const !== 'steglearn.participant-goal-intake/v1') {
   fail('participant goal schema version contract drifted');
@@ -27,6 +28,9 @@ if (curriculumSchema.properties?.schema_version?.const !== 'steglearn.generated-
 }
 if (reviewSchema.properties?.schema_version?.const !== 'steglearn.curriculum-review-package/v1') {
   fail('curriculum review package schema version contract drifted');
+}
+if (teachingSchema.properties?.schema_version?.const !== 'steglearn.teaching-session/v1') {
+  fail('teaching session schema version contract drifted');
 }
 
 if (goal.schema_version !== 'steglearn.participant-goal-intake/v1') fail('goal example schema_version mismatch');
@@ -67,5 +71,13 @@ if (curriculum.review_binding?.material_change_requires_new_version !== true) fa
 if (curriculum.review_binding?.review_package_schema !== 'steglearn.curriculum-review-package/v1') fail('review package schema binding mismatch');
 if (curriculum.teaching_policy?.teaching_must_bind_exact_version !== true) fail('teaching must bind the exact curriculum version');
 if (curriculum.teaching_policy?.teachable !== true) fail('example curriculum should be teachable');
+
+const teachingRequired = new Set(teachingSchema.required ?? []);
+for (const requiredField of ['teaching_session_id', 'participant_entity_id', 'curriculum_id', 'curriculum_version', 'review_state_at_start', 'teaching_authority', 'state', 'events']) {
+  if (!teachingRequired.has(requiredField)) fail(`teaching session schema must require ${requiredField}`);
+}
+if (!teachingSchema.properties?.curriculum_id || !teachingSchema.properties?.curriculum_version) {
+  fail('teaching session schema must preserve exact curriculum identity and version');
+}
 
 console.log('StegLearn curriculum contracts: PASS');
