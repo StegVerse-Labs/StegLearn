@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stegverse.org/schemas/external-learning-interlock.schema.json",
+  "title": "StegLearn External Learning Interlock Relationship",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "relationship_id",
+    "local_system",
+    "external_system",
+    "mode",
+    "interaction_classes",
+    "capabilities",
+    "restrictions",
+    "privacy",
+    "runtime_state"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "relationship_id": {"type": "string", "minLength": 1},
+    "local_system": {"const": "StegVerse-Labs/StegLearn"},
+    "external_system": {
+      "type": "object",
+      "required": ["name", "origin"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "origin": {"type": "string", "pattern": "^https://edukors\\.org/?$"}
+      },
+      "additionalProperties": false
+    },
+    "mode": {"enum": ["EVALUATION", "INTEGRATION_CANDIDATE", "INTEGRATED"]},
+    "interaction_classes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["OBSERVATION", "REQUEST", "RECOMMENDATION", "EVIDENCE", "ARTIFACT"]},
+      "minItems": 1
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1
+    },
+    "restrictions": {
+      "type": "object",
+      "required": [
+        "authenticated_access",
+        "automated_mutation_external",
+        "direct_mutation_steglearn",
+        "partnership_inferred",
+        "new_machine_transport_requires_admission"
+      ],
+      "properties": {
+        "authenticated_access": {"const": false},
+        "automated_mutation_external": {"const": false},
+        "direct_mutation_steglearn": {"const": false},
+        "partnership_inferred": {"const": false},
+        "new_machine_transport_requires_admission": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "required": ["learner_private_data_egress", "public_source_evaluation_allowed"],
+      "properties": {
+        "learner_private_data_egress": {"const": false},
+        "public_source_evaluation_allowed": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "runtime_state": {
+      "enum": ["SOURCE_ONLY", "RUNTIME_INTERACTION_OBSERVED"]
+    }
+  },
+  "additionalProperties": false
+}
