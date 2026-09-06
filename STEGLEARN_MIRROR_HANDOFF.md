@@ -134,7 +134,8 @@ Preserved PASS evidence:
 - `34014483851` — goal-intake UI;
 - `34014587317` — bounded generated-curriculum UI;
 - `34014660474` — synchronized review rendering;
-- `34014762575` — **PASS** on head `7ff39a7b67d668c83ffd75fff774d6adb18f6249` after review decisions, teaching-session schema/runtime UI, teaching contract validation, and README update. Edukors validator and full build completed successfully.
+- `34014762575` — review decisions + teaching-session implementation PASS on `7ff39a7b67d668c83ffd75fff774d6adb18f6249`;
+- `34014798310` — **latest-head PASS** on `9fd7a6624110bcaed193849d61232d3adaa5bcc8`; Edukors validator and full validation/build job completed SUCCESS after canonical handoff update.
 
 These are source/build facts only. They do not prove arbitrary-domain subject-matter quality, production conversational AI teaching, classroom effectiveness, runtime sensor observation, authentic external-learning InTr execution, or production activation.
 
@@ -171,4 +172,4 @@ When release predicates are actually satisfied, verify propagation to `StegVerse
 
 ## Archive readiness
 
-The current product direction, preflight, contracts, goal/curriculum/review/teaching implementation, validation evidence, remaining sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
+The current product direction, preflight, contracts, goal/curriculum/review/teaching implementation, latest-head validation evidence, remaining sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
