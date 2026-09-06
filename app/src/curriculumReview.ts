@@ -1,5 +1,19 @@
-import type { ParticipantGoalIntake } from './curriculum';
+import type { ParticipantEntityType, ParticipantGoalIntake } from './curriculum';
 import type { GeneratedCurriculum } from './curriculumGeneration';
+
+export type CurriculumReviewState = 'UNREVIEWED' | 'IN_REVIEW' | 'REVIEWED' | 'CHANGES_REQUESTED' | 'REJECTED' | 'APPROVED';
+export type CurriculumReviewDecision = 'COMMENT' | 'REQUEST_CHANGES' | 'REJECT' | 'APPROVE';
+export type CurriculumReviewAuthorityEffect = 'NONE' | 'ADVISORY' | 'REVISION_REQUEST' | 'APPROVAL_WITHIN_CONTEXT';
+
+export interface CurriculumReviewRecord {
+  reviewer_entity_id: string;
+  reviewer_entity_type: ParticipantEntityType;
+  review_role: string;
+  decision: CurriculumReviewDecision;
+  comments: string | null;
+  reviewed_at: string | null;
+  authority_effect: CurriculumReviewAuthorityEffect;
+}
 
 export interface CurriculumReviewPackage {
   schema_version: 'steglearn.curriculum-review-package/v1';
@@ -25,8 +39,8 @@ export interface CurriculumReviewPackage {
     human_readable_available: true;
     machine_readable_available: true;
     content_hash_sha256: null;
-    review_state: 'UNREVIEWED';
-    reviews: [];
+    review_state: CurriculumReviewState;
+    reviews: CurriculumReviewRecord[];
   };
   teaching_binding: {
     teachable: boolean;
@@ -90,6 +104,53 @@ export function createCurriculumReviewPackage(
       bound_curriculum_version: curriculum.curriculum_version,
       review_requirement: reviewRequirement,
       material_change_requires_new_version: true,
+    },
+  };
+}
+
+export function applyCurriculumReviewDecision(
+  reviewPackage: CurriculumReviewPackage,
+  review: {
+    reviewerEntityId: string;
+    reviewerEntityType: ParticipantEntityType;
+    reviewRole: string;
+    decision: CurriculumReviewDecision;
+    comments?: string;
+    authorityEffect: CurriculumReviewAuthorityEffect;
+  },
+): CurriculumReviewPackage {
+  if (!review.reviewerEntityId.trim()) throw new Error('Reviewer entity ID is required.');
+  if (review.decision === 'APPROVE' && review.authorityEffect !== 'APPROVAL_WITHIN_CONTEXT') {
+    throw new Error('APPROVE requires APPROVAL_WITHIN_CONTEXT authority effect.');
+  }
+  if (review.decision !== 'APPROVE' && review.authorityEffect === 'APPROVAL_WITHIN_CONTEXT') {
+    throw new Error('APPROVAL_WITHIN_CONTEXT may only accompany APPROVE.');
+  }
+
+  const state: CurriculumReviewState = review.decision === 'APPROVE'
+    ? 'APPROVED'
+    : review.decision === 'REJECT'
+      ? 'REJECTED'
+      : review.decision === 'REQUEST_CHANGES'
+        ? 'CHANGES_REQUESTED'
+        : 'REVIEWED';
+
+  const record: CurriculumReviewRecord = {
+    reviewer_entity_id: review.reviewerEntityId.trim(),
+    reviewer_entity_type: review.reviewerEntityType,
+    review_role: review.reviewRole.trim() || 'curriculum-reviewer',
+    decision: review.decision,
+    comments: review.comments?.trim() || null,
+    reviewed_at: new Date().toISOString(),
+    authority_effect: review.authorityEffect,
+  };
+
+  return {
+    ...reviewPackage,
+    review_surface: {
+      ...reviewPackage.review_surface,
+      review_state: state,
+      reviews: [...reviewPackage.review_surface.reviews, record],
     },
   };
 }
