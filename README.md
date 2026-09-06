@@ -167,6 +167,10 @@ The first materialized reusable path is the [TI-83 Plus and Arduino Sensor Lab](
 
 StegLearn may evaluate or interact with external educational systems only through an explicit, bounded relationship contract. The first installed relationship is the evaluation-only Edukors Interlock/InTr lane documented in [`docs/EDUKORS_INTR_MIRROR_HANDOFF.md`](docs/EDUKORS_INTR_MIRROR_HANDOFF.md), relationship `steglearn.edukors.evaluation.v1`.
 
+Any API, MCP, authenticated account, AI-agent transport, or other privileged external-learning mechanism requires a **separately admitted capability package**. Credential-free public observation reuses the canonical StegOS Universal InTr `external-api-observation` profile rather than minting a competing Edukors-specific connector profile.
+
+Source installation, public retrieval, CI, repository presence, or deployment **does not prove an authentic runtime Interlock/InTr transition**. **Ordinary web retrieval is not a substitute** for authentic InTr materialization evidence or Master Records reconciliation.
+
 Public observation or source installation does not imply partnership, authenticated integration, runtime activation, or authority to mutate StegLearn state.
 
 ## Relationship to Learning Transition Governance
