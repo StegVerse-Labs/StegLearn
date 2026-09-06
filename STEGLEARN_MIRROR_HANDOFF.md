@@ -18,16 +18,15 @@ participant enters StegLearn
 -> starting point + depth + constraints
 -> governed goal-intake record
 -> generated curriculum version
+-> deterministic review-content SHA-256
 -> synchronized human/machine review package
--> review / revise / approve according to authority
--> exact-version teaching session
+-> hash-bound review / revise / approve according to authority
+-> exact curriculum ID/version/hash teaching session
 -> permitted observation / adaptation / evidence
 -> receipt / longitudinal continuity
 ```
 
 Curriculum generation is not terminal. Reviewability and teaching are product requirements.
-
-Instructional depth may range from first exposure through advanced professional, graduate, doctoral, and post-doctoral depth where applicable. These are instructional-depth labels, not accreditation, degrees, licenses, institutional equivalence, or professional authority.
 
 Preferred first deployment remains **human teacher + governed on-screen StegLearn AI Entity**. In teacher-led use, the human teacher remains educational authority.
 
@@ -37,23 +36,22 @@ Preferred first deployment remains **human teacher + governed on-screen StegLear
 - Generated curriculum does not become fixed participant identity.
 - Review availability does not equal approval or teaching authority.
 - `APPROVE` requires an authority effect valid within the governing context.
-- Teaching binds exact curriculum ID/version.
-- A teaching session cannot advance against a different curriculum ID/version.
-- Material curriculum changes must remain versioned and inspectable.
+- Review decisions bind the deterministic SHA-256 of the exact reviewable curriculum envelope.
+- A content-hash mismatch fails closed for review decisions and teaching readiness.
+- Teaching binds exact curriculum ID, version, and reviewed content hash.
+- Material curriculum changes must remain versioned and inspectable and cannot silently inherit prior approval.
+- Hash equality is content-integrity evidence only; it does not prove curriculum correctness, pedagogical quality, admissibility, accreditation, or authority.
 - Sensor/learning inputs must be explicitly authorized before use.
-- Engagement, participation, responsiveness, activity, and progress observations do not independently become mastery, failure, discipline, or fixed identity.
 - Participant evidence, sensor/system observation, human context, AI interpretation, curriculum content, review decision, and teaching action remain distinguishable.
-- High-consequence or regulated learning may require additional human or external authority.
-- Completion does not grant licensure, accreditation, or authority outside the admitted learning relationship.
 - Task Registry owns work intent; WorkerCoordinator owns executable claims/fences; Master Records owns observed/reconstructable reality; Interlock/InTr governs ingress/egress. Source and CI do not manufacture runtime authority.
 
 ## Current branch / PR
 
 Branch: `feature/teacher-first-public-model`
 
-Open PR: `StegVerse-Labs/StegLearn#3` — `Implement StegLearn goal-to-curriculum review/teaching contracts`.
+Open PR: `StegVerse-Labs/StegLearn#3` — `Implement StegLearn goal → curriculum → review → teaching vertical slice`.
 
-No competing open StegLearn PR was observed for this same workload. Existing learning-path branches remain separate scope.
+No competing open StegLearn PR was observed for this workload during the current preflight.
 
 ## Machine preflight — 2026-09-06
 
@@ -61,72 +59,64 @@ Resolved before functional mutation:
 
 - canonical repository handoff: this file;
 - canonical Task Registry: `StegVerse-Labs/.github/data/canonical-task-registry.json`, generation 15, status `RUNTIME_PROFILE_GOVERNANCE_REVIEW_SOURCE_BOUND_AUTHENTIC_RUNTIME_PENDING`;
-- WorkerCoordinator source: `StegVerse-Labs/.github/control/worker-registry.json`, generation 22; no indexed StegLearn goal/curriculum/review/teaching claim or fence observed;
-- Master Records: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`, status `SOURCE_FEED_RUNTIME_PROFILE_AND_PRESENCE_CUSTODY_PATH_IMPLEMENTED_AUTHENTIC_INPUT_PENDING`;
-- existing learning-path, curriculum-review, receipt/evidence, Edukors validation, and build surfaces were reused;
-- org/repo search found no existing StegLearn teaching-session contract to reuse before `schemas/teaching-session.schema.json` was added;
+- WorkerCoordinator source: `StegVerse-Labs/.github/control/worker-registry.json`, generation 22; no indexed StegLearn goal/curriculum/review/teaching/hash claim or fence observed;
+- Master Records bounded custody handoff: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`, status `SOURCE_FEED_RUNTIME_PROFILE_AND_PRESENCE_CUSTODY_PATH_IMPLEMENTED_AUTHENTIC_INPUT_PENDING`;
+- cross-task PR search found only current PR #3 for this StegLearn workload;
+- StegVerse-wide source search found an existing canonical JSON hashing convention: sorted object keys, compact JSON separators, UTF-8, SHA-256. The StegLearn implementation reuses that convention rather than creating a competing hash interpretation;
+- existing `steglearn.curriculum-review-package/v1`, teaching-session, receipt/evidence, Edukors validation, and build surfaces are reused;
 - Site remains a separate publication target and is not mutated unless Site orchestration admits the workload.
 
 ### README completeness
 
 **README UPDATE REQUIRED AND SATISFIED.**
 
-Goal intake, generated curriculum, synchronized review, review decisions, and exact-version teaching materially change product interfaces, validation behavior, governance/authority semantics, and capability meaning. `README.md` is updated in the same change set and retains Edukors-required completeness markers.
+Deterministic curriculum hashing changes review-package interface requirements, review-decision evidence semantics, teaching prerequisites, failure behavior, and capability meaning. `README.md` is updated in the same change set and retains the required Edukors completeness markers.
 
 ## Implemented current vertical slice
 
-### Contracts
+### Existing goal → curriculum → review → teaching path
 
 - `schemas/participant-goal-intake.schema.json`
 - `schemas/generated-curriculum.schema.json`
 - existing `schemas/curriculum-review-package.schema.json` reused
 - `schemas/teaching-session.schema.json`
-- `scripts/validate-curriculum-contracts.mjs` validates goal/curriculum/review/teaching contract identity and exact-version requirements
-- `app/package.json` runs curriculum contract validation before receipt validation and TypeScript/Vite build
-
-### Goal intake
-
 - `app/src/curriculum.ts`
-- `app/src/GoalIntakePanel.tsx`
-- creates/exports `steglearn.participant-goal-intake/v1`
-- captures participant/context, desired outcome/depth, starting point, constraints, evidence expectations, reviewer requirements
-- bounded AI-participant/context and supervised-authority mismatches fail closed
-
-### Bounded curriculum generation
-
 - `app/src/curriculumGeneration.ts`
-- consumes exact admitted goal record
-- emits `steglearn.generated-curriculum/v1`
-- preserves exact goal ID/version provenance and requested depth
-- emits prerequisites, objectives, units, teaching methods, evidence expectations, progression gates, completion criteria, review binding, exact-version teaching policy
-- deterministic prototype only; no arbitrary-domain expert-quality claim
-
-### Synchronized review and decisions
-
 - `app/src/curriculumReview.ts`
-- emits existing `steglearn.curriculum-review-package/v1`
-- verifies exact goal/curriculum provenance
-- human-readable and machine-readable projections resolve to the same curriculum ID/version
-- review package export supported
-- contextual `APPROVE` and `REQUEST_CHANGES` decisions supported
-- approval requires `APPROVAL_WITHIN_CONTEXT`; revision request remains distinct
-- `content_hash_sha256` remains intentionally null pending deterministic hashing
-
-### Review-gated teaching
-
 - `app/src/teaching.ts`
-- emits `steglearn.teaching-session/v1`
-- teaching start requires review policy satisfaction; default teacher-led approval path is blocked until `APPROVED`
-- teaching session records participant, exact curriculum ID/version, review state at start, human-authority requirement, authority IDs, current unit, timestamps, and teaching events
-- UI presents current unit outcomes, teaching methods, activities, evidence expectations, and progression gate
-- advancing units records events and fails if curriculum ID/version differs
-- bounded session completes after all generated units are presented
+- `app/src/GoalIntakePanel.tsx`
 
-This is now an actual bounded prototype of **goal -> curriculum -> review -> teaching**. It is not yet a conversational AI instructor, expert dynamic curriculum generator, evidence-driven adaptive progression engine, or production classroom system.
+### Deterministic curriculum review hashing
+
+Highest-priority admissible machine work is implemented:
+
+- added `app/src/canonicalHash.ts`;
+- canonical JSON recursively sorts object keys, preserves array order, uses compact JSON representation and UTF-8 bytes, then computes SHA-256;
+- `curriculumReview.ts` hashes the reviewable envelope containing curriculum identity/version, learning goal/depth, starting-point summary, constraints, and canonical curriculum;
+- `review_surface.content_hash_sha256` is now mandatory and non-null;
+- each review decision records `reviewed_content_hash_sha256`;
+- review decisions fail closed if deterministic hash verification fails;
+- `teaching_binding.bound_content_hash_sha256` is mandatory and must match the review hash;
+- approval-required teaching requires an `APPROVE` + `APPROVAL_WITHIN_CONTEXT` review whose reviewed hash matches the current content hash;
+- `steglearn.teaching-session/v1` records `curriculum_content_hash_sha256` at session start;
+- teaching readiness fails closed when content-hash or teaching-hash binding does not verify.
+
+### Validation contract changes
+
+`scripts/validate-curriculum-contracts.mjs` now checks:
+
+- review schema requires deterministic content hash;
+- review records require reviewed-content hash;
+- teaching binding requires bound-content hash;
+- teaching-session schema requires curriculum content hash;
+- all hash fields use lowercase 64-character SHA-256 hex;
+- canonical review-envelope hashing is invariant to object-key insertion order.
+
+The build gate remains `curriculum contracts -> receipt validation -> TypeScript -> Vite`.
 
 ## Validation evidence
 
-Preserved PASS evidence:
+Preserved prior PASS evidence:
 
 - `34001370386` — early-language compatibility/build;
 - `34001573328` — Edukors public-observation source binding;
@@ -134,23 +124,24 @@ Preserved PASS evidence:
 - `34014483851` — goal-intake UI;
 - `34014587317` — bounded generated-curriculum UI;
 - `34014660474` — synchronized review rendering;
-- `34014762575` — review decisions + teaching-session implementation PASS on `7ff39a7b67d668c83ffd75fff774d6adb18f6249`;
-- `34014798310` — **latest-head PASS** on `9fd7a6624110bcaed193849d61232d3adaa5bcc8`; Edukors validator and full validation/build job completed SUCCESS after canonical handoff update.
+- `34014762575` — review decisions + teaching-session implementation;
+- `34014798310` — prior latest-head full validation/build PASS.
 
-These are source/build facts only. They do not prove arbitrary-domain subject-matter quality, production conversational AI teaching, classroom effectiveness, runtime sensor observation, authentic external-learning InTr execution, or production activation.
+The deterministic hashing commits are newer than `34014798310`; latest-head CI must be observed separately before a PASS is claimed for this new hash-binding implementation.
+
+These are source/build facts only. They do not prove curriculum quality, classroom effectiveness, production conversational AI teaching, authentic sensor observation, external-learning InTr execution, or production activation.
 
 ## Remaining machine work — priority order
 
-1. Add deterministic curriculum content hashing and bind review decisions to the hashed curriculum version.
-2. Add material curriculum revision/diff flow producing a new inspectable version and invalidating prior teaching authorization where required.
-3. Add participant evidence capture/progression gating inside teaching rather than unit advancement by button alone.
-4. Add conversational AI teaching inside the exact-version teaching session while preserving teaching/evidence/event contracts.
-5. Replace/augment deterministic curriculum generation with an admitted AI-backed generator that still emits `steglearn.generated-curriculum/v1`; model output is not automatically reviewed curriculum.
-6. Check/reuse existing StegVerse permission/evidence/Interlock contracts before adding sensor/input permission and observation-event contracts.
-7. Define teacher delegation/return contracts for bounded learner/small-group teaching.
-8. Add visible StegLearn Entity and teacher-facing observation/recommendation surfaces.
-9. Add admitted AI-participant learning contracts and negative tests.
-10. When Site orchestration admits work, publish the StegLearn informational landing page and navigation/discovery path.
+1. Add material curriculum revision/diff flow that produces a new inspectable version/hash and invalidates prior teaching authorization where required.
+2. Add participant evidence capture/progression gating inside teaching rather than unit advancement by button alone.
+3. Add conversational AI teaching inside the exact-version/hash teaching session while preserving teaching/evidence/event contracts.
+4. Replace/augment deterministic curriculum generation with an admitted AI-backed generator that still emits `steglearn.generated-curriculum/v1`; model output is not automatically reviewed curriculum.
+5. Check/reuse existing StegVerse permission/evidence/Interlock contracts before adding sensor/input permission and observation-event contracts.
+6. Define teacher delegation/return contracts for bounded learner/small-group teaching.
+7. Add visible StegLearn Entity and teacher-facing observation/recommendation surfaces.
+8. Add admitted AI-participant learning contracts and negative tests.
+9. When Site orchestration admits work, publish the StegLearn informational landing page and navigation/discovery path.
 
 ## Edukors lane
 
@@ -158,18 +149,16 @@ Evaluation-only Edukors relationship `steglearn.edukors.evaluation.v1` remains s
 
 ## User / physical work
 
-No user action is required for the current source/UI work.
+No user action is required for the current source/UI/hash-binding work.
 
 A future real classroom pilot requires an explicitly authorized educator/learning context before collecting real participant or sensor evidence.
 
-TI-83/Arduino physical work remains in the existing lesson lane.
-
 ## Release state
 
-Not release-tagged. Deterministic hashing, curriculum revision/diff semantics, evidence-gated teaching progression, conversational AI instruction, admitted AI-backed generation, sensor-mediated classroom assistance, generalized AI-participant learning, authentic external-learning runtime evidence, and public Site publication remain incomplete.
+Not release-tagged. Material revision/diff semantics, evidence-gated teaching progression, conversational AI instruction, admitted AI-backed generation, sensor-mediated classroom assistance, generalized AI-participant learning, authentic external-learning runtime evidence, and public Site publication remain incomplete.
 
 When release predicates are actually satisfied, verify propagation to `StegVerse-Labs/Site`, `GCAT-BCAT-Engine/Publisher`, `StegVerse-Labs/admissibility-wiki`, and `StegVerse-002/stegguardian-wiki` as applicable.
 
 ## Archive readiness
 
-The current product direction, preflight, contracts, goal/curriculum/review/teaching implementation, latest-head validation evidence, remaining sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
+The product direction, preflight, deterministic hashing convention/reuse decision, current goal/curriculum/review/teaching/hash implementation, validation boundary, remaining sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
