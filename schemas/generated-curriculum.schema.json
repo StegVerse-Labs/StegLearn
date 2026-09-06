@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stegverse.org/schemas/steglearn/generated-curriculum.schema.json",
+  "title": "StegLearn Generated Curriculum",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "curriculum_id",
+    "curriculum_version",
+    "source_goal_intake",
+    "title",
+    "requested_depth",
+    "supportable_depth",
+    "objectives",
+    "prerequisites",
+    "units",
+    "completion_criteria",
+    "review_binding",
+    "teaching_policy",
+    "non_capture_note"
+  ],
+  "properties": {
+    "schema_version": {"type":"string","const":"steglearn.generated-curriculum/v1"},
+    "curriculum_id": {"type":"string","minLength":1},
+    "curriculum_version": {"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "source_goal_intake": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["goal_intake_id","goal_intake_version"],
+      "properties": {
+        "goal_intake_id":{"type":"string","minLength":1},
+        "goal_intake_version":{"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    },
+    "title": {"type":"string","minLength":1},
+    "summary": {"type":"string","minLength":1},
+    "requested_depth": {
+      "type":"string",
+      "enum":["ORIENTATION","FOUNDATIONAL","BEGINNER","INTERMEDIATE","ADVANCED","VOCATIONAL_APPLIED","UNDERGRADUATE_EQUIVALENT","GRADUATE_EQUIVALENT","DOCTORAL_RESEARCH_EQUIVALENT","POST_DOCTORAL_FRONTIER"]
+    },
+    "supportable_depth": {
+      "type":"string",
+      "enum":["ORIENTATION","FOUNDATIONAL","BEGINNER","INTERMEDIATE","ADVANCED","VOCATIONAL_APPLIED","UNDERGRADUATE_EQUIVALENT","GRADUATE_EQUIVALENT","DOCTORAL_RESEARCH_EQUIVALENT","POST_DOCTORAL_FRONTIER"]
+    },
+    "depth_rationale": {"type":"string","minLength":1},
+    "objectives": {"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+    "prerequisites": {
+      "type":"array",
+      "items": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["prerequisite_id","description","state"],
+        "properties": {
+          "prerequisite_id":{"type":"string","minLength":1},
+          "description":{"type":"string","minLength":1},
+          "state":{"type":"string","enum":["REQUIRED","RECOMMENDED","EVIDENCED_SATISFIED","WAIVED_BY_AUTHORITY"]},
+          "evidence_refs":{"type":"array","items":{"type":"string","minLength":1},"default":[]}
+        }
+      }
+    },
+    "units": {
+      "type":"array",
+      "minItems":1,
+      "items": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["unit_id","title","outcomes","teaching_methods","activities","evidence_expectations","progression_gate"],
+        "properties": {
+          "unit_id":{"type":"string","minLength":1},
+          "title":{"type":"string","minLength":1},
+          "outcomes":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+          "teaching_methods":{"type":"array","minItems":1,"items":{"type":"string","enum":["DIRECT_EXPLANATION","SOCRATIC_QUESTIONING","DEMONSTRATION","GUIDED_PRACTICE","ADAPTIVE_EXAMPLES","SIMULATION","PROJECT_GUIDANCE","SUPERVISED_EXPERIMENT","CRITIQUE_REVISION","SOURCE_DISCUSSION","RESEARCH_METHOD_GUIDANCE","EXPLANATION_BACK"]}},
+          "activities":{"type":"array","items":{"type":"string","minLength":1}},
+          "evidence_expectations":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+          "progression_gate":{"type":"string","minLength":1},
+          "optional_branches":{"type":"array","items":{"type":"string","minLength":1},"default":[]}
+        }
+      }
+    },
+    "completion_criteria": {"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+    "review_binding": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["review_package_required","material_change_requires_new_version"],
+      "properties": {
+        "review_package_required":{"type":"boolean"},
+        "material_change_requires_new_version":{"type":"boolean"},
+        "review_package_schema":{"type":"string","const":"steglearn.curriculum-review-package/v1"}
+      }
+    },
+    "teaching_policy": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["teachable","teaching_must_bind_exact_version","adaptation_mode"],
+      "properties": {
+        "teachable":{"type":"boolean"},
+        "teaching_must_bind_exact_version":{"type":"boolean","const":true},
+        "adaptation_mode":{"type":"string","enum":["WITHIN_VERSION_NON_MATERIAL_ONLY","VERSIONED_MATERIAL_CHANGES"]},
+        "human_authority_required":{"type":"boolean"}
+      }
+    },
+    "non_capture_note": {"type":"string","minLength":1}
+  }
+}

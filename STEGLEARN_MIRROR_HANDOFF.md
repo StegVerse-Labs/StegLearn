@@ -1,192 +1,139 @@
 # StegLearn Mirror Handoff
 
-## Repository
+## Repository / authority
 
-`StegVerse-Labs/StegLearn`
+Repository: `StegVerse-Labs/StegLearn`
 
-## Status
+Status: active implementation.
 
-Active implementation. This file is the repository-local source of truth for active StegLearn implementation lanes.
+This file is the repository-local source of truth for current StegLearn implementation lanes.
 
-## Current Goals
+## Canonical product direction
 
-### TI-83 Plus / Arduino learning-path lane
-
-Add a reusable, age-appropriate learning-path system to StegLearn and materialize the first path around:
+StegLearn is a governed learning environment in which a human or admitted AI entity can move through:
 
 ```text
-TI-83 Plus restoration
-→ TI-BASIC programming
-→ sensor observation
-→ Arduino bridge
-→ governed low-voltage action
-→ parent-reviewed learning receipt
+goal conversation
+-> governed goal-intake record
+-> generated curriculum version
+-> deterministic review-content SHA-256
+-> synchronized human/machine review package
+-> hash-bound review / revision / approval according to authority
+-> exact curriculum ID/version/hash teaching session
+-> permitted observation / adaptation / evidence
+-> receipt / longitudinal continuity
 ```
 
-### Early-language longitudinal continuity lane
+Curriculum generation is not terminal. Reviewability and teaching are product requirements. Preferred first deployment remains **human teacher + governed on-screen StegLearn AI Entity**; in teacher-led use, the human teacher remains educational authority.
 
-Preserve parent-reviewed early-language observations over time using private/local learner records so progression can be compared across:
+## Governing invariants
 
-```text
-observation
-→ exact learner wording
-→ conversational context
-→ revision/self-correction
-→ parent review
-→ accepted receipt
-→ longitudinal comparison
-```
+- Requested depth does not automatically prove readiness.
+- Generated curriculum does not become fixed participant identity.
+- Review availability does not equal approval or teaching authority.
+- `APPROVE` requires `APPROVAL_WITHIN_CONTEXT`.
+- Review decisions bind the deterministic SHA-256 of the exact reviewable curriculum envelope.
+- A content-hash mismatch fails closed for review decisions and teaching readiness.
+- Teaching binds exact curriculum ID, version, and reviewed content hash.
+- Material curriculum changes must remain versioned/inspectable and cannot silently inherit prior approval.
+- Hash equality is integrity evidence only; it does not prove correctness, pedagogical quality, admissibility, accreditation, or authority.
+- Sensor/learning inputs require explicit authorization.
+- Participant evidence, system observation, human context, AI interpretation, curriculum content, review decision, and teaching action remain distinguishable.
+- Task Registry owns work intent; WorkerCoordinator owns executable claims/fences; Master Records owns observed/reconstructable reality; Interlock/InTr governs ingress/egress. Source and CI do not manufacture runtime authority.
 
-The public repository may contain only anonymized, synthetic, or generalized examples. Family-specific child records remain private/local by default.
+## Current branch / PR
 
-### Edukors external-learning Interlock / InTr evaluation lane
+Branch: `feature/teacher-first-public-model`
 
-Establish an evaluation-first, reconstructable Interlock/InTr relationship between StegLearn and `https://edukors.org/` before deeper collaboration or machine integration occurs.
+Open PR: `StegVerse-Labs/StegLearn#3` — `Implement StegLearn goal → curriculum → review → teaching vertical slice`.
 
-Canonical bounded handoff:
+No competing open StegLearn PR was observed for this workload during the current preflight.
 
-`docs/EDUKORS_INTR_MIRROR_HANDOFF.md`
+## Machine preflight — 2026-09-06
 
-Initial relationship:
+Resolved before functional mutation:
 
-`steglearn.edukors.evaluation.v1`
+- canonical repository handoff: this file;
+- canonical Task Registry: `StegVerse-Labs/.github/data/canonical-task-registry.json`, generation 15, status `RUNTIME_PROFILE_GOVERNANCE_REVIEW_SOURCE_BOUND_AUTHENTIC_RUNTIME_PENDING`;
+- WorkerCoordinator source: `StegVerse-Labs/.github/control/worker-registry.json`, generation 22; no indexed StegLearn goal/curriculum/review/teaching/hash claim or fence observed;
+- Master Records bounded custody handoff: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`, status `SOURCE_FEED_RUNTIME_PROFILE_AND_PRESENCE_CUSTODY_PATH_IMPLEMENTED_AUTHENTIC_INPUT_PENDING`;
+- cross-task PR search found only current PR #3 for this StegLearn workload;
+- StegVerse-wide source search found the existing canonical hashing convention: recursively sorted object keys, compact JSON, UTF-8, SHA-256. StegLearn reuses that convention rather than creating a competing hash interpretation;
+- existing curriculum-review, teaching-session, receipt/evidence, Edukors validation, and build surfaces were reused;
+- Site remains a separate publication target and is not mutated unless Site orchestration admits the workload.
 
-Current state:
+### README completeness
 
-`SOURCE_EVALUATION_INTERLOCK_AND_CANONICAL_PUBLIC_OBSERVATION_BINDING_VALIDATED_RUNTIME_INTERACTION_NOT_OBSERVED`
+**README UPDATE REQUIRED AND SATISFIED.**
 
-The source contract permits public educational observation, comparison, evidence/artifact intake, and explicit human-mediated requests while denying authenticated access, automated external mutation, learner-private data egress, direct Edukors mutation of StegLearn, or inference of partnership/endorsement. Any later API, MCP, authenticated account, or AI-agent transport requires a separately admitted capability package.
+Deterministic curriculum hashing changes review-package interface requirements, review-decision evidence semantics, teaching prerequisites/failure behavior, and capability meaning. `README.md` is updated in the same change set and retains the required Edukors completeness markers.
 
-For credential-free public observation, this lane reuses the canonical StegOS `external-api-observation` Universal InTr profile; no Edukors-specific connector profile is created.
+## Implemented current vertical slice
 
-## Governing Boundaries
+Existing governed path remains:
 
-- Keep lessons inside StegLearn unless a future collection has an independently governed product boundary.
-- Do not treat a lesson, score, interest, successful repair, isolated utterance, or developmental observation as a fixed learner identity.
-- Parent or steward review remains required before evidence becomes an accepted learning receipt.
-- Preserve raw learner wording and parent context separately from later interpretation.
-- Do not overwrite earlier observations with later developmental conclusions.
-- Public repository artifacts must not expose a child's public name, exact birth date, school, routine location, or unnecessary identifying context.
-- Local learner identifiers are preferred for actual family records.
-- Battery-leak cleanup, soldering, exposed circuitry, and electrical interfaces require adult control.
-- No household voltage, weapon construction, exposed high-voltage experiments, or safety-critical sensor claims.
-- The TI-83 Plus is a learner interface; it does not acquire independent actuator authority.
-- An Arduino bridge must validate any actuator request and fail closed.
-- External educational-system interaction must cross the applicable Interlock/InTr boundary before becoming StegLearn state.
-- Public-source evaluation does not imply partnership, endorsement, curriculum adoption, authenticated access, or production integration.
-- Edukors or any other external educational system cannot directly mutate learner records, Master Records, SKAP Vault, repositories, publication, finance, or governance state.
-- Ordinary public web retrieval is not authentic InTr execution evidence.
-- Task Registry owns work intent, WorkerCoordinator owns executable claims/fences, Master Records owns observed/reconstructable reality, and Interlock/InTr governs ingress/egress; source and CI do not manufacture those authorities.
+- `schemas/participant-goal-intake.schema.json`
+- `schemas/generated-curriculum.schema.json`
+- `schemas/curriculum-review-package.schema.json`
+- `schemas/teaching-session.schema.json`
+- `app/src/curriculum.ts`
+- `app/src/curriculumGeneration.ts`
+- `app/src/curriculumReview.ts`
+- `app/src/teaching.ts`
+- `app/src/GoalIntakePanel.tsx`
 
-## Implemented
+Highest-priority hash-binding work is now implemented:
 
-### Learning-path lane
+- `app/src/canonicalHash.ts` provides canonical JSON + SHA-256;
+- review content envelope includes curriculum identity/version, learning goal/depth, starting-point summary, constraints, and canonical curriculum;
+- `review_surface.content_hash_sha256` is mandatory/non-null;
+- each review record stores `reviewed_content_hash_sha256`;
+- review decisions fail closed on hash mismatch;
+- `teaching_binding.bound_content_hash_sha256` must match the review hash;
+- approval-required teaching requires a matching hash-bound contextual approval;
+- teaching sessions record `curriculum_content_hash_sha256`;
+- teaching readiness fails closed when the review or teaching hash binding fails.
 
-- Reusable `lessons/` catalog boundary.
-- Machine-readable learning-path schema.
-- TI-83 Plus and Arduino sensor learning-path manifest.
-- Complete staged lesson guide for an approximately eight-year-old learner.
-- Example parent-reviewed learning receipt.
-- Root README navigation and repository structure updates.
-- Application catalog rendering for machine-readable learning paths.
-- One-click path selection that prefills the learner wonder, first-stage activity types, subject mappings, and next-stage questions.
+`scripts/validate-curriculum-contracts.mjs` validates hash requirements and canonical key-order invariance in addition to existing goal/curriculum/review/teaching invariants.
 
-### Early-language continuity lane
+## Validation evidence
 
-- Existing learner-relative admissibility already supports `conversation`, `revision-history`, `observed-behavior`, and `parent-transcribed-language`.
-- Existing learning receipt schema already supports `learner_quote` and `parent_note`.
-- Added `docs/early-language-longitudinal-continuity.md` defining evidence, privacy, revision-event, comparison, and continuity rules.
-- Added `examples/receipts/early-language-revision-receipt.json` as an anonymized public example of a label-revision event.
-- Family-specific observation content remains intentionally uncommitted to the public repository and belongs in the private/local learner record.
-- Repaired TypeScript target compatibility by replacing `Array.prototype.at(-1)` with equivalent indexed access without changing behavior or evidence semantics.
+Preserved prior PASS evidence includes `34001370386`, `34001573328`, `34014352330`, `34014483851`, `34014587317`, `34014660474`, `34014762575`, and `34014798310`.
 
-### Edukors Interlock/InTr evaluation lane
+Current deterministic-hash implementation validation:
 
-- Added `docs/EDUKORS_INTR_MIRROR_HANDOFF.md` as the bounded continuation record.
-- Added `schemas/external-learning-interlock.schema.json` for external-learning relationship constraints.
-- Added `examples/interlocks/edukors-evaluation-interlock.json` with evaluation-only capabilities and fail-closed restrictions.
-- Added `examples/interlocks/edukors-public-observation-transport.json` binding the relationship to the existing StegOS `external-api-observation` profile.
-- Added `scripts/validate-edukors-interlock.mjs` to enforce relationship, transport-reuse, privacy, authority, and README completeness boundaries.
-- Bound the Edukors source-contract validator into `.github/workflows/validate.yml` before the existing StegLearn build gate.
-- Updated README in the same change set when material external-interface/governance semantics were introduced.
-- No runtime interaction, partnership, authenticated Edukors integration, or production activation is claimed by source installation or CI.
+- GitHub Actions run `34017433834`: **SUCCESS** on functional/documentation head `a877cf06e071005900fc42afd8462a96854a271d`.
+- The run includes the Edukors completeness validator and the full curriculum-contract / receipt / TypeScript / Vite build gate.
+- The canonical handoff commit after that run is documentation-only and does not add functional behavior.
 
-## Validation Completed
+This is source/build validation only. It does not prove curriculum quality, classroom effectiveness, production conversational AI teaching, runtime sensor observation, authentic external-learning InTr execution, or production activation.
 
-- All pre-existing repository JSON artifacts previously parsed successfully.
-- `lessons/ti83-arduino-sensor-lab/lesson.json` previously conformed to `schemas/learning-path.schema.json`.
-- `examples/receipts/ti83-sensor-lab-receipt.json` previously conformed to `schemas/learning-receipt.schema.json`.
-- The application production build passes with TypeScript and Vite.
-- The obsolete TypeScript `moduleResolution` setting was updated to the current bundler mode.
-- The standard Vite client type declaration and generated-directory ignore rules were added.
-- The early-language revision example is covered by the committed receipt fixture validator wired into the production build command.
-- Acceptance tests include longitudinal comparison and committed-receipt fixture validation.
-- `.github/workflows/validate.yml` runs the Edukors Interlock source validator followed by the existing `npm run build` gate.
-- Run `34001370386` established a full repository validation/build PASS after the early-language compatibility repair.
-- Run `34001573328` established a full PASS for the canonical Edukors public-observation transport binding after validator stabilization: dependency install PASS, Edukors source validator PASS, committed receipts PASS, TypeScript/Vite build PASS.
-- These are source/build validation facts only; no authentic Edukors InTr runtime interaction or Master Records reconciliation is claimed.
+## Remaining machine work — priority order
 
-## Resolved Machine Preflight State
+1. Add material curriculum revision/diff flow producing a new inspectable version/hash and invalidating prior teaching authorization where required.
+2. Add participant evidence capture/progression gating inside teaching rather than unit advancement by button alone.
+3. Add conversational AI teaching inside the exact-version/hash teaching session while preserving teaching/evidence/event contracts.
+4. Replace/augment deterministic curriculum generation with an admitted AI-backed generator that still emits `steglearn.generated-curriculum/v1`; model output is not automatically reviewed curriculum.
+5. Check/reuse existing StegVerse permission/evidence/Interlock contracts before adding sensor/input permission and observation-event contracts.
+6. Define teacher delegation/return contracts for bounded learner/small-group teaching.
+7. Add visible StegLearn Entity and teacher-facing observation/recommendation surfaces.
+8. Add admitted AI-participant learning contracts and negative tests.
+9. When Site orchestration admits work, publish the StegLearn informational landing page and navigation/discovery path.
 
-Relevant canonical coordination was resolved before mutation:
+## Edukors lane
 
-- `StegVerse-Labs/.github/data/canonical-task-registry.json` generation 12;
-- `StegVerse-Labs/.github/docs/CANONICAL_WORK_COORDINATION_SYSTEM_MIRROR_HANDOFF.md`;
-- `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`;
-- no current StegLearn/Edukors executable task identity or WorkerCoordinator claim was found in indexed coordination surfaces;
-- no authentic Master Records execution event for Edukors observation was found;
-- existing StegOS Universal InTr `external-api-observation` profile was reused rather than duplicated.
+Evaluation-only Edukors relationship `steglearn.edukors.evaluation.v1` remains source-complete. Authentic runtime execution still requires canonical task/WorkerCoordinator/Interlock admission, exact correlated observation, a StegLearn evaluation record, and Master Records reconciliation. No partnership or production integration is inferred.
 
-README completeness decisions are preserved in `docs/EDUKORS_INTR_MIRROR_HANDOFF.md`. Material relationship/transport semantic changes required README updates in the same change sets. Equivalent compiler-target and validator-stability repairs were explicitly determined not to require README changes because they changed no product or governance semantics.
+## User / physical work
 
-## Remaining Machine Work
+No user action is required for current source/UI/hash-binding work. A future real classroom pilot requires an explicitly authorized educator/learning context before collecting real participant or sensor evidence.
 
-### Edukors lane — highest current executable boundary
+## Release state
 
-Source implementation and repository validation are complete for the evaluation contract and canonical public-observation binding. The next required transition is authentic runtime execution, but it may not be fabricated from repository source or GitHub Actions.
+Not release-tagged. Material revision/diff semantics, evidence-gated teaching progression, conversational AI instruction, admitted AI-backed generation, sensor-mediated classroom assistance, generalized AI-participant learning, authentic external-learning runtime evidence, and public Site publication remain incomplete.
 
-Remaining sequence:
+When release predicates are actually satisfied, verify propagation to `StegVerse-Labs/Site`, `GCAT-BCAT-Engine/Publisher`, `StegVerse-Labs/admissibility-wiki`, and `StegVerse-002/stegguardian-wiki` as applicable.
 
-1. canonical task/WorkerCoordinator/Interlock substrate admits an executable Edukors public-observation task;
-2. execute a credential-free public observation through Universal InTr using the existing `external-api-observation` profile;
-3. preserve exact egress/ingress correlation and produce a StegLearn evaluation record;
-4. reconcile retained authentic evidence through Master Records;
-5. only then consider a separately admitted privileged integration capability if collaboration momentum exists.
+## Archive readiness
 
-No current task-registry identity, WorkerCoordinator execution claim, or Master Records runtime event authorizing step 2 has been observed. Therefore further runtime execution is blocked on the canonical execution/admission substrate, not on missing StegLearn source files.
-
-### Other StegLearn lanes
-
-- Ensure any future AI-generated developmental summary cites underlying learner quote/parent note records and remains distinguishable from raw evidence.
-- Consider richer comparison filters only after actual private/local longitudinal records exist; do not invent family evidence.
-- Decide release/tag state only after the relevant lane-specific runtime/evidence and release review predicates pass.
-
-## Remaining Physical / User Work
-
-### TI-83 / Arduino lane
-
-- Adult removes leaking AAA batteries and neutralizes residue using TI guidance.
-- Restore and test the TI-83 Plus before beginning the programming stages.
-- Identify whether the available cable is calculator-to-calculator or USB-to-2.5 mm.
-- Build a protected Arduino/TI link interface before attempting live transfers.
-- Restrict the first actuator experiment to a low-voltage LED.
-
-### Early-language lane
-
-- Private/local family observations need parent-approved capture in the actual learner record if the exact utterance and personal context are to be preserved.
-- Earlier historical observations that were never committed cannot be reconstructed as exact quotes unless an original source record is recovered.
-
-### Edukors Interlock/InTr lane
-
-- No user action is required for source installation, profile reuse, or repository validation.
-- Any direct outreach or collaboration request remains human-mediated until an explicitly admitted machine communication capability exists.
-
-## Release State
-
-Not release-tagged by this lane. The Edukors evaluation relationship and canonical public-observation binding are source-complete and repository-validated, but authentic InTr runtime interaction and Master Records reconciliation remain unobserved. No partnership, production integration, or release authority is inferred.
-
-When this repository reaches an actual tag/release predicate, release work must include verification that pertinent information is propagated or applied through the existing contracts to `StegVerse-Labs/Site`, `GCAT-BCAT-Engine/Publisher`, `StegVerse-Labs/admissibility-wiki`, and `StegVerse-002/stegguardian-wiki` as applicable.
-
-## Archive Readiness
-
-All current Edukors source implementation, preflight findings, canonical connector reuse, CI evidence, remaining runtime predicates, and authority boundaries are repository-resident in this handoff and `docs/EDUKORS_INTR_MIRROR_HANDOFF.md`. No conversation-only information is required to continue this lane.
+The product direction, preflight, canonical hashing reuse decision, current goal/curriculum/review/teaching/hash implementation, validation evidence, remaining sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.

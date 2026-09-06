@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stegverse.org/schemas/steglearn/participant-goal-intake.schema.json",
+  "title": "StegLearn Participant Goal Intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "goal_intake_id",
+    "goal_intake_version",
+    "participant",
+    "desired_outcome",
+    "requested_depth",
+    "learning_context",
+    "constraints",
+    "evidence_expectations"
+  ],
+  "properties": {
+    "schema_version": {"type":"string","const":"steglearn.participant-goal-intake/v1"},
+    "goal_intake_id": {"type":"string","minLength":1},
+    "goal_intake_version": {"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "participant": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["entity_id","entity_type","admission_state"],
+      "properties": {
+        "entity_id":{"type":"string","minLength":1},
+        "entity_type":{"type":"string","enum":["HUMAN","AI","ORGANIZATION","OTHER_ADMITTED_ENTITY"]},
+        "admission_state":{"type":"string","enum":["HUMAN_CONTEXT","ADMITTED_AI","ADMITTED_ORGANIZATION","OTHER_ADMITTED"]}
+      }
+    },
+    "desired_outcome": {"type":"string","minLength":1},
+    "requested_depth": {
+      "type":"string",
+      "enum":["ORIENTATION","FOUNDATIONAL","BEGINNER","INTERMEDIATE","ADVANCED","VOCATIONAL_APPLIED","UNDERGRADUATE_EQUIVALENT","GRADUATE_EQUIVALENT","DOCTORAL_RESEARCH_EQUIVALENT","POST_DOCTORAL_FRONTIER"]
+    },
+    "starting_point": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["basis","summary"],
+      "properties": {
+        "basis":{"type":"string","enum":["PARTICIPANT_DECLARED","HUMAN_REVIEWED","EVIDENCE_SUPPORTED","UNKNOWN"]},
+        "summary":{"type":["string","null"]},
+        "evidence_refs":{"type":"array","items":{"type":"string","minLength":1},"default":[]}
+      }
+    },
+    "learning_context": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["mode","human_authority_required"],
+      "properties": {
+        "mode":{"type":"string","enum":["TEACHER_LED","PARENT_STEWARD_SUPERVISED","INDIVIDUAL_GOVERNED","AI_PARTICIPANT"]},
+        "human_authority_required":{"type":"boolean"},
+        "authority_entity_ids":{"type":"array","items":{"type":"string","minLength":1},"default":[]}
+      }
+    },
+    "constraints": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["time","resources","safety_or_regulatory"],
+      "properties": {
+        "time":{"type":"array","items":{"type":"string"},"default":[]},
+        "resources":{"type":"array","items":{"type":"string"},"default":[]},
+        "safety_or_regulatory":{"type":"array","items":{"type":"string"},"default":[]},
+        "accessibility":{"type":"array","items":{"type":"string"},"default":[]}
+      }
+    },
+    "evidence_expectations": {
+      "type":"array",
+      "minItems":1,
+      "items":{"type":"string","minLength":1}
+    },
+    "review_requirements": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["curriculum_review_required"],
+      "properties": {
+        "curriculum_review_required":{"type":"boolean"},
+        "reviewer_entity_ids":{"type":"array","items":{"type":"string","minLength":1},"default":[]}
+      }
+    },
+    "non_capture_note": {"type":"string","minLength":1}
+  }
+}

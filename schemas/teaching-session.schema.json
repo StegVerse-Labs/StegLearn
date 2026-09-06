@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stegverse.org/schemas/steglearn/teaching-session.schema.json",
+  "title": "StegLearn Teaching Session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","teaching_session_id","participant_entity_id","curriculum_id","curriculum_version","curriculum_content_hash_sha256","review_state_at_start","teaching_authority","state","current_unit_id","started_at","events","non_capture_note"],
+  "properties": {
+    "schema_version":{"type":"string","const":"steglearn.teaching-session/v1"},
+    "teaching_session_id":{"type":"string","minLength":1},
+    "participant_entity_id":{"type":"string","minLength":1},
+    "curriculum_id":{"type":"string","minLength":1},
+    "curriculum_version":{"type":"string","minLength":1},
+    "curriculum_content_hash_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "review_state_at_start":{"type":"string","enum":["UNREVIEWED","IN_REVIEW","REVIEWED","CHANGES_REQUESTED","REJECTED","APPROVED"]},
+    "teaching_authority":{"type":"object","additionalProperties":false,"required":["review_requirement","human_authority_required","authority_entity_ids"],"properties":{"review_requirement":{"type":"string","enum":["REVIEW_AVAILABLE","REVIEW_REQUIRED","APPROVAL_REQUIRED"]},"human_authority_required":{"type":"boolean"},"authority_entity_ids":{"type":"array","items":{"type":"string","minLength":1}}}},
+    "state":{"type":"string","enum":["ACTIVE","PAUSED","COMPLETED"]},
+    "current_unit_id":{"type":["string","null"]},
+    "started_at":{"type":"string","format":"date-time"},
+    "updated_at":{"type":"string","format":"date-time"},
+    "events":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["event_id","event_type","occurred_at","unit_id","description"],"properties":{"event_id":{"type":"string","minLength":1},"event_type":{"type":"string","enum":["SESSION_STARTED","UNIT_PRESENTED","UNIT_ADVANCED","SESSION_PAUSED","SESSION_COMPLETED"]},"occurred_at":{"type":"string","format":"date-time"},"unit_id":{"type":["string","null"]},"description":{"type":"string","minLength":1}}}},
+    "non_capture_note":{"type":"string","minLength":1}
+  }
+}
