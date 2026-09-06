@@ -10,19 +10,21 @@ Active implementation. This file is the repository-local source of truth for act
 
 ## Canonical Product Direction
 
-StegLearn is a governed learning environment in which a human or admitted AI entity may enter, converse with the StegLearn AI Entity about a desired skill, capability, body of knowledge, outcome, and desired depth, receive a governed curriculum, and then be taught that curriculum.
+StegLearn is a governed learning environment in which a human or admitted AI entity may enter, converse with the StegLearn AI Entity about a desired skill, capability, body of knowledge, outcome, and desired depth, receive a governed curriculum, and then be taught that curriculum by StegLearn.
 
 ```text
 participant enters StegLearn
 -> conversation about desired skill / knowledge / outcome
 -> establish starting point + desired depth + constraints
 -> generate governed curriculum
--> teach curriculum
+-> StegLearn teaches the curriculum
 -> observe permitted engagement / participation / progress
 -> adapt instruction
 -> preserve evidence / explanation / revision
 -> review / receipt / longitudinal continuity
 ```
+
+**Curriculum generation is not a terminal feature. Teaching the generated curriculum is part of the product definition.**
 
 The intended instructional range can extend from first exposure and foundational learning through advanced professional, graduate, doctoral, and post-doctoral depth where the subject supports those levels.
 
@@ -140,7 +142,7 @@ Branch: `feature/teacher-first-public-model`
 - Added `docs/conversational-curriculum-and-teaching-model.md`.
 - Updated `README.md` to make conversational curriculum generation, teaching, human/AI participants, and teacher-first deployment explicit.
 - Updated `docs/product-spec.md` so goal conversation, curriculum generation, teaching, adaptive instruction, teacher authority, authorized sensors, and AI participants are first-class product semantics.
-- Updated `docs/ai-scaffold-policy.md` previously for teacher authority, authorized sensor observation, bounded delegation, and authority drift.
+- Updated `docs/ai-scaffold-policy.md` so curriculum generation and teaching are explicitly allowed within governed authority boundaries.
 - Public copy distinguishes product intent from runtime, credentialing, accreditation, deployment, and partnership claims.
 
 ## Validation Evidence Preserved
@@ -180,7 +182,7 @@ README completeness decision: the teacher-first and conversational curriculum/te
 2. Define generated curriculum schema capable of representing prerequisite maps, instructional depth, evidence expectations, branches, and completion criteria.
 3. Implement conversational goal intake in the StegLearn UI.
 4. Implement bounded curriculum generation from an admitted goal conversation.
-5. Implement teaching execution for generated curricula rather than syllabus-only generation.
+5. Implement actual teaching execution for generated curricula rather than syllabus-only generation.
 6. Define machine-readable sensor/input permission and observation-event contracts without duplicating existing StegVerse permission, Interlock/InTr, or evidence schemas.
 7. Define teacher delegation/return contracts for bounded learner or small-group teaching.
 8. Add visible StegLearn Entity and teacher-facing observation/recommendation surfaces.
