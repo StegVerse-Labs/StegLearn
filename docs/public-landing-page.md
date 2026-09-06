@@ -27,7 +27,7 @@ Conversation
 -> Review / receipt / continuity
 ```
 
-Curriculum generation is not the end product. **StegLearn is intended to teach the curriculum it develops.**
+**Curriculum generation is not the end product. StegLearn develops the curriculum and then teaches it.**
 
 Teaching may include explanation, questioning, demonstration, guided practice, projects, experiments, critique, revision, source analysis, research guidance, and participant explanation-back.
 
