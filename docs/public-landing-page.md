@@ -6,13 +6,13 @@
 
 # StegLearn
 
-## Tell StegLearn what you want to learn. Then learn it.
+## Tell StegLearn what you want to learn. Review the path. Then learn it.
 
 A human or admitted AI entity can enter StegLearn and begin with a conversation:
 
 **What skill, capability, or body of knowledge do you want to develop? How far do you want to go?**
 
-StegLearn is intended to turn that conversation into a governed curriculum matched to the participant's goal, starting point, desired depth, constraints, and evidence requirements—and then teach it.
+StegLearn is intended to turn that conversation into a governed curriculum matched to the participant's goal, starting point, desired depth, constraints, and evidence requirements, produce a reviewable version of that curriculum, and then teach the selected version.
 
 The intended range can extend from first exposure and foundational learning through advanced professional, graduate, doctoral, and post-doctoral depth where the subject supports those levels.
 
@@ -21,13 +21,19 @@ Conversation
 -> Desired skill / knowledge / outcome
 -> Starting point + desired depth
 -> Governed curriculum
+-> Reviewable curriculum version
+-> Review / revise / select
 -> Teaching
 -> Observation + adaptation
 -> Evidence + revision
 -> Review / receipt / continuity
 ```
 
-**Curriculum generation is not the end product. StegLearn develops the curriculum and then teaches it.**
+**The product is not just curriculum generation. StegLearn develops the curriculum, makes it reviewable, and can teach it.**
+
+The reviewable curriculum should be understandable by a human and inspectable by an admitted AI entity through synchronized human-readable and machine-readable forms of the same versioned curriculum.
+
+A learner, teacher, parent/steward, subject-matter reviewer, institution, admitted AI reviewer, or other governed entity may review according to its allowed role. Being able to inspect a curriculum does not automatically mean the entity can approve it or authorize teaching.
 
 Teaching may include explanation, questioning, demonstration, guided practice, projects, experiments, critique, revision, source analysis, research guidance, and participant explanation-back.
 
@@ -41,10 +47,11 @@ A governed AI Entity can be visibly present in the learning environment, interac
 
 **The teacher remains in authority in teacher-led use.**
 
-StegLearn can observe, assist, explain, organize, adapt, teach within delegated scope, record, and recommend. It does not silently transfer educational authority from the human educator to the AI.
+StegLearn can discuss goals, generate curriculum, present it for review, observe, assist, explain, organize, adapt, teach within delegated scope, record, and recommend. It does not silently transfer educational authority from the human educator to the AI.
 
 ```text
 Teacher + StegLearn
+-> curriculum proposal and review
 -> greater awareness
 -> more responsive instruction
 -> more individualized support
@@ -92,9 +99,24 @@ StegLearn can develop a curriculum containing prerequisites, objectives, concept
 
 The path remains adaptable as new evidence appears.
 
+## Review before and during teaching
+
+A generated curriculum should not exist only as an internal AI plan.
+
+StegLearn should produce a stable reviewable version with:
+
+- a human-readable curriculum;
+- a machine-readable canonical manifest;
+- stable curriculum identity and version;
+- reviewer comments or decisions tied to the exact version;
+- a clear distinction between review, revision request, approval, and teaching authorization;
+- traceability from the selected version into teaching.
+
+If teaching materially changes the curriculum, the change should remain visible and versioned rather than silently replacing what was reviewed.
+
 ## Enhance the teacher first
 
-A teacher cannot continuously watch every learner, remember every question, notice every stalled activity, provide every alternate explanation, create every differentiated path, and document every meaningful learning event at the same time.
+A teacher cannot continuously watch every learner, remember every question, notice every stalled activity, provide every alternate explanation, create every differentiated path, review every proposed path, and document every meaningful learning event at the same time.
 
 StegLearn is intended to help.
 
@@ -119,7 +141,7 @@ For example:
 
 > "StegLearn, work with table three on equivalent fractions while I help the experiment group."
 
-Within that delegated scope, StegLearn may guide the activity, ask questions, teach, adapt explanations, collect permitted evidence, and return a concise summary to the teacher.
+Within that delegated scope, StegLearn may guide the activity, ask questions, teach the reviewed or selected path, adapt explanations, collect permitted evidence, and return a concise summary to the teacher.
 
 The delegation ends at its admitted boundary. The AI does not convert temporary instructional assistance into independent educational authority.
 
@@ -131,7 +153,9 @@ A human may enter StegLearn to develop a new skill, learn a discipline, prepare 
 
 An admitted AI entity may also participate in a governed learning relationship when its identity, authority, permitted inputs and outputs, evidence obligations, and learning-state mutation rights are explicitly bounded.
 
-The ability of an external model or agent to send requests does not itself make it an admitted StegLearn participant.
+An admitted AI entity may also review a generated curriculum when that review capability is separately permitted.
+
+The ability of an external model or agent to send requests does not itself make it an admitted StegLearn participant or reviewer.
 
 ## Learning without capture
 
@@ -141,7 +165,7 @@ StegLearn is built around a principle:
 
 Learning should not reduce a participant to a score, a fixed profile, or a predetermined destination.
 
-StegLearn may preserve patterns, progress, questions, explanations, revisions, artifacts, and reviewed evidence over time without treating those observations as permanent identity.
+StegLearn may preserve patterns, progress, questions, explanations, revisions, artifacts, curriculum versions, reviews, and evidence over time without treating those observations as permanent identity.
 
 ## The evidence layer
 
@@ -160,13 +184,15 @@ A learning receipt can preserve what the participant asked, attempted, observed,
 
 Over time, those receipts can form a longitudinal record that shows development without requiring static classification.
 
-## AI can teach. Authority remains governed.
+## AI can develop, present, and teach. Authority remains governed.
 
 StegLearn may:
 
 - discuss what the participant wants to learn;
 - generate a curriculum matched to requested depth;
-- teach that curriculum;
+- produce a reviewable human-readable and machine-readable curriculum version;
+- accept comments or revisions according to entity role;
+- teach the selected curriculum version;
 - observe permitted learning activity;
 - explain concepts in multiple ways;
 - adapt pacing, examples, sequence, and prerequisite work;
@@ -176,7 +202,7 @@ StegLearn may:
 - identify patterns across reviewed learning records;
 - draft learning receipts and summaries.
 
-In teacher-led use, StegLearn does not become the final authority over educational objectives, high-impact learner decisions, or acceptance of evidence unless a separately governed context explicitly says otherwise.
+In teacher-led use, StegLearn does not become the final authority over educational objectives, high-impact learner decisions, curriculum approval, or acceptance of evidence unless a separately governed context explicitly says otherwise.
 
 ## A path toward increasingly individualized learning
 
@@ -184,6 +210,7 @@ The teacher-first model creates a governed path toward broader use:
 
 ```text
 Teacher + AI assistant
+-> reviewed curriculum + teacher-delegated teaching
 -> teacher-delegated small-group teaching
 -> supervised individualized tutoring
 -> parent/steward-supervised learning
@@ -197,11 +224,11 @@ Later autonomy is not automatically authorized simply because an earlier form of
 
 The goal is not merely to automate lesson planning.
 
-The product is the combination of **conversation, curriculum generation, teaching, adaptation, evidence, and continuity** inside a governed learning relationship.
+The product is the combination of **conversation, curriculum generation, reviewability, teaching, adaptation, evidence, and continuity** inside a governed learning relationship.
 
 A concise question captures the direction:
 
-**What becomes possible when any admitted participant can say what they want to learn, receive a curriculum at the depth they need, and have a governed AI Entity actually teach it?**
+**What becomes possible when any admitted participant can say what they want to learn, receive a curriculum at the depth they need, review that curriculum through a human- or machine-readable surface, and have a governed AI Entity actually teach the selected version?**
 
 For the first implementation, a second question matters just as much:
 
@@ -211,11 +238,11 @@ For the first implementation, a second question matters just as much:
 
 StegLearn is in active implementation.
 
-Current source work includes a local-first prototype, reusable learning-path foundations, structured learning receipts, parent/steward review semantics, learner-relative admissibility, longitudinal learning continuity, a teacher-first governed AI model, a conversational curriculum-and-teaching model, and bounded external-learning relationship contracts.
+Current source work includes a local-first prototype, reusable learning-path foundations, structured learning receipts, parent/steward review semantics, learner-relative admissibility, longitudinal learning continuity, a teacher-first governed AI model, a conversational curriculum/review/teaching model, a curriculum review-package schema, and bounded external-learning relationship contracts.
 
-The teacher-first governed AI Entity remains the preferred initial deployment posture. Conversational curriculum generation and teaching define the broader product direction.
+The teacher-first governed AI Entity remains the preferred initial deployment posture. Conversational curriculum generation, entity review, and teaching define the broader product direction.
 
-This page must not be interpreted as a claim that production classroom sensing, fully autonomous instruction, post-doctoral curriculum quality across all domains, accredited credentialing, or live external educational-system integration has already been activated.
+This page must not be interpreted as a claim that production classroom sensing, fully autonomous instruction, runtime curriculum review rendering, post-doctoral curriculum quality across all domains, accredited credentialing, or live external educational-system integration has already been activated.
 
 ## External learning and collaboration
 
@@ -223,4 +250,4 @@ StegLearn is designed to evaluate and interact with external educational systems
 
 Areas of intellectual or technical intersection with educators, researchers, and educational organizations may be explored without implying partnership, endorsement, authenticated integration, or production interoperability.
 
-The Edukors intersection becomes especially direct here: the role of the educator can be examined not only in relation to AI-assisted observation, but also in relation to AI-generated curriculum, adaptive teaching, and the preservation of human educational authority.
+The Edukors intersection becomes especially direct here: the role of the educator can be examined in relation to AI-generated curriculum, curriculum review, adaptive teaching, learner evidence, and the preservation of human educational authority.
