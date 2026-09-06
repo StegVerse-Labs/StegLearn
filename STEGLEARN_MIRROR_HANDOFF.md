@@ -59,13 +59,13 @@ The teacher-first posture is the preferred first validation environment; it is n
 
 - TI-83 Plus / Arduino reusable learning path and reviewed receipt model.
 - Early-language longitudinal continuity with family-specific records private/local by default.
-- Edukors evaluation-only external-learning Interlock/InTr relationship `steglearn.edukors.evaluation.v1`, still source-validated with authentic runtime interaction unobserved.
+- Edukors evaluation-only external-learning Interlock/InTr relationship `steglearn.edukors.evaluation.v1`, source-validated with authentic runtime interaction unobserved.
 
 ## Current Branch / PR
 
 Branch: `feature/teacher-first-public-model`
 
-Open PR: `StegVerse-Labs/StegLearn#3` — curriculum-review-teaching model.
+Open PR: `StegVerse-Labs/StegLearn#3` — `Implement StegLearn goal-to-curriculum review/teaching contracts`.
 
 No competing open StegLearn PR was observed for this same workload during the current preflight. Existing learning-path branches remain separate scope.
 
@@ -78,78 +78,58 @@ Resolved before functional mutation:
 3. WorkerCoordinator source: `StegVerse-Labs/.github/control/worker-registry.json`, generation 22. No StegLearn goal-intake/curriculum claim or fence was observed in indexed coordination surfaces.
 4. Master Records canonical work custody handoff: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`, status `SOURCE_FEED_RUNTIME_PROFILE_AND_PRESENCE_CUSTODY_PATH_IMPLEMENTED_AUTHENTIC_INPUT_PENDING`.
 5. Cross-task collision check: open StegLearn PR search found only PR #3 for the current workload; no duplicate goal-intake/generated-curriculum implementation was found.
-6. Existing implementations reused: `schemas/learning-path.schema.json`, `schemas/curriculum-review-package.schema.json`, existing receipt/evidence boundaries, and the existing build validation path. No competing review schema was minted.
+6. Existing implementations reused: `schemas/learning-path.schema.json`, `schemas/curriculum-review-package.schema.json`, existing receipt/evidence boundaries, Edukors external-learning validation, and the existing build path. No competing curriculum-review schema was minted.
 7. Site remains a separate publication target and is not mutated from this lane unless Site orchestration admits the workload.
 
 ### README completeness predicate
 
 **README UPDATE REQUIRED AND SATISFIED.**
 
-The current change adds machine-readable participant-goal and generated-curriculum interfaces and makes curriculum-contract validation a build prerequisite. These materially change supported interfaces, validation behavior, capability meaning, and exact-version teaching semantics. `README.md` is updated in the same change set to document the contracts, examples, validator, review reuse, and build gate.
+The change adds machine-readable participant-goal and generated-curriculum interfaces and makes curriculum-contract validation a build prerequisite. These materially change supported interfaces, validation behavior, capability meaning, and exact-version teaching semantics. `README.md` is updated in the same change set and preserves the required Edukors external-learning completeness markers.
 
-## Highest-Priority Admissible Machine Work Completed This Pass
+## Highest-Priority Admissible Machine Work Completed
 
-The prior highest-priority remaining items were:
+The prior top two source tasks are complete:
 
-1. define machine-readable participant goal / desired-depth intake;
-2. define generated curriculum schema.
-
-Both source tasks are now implemented, together with bounded validation needed to make them machine-checkable.
+1. machine-readable participant goal / desired-depth intake schema;
+2. generated curriculum schema capable of prerequisite maps, instructional depth, evidence expectations, branches, completion criteria, review binding, and teaching policy.
 
 ### Installed
 
 - `schemas/participant-goal-intake.schema.json`
-  - participant entity identity/type/admission state;
-  - desired outcome and requested depth;
-  - starting-point basis without assuming readiness;
-  - teacher/steward/individual/AI learning context;
-  - constraints and evidence expectations;
-  - curriculum review requirements.
-
 - `schemas/generated-curriculum.schema.json`
-  - stable curriculum identity/version;
-  - exact source goal-intake identity/version;
-  - requested and supportable depth;
-  - prerequisites with state/evidence refs;
-  - objectives, teachable units, teaching methods, activities, evidence expectations, progression gates, optional branches;
-  - completion criteria;
-  - reuse of `steglearn.curriculum-review-package/v1`;
-  - exact-version teaching requirement;
-  - versioned material-change policy;
-  - non-capture semantics.
-
 - `examples/curricula/python-foundations-goal-intake.json`
 - `examples/curricula/python-foundations-generated-curriculum.json`
 - `scripts/validate-curriculum-contracts.mjs`
-- `app/package.json` build gate updated to run curriculum-contract validation before receipt validation and TypeScript/Vite build.
-- `README.md` updated in the same change set.
+- `app/package.json` build gate updated to run curriculum-contract validation before receipt validation and TypeScript/Vite build
+- `README.md` updated in the same change set
 
-### Source invariants enforced by validator
+### Reused rather than duplicated
 
-- schema-version bindings remain stable;
-- generated curriculum binds exact goal-intake ID/version;
-- requested depth is preserved from admitted goal intake;
-- curriculum units have unique IDs and explicit outcomes, teaching methods, evidence expectations, and progression gates;
-- review-package schema is reused rather than duplicated;
-- material curriculum changes require a new inspectable version;
-- teaching must bind the exact selected curriculum version.
-
-These are source-contract facts only. They do not prove dynamic curriculum generation, runtime review rendering, teaching execution, classroom effectiveness, AI-participant learning, or runtime sensing.
+`steglearn.generated-curriculum/v1` binds to the existing `steglearn.curriculum-review-package/v1` review contract. Material changes require a new inspectable version, and teaching must bind the exact selected curriculum version.
 
 ## Validation Evidence
 
-Historical validation preserved:
+Historical evidence preserved:
 
 - run `34001370386`: repository validation/build PASS after early-language compatibility repair;
 - run `34001573328`: canonical Edukors public-observation source binding PASS after validator stabilization.
 
-Current branch source now includes an additional curriculum-contract build gate. Current CI result must be observed separately before claiming the new gate passed remotely.
+Current branch validation:
+
+- run `34014352330`: **PASS** on head `e0339226fed1caa8612ef64fa0ac42b10809c20a`.
+- Edukors Interlock source-contract validator: PASS.
+- new curriculum-contract validator through `npm run build`: PASS.
+- committed receipt validation: PASS.
+- TypeScript/Vite build: PASS.
+
+This validates source/build contracts only. It does not prove dynamic curriculum generation, runtime review rendering, curriculum teaching execution, classroom effectiveness, AI-participant learning, runtime sensing, or production activation.
 
 ## Remaining Machine Work — Priority Order
 
 1. Implement conversational goal intake in the StegLearn UI using `steglearn.participant-goal-intake/v1` rather than inventing a parallel state shape.
 2. Implement bounded curriculum generation that emits `steglearn.generated-curriculum/v1` from an admitted goal-intake record.
-3. Materialize synchronized review-package rendering from the generated curriculum using the existing `steglearn.curriculum-review-package/v1` contract.
+3. Materialize synchronized review-package rendering from the generated curriculum using `steglearn.curriculum-review-package/v1`.
 4. Implement actual teaching execution bound to the selected curriculum ID/version, not syllabus-only generation.
 5. Add curriculum revision/diff handling so material instructional changes produce a new inspectable version.
 6. Define machine-readable sensor/input permission and observation-event contracts only after checking existing StegVerse permission/evidence/Interlock contracts for reuse.
@@ -171,10 +151,10 @@ Source implementation remains complete for evaluation-only observation binding. 
 
 ## Release State
 
-Not release-tagged. The repository is not yet at the release predicate because runtime goal intake, dynamic curriculum generation, review rendering, curriculum-version-bound teaching execution, visible AI Entity behavior, sensor-mediated classroom interaction, generalized AI-participant learning, and public Site publication remain incomplete.
+Not release-tagged. Runtime goal intake, dynamic curriculum generation, review rendering, curriculum-version-bound teaching execution, visible AI Entity behavior, sensor-mediated classroom interaction, generalized AI-participant learning, and public Site publication remain incomplete.
 
 When release predicates are actually satisfied, release work must verify pertinent propagation to `StegVerse-Labs/Site`, `GCAT-BCAT-Engine/Publisher`, `StegVerse-Labs/admissibility-wiki`, and `StegVerse-002/stegguardian-wiki` as applicable.
 
 ## Archive Readiness
 
-The current product direction, preflight, installed goal/curriculum contracts, validation boundary, remaining implementation sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
+The current product direction, preflight, installed goal/curriculum contracts, validation evidence, remaining implementation sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
