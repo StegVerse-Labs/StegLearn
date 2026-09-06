@@ -62,11 +62,12 @@ if (failures.length === 0) {
     'EGRESS INTERLOCK',
     'INGRESS INTERLOCK',
     'InTr materialization',
-    'SOURCE_EVALUATION_INTERLOCK_INSTALLED_RUNTIME_INTERACTION_NOT_OBSERVED',
+    'SOURCE_EVALUATION_INTERLOCK_VALIDATED_CANONICAL_PUBLIC_OBSERVATION_BINDING_INSTALLED_RUNTIME_INTERACTION_NOT_OBSERVED',
     'does **not** permit',
     'explicit human authorization',
     'external-api-observation',
     'run `34001370386`',
+    'run `34001498346`',
     'README_UPDATE_REQUIRED'
   ]) {
     requireCheck(handoff.toLowerCase().includes(marker.toLowerCase()), `handoff missing marker: ${marker}`);
