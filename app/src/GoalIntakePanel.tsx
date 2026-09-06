@@ -11,6 +11,8 @@ import type {
   ParticipantEntityType,
   ParticipantGoalIntake,
 } from './curriculum';
+import { createBoundedCurriculumDraft } from './curriculumGeneration';
+import type { GeneratedCurriculum } from './curriculumGeneration';
 import { exportJson } from './storage';
 
 function splitList(value: string): string[] {
@@ -34,6 +36,7 @@ export default function GoalIntakePanel() {
   const [reviewRequired, setReviewRequired] = useState(true);
   const [reviewerIds, setReviewerIds] = useState('teacher-local-001');
   const [admittedGoal, setAdmittedGoal] = useState<ParticipantGoalIntake | null>(null);
+  const [generatedCurriculum, setGeneratedCurriculum] = useState<GeneratedCurriculum | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
 
   const canAdmit = useMemo(
@@ -78,6 +81,17 @@ export default function GoalIntakePanel() {
     });
 
     setAdmittedGoal(goal);
+    setGeneratedCurriculum(null);
+    setErrors([]);
+  }
+
+  function generateCurriculum() {
+    if (!admittedGoal) {
+      setErrors(['Create a governed goal intake before generating a curriculum draft.']);
+      return;
+    }
+
+    setGeneratedCurriculum(createBoundedCurriculumDraft(admittedGoal));
     setErrors([]);
   }
 
@@ -87,7 +101,7 @@ export default function GoalIntakePanel() {
         <p className="eyebrow">StegLearn goal conversation</p>
         <h1>What do you want to know or be able to do?</h1>
         <p className="hint">
-          This creates the governed participant goal record that a later curriculum generator must consume. It does not yet claim that a dynamic curriculum has been generated or taught.
+          This surface creates the governed participant goal record and can materialize a bounded, reviewable curriculum draft that consumes that exact record. It does not yet claim AI-authored expert curriculum quality or teaching execution.
         </p>
 
         <div className="grid">
@@ -181,7 +195,7 @@ export default function GoalIntakePanel() {
 
         {errors.length ? (
           <div className="validation-panel">
-            <strong>Goal intake needs attention</strong>
+            <strong>Goal/curriculum flow needs attention</strong>
             <ul>{errors.map((error) => <li key={error}>{error}</li>)}</ul>
           </div>
         ) : null}
@@ -195,10 +209,24 @@ export default function GoalIntakePanel() {
           >
             Export goal intake JSON
           </button>
+          <button type="button" disabled={!admittedGoal} onClick={generateCurriculum}>Generate bounded curriculum draft</button>
+          <button
+            type="button"
+            disabled={!generatedCurriculum}
+            onClick={() => generatedCurriculum && exportJson('steglearn-generated-curriculum.json', generatedCurriculum)}
+          >
+            Export curriculum JSON
+          </button>
         </div>
 
         <h2>Admitted goal intake preview</h2>
         <pre>{JSON.stringify(admittedGoal, null, 2)}</pre>
+
+        <h2>Generated curriculum preview</h2>
+        <p className="hint">
+          This is a deterministic bounded prototype proving goal-intake → generated-curriculum contract flow. Subject-matter generation quality and live AI teaching remain separate implementation/evidence predicates.
+        </p>
+        <pre>{JSON.stringify(generatedCurriculum, null, 2)}</pre>
       </section>
     </div>
   );
