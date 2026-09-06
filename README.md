@@ -2,9 +2,9 @@
 
 StegLearn is a governed learning system designed to maximize participant growth without capture.
 
-Its broader product model is conversational: a human or admitted AI entity can enter StegLearn, describe a desired skill, capability, or body of knowledge, agree on the desired depth, receive a governed curriculum, obtain a reviewable version of that curriculum, and then be taught that curriculum by the StegLearn AI Entity.
+Its product model is conversational: a human or admitted AI entity can enter StegLearn, describe a desired skill, capability, or body of knowledge, agree on desired depth, receive a governed curriculum, obtain a reviewable version of that curriculum, and then be taught the selected curriculum by the StegLearn AI Entity.
 
-Its preferred initial deployment posture is **human teacher + governed AI Entity**: the teacher remains the educational authority while StegLearn helps observe permitted learning activity, generate appropriate learning paths, make those paths reviewable before execution, teach within delegated scope, adapt instruction, support learners, and preserve evidence of growth.
+The preferred initial deployment posture is **human teacher + governed AI Entity**. In teacher-led use, the teacher remains the educational authority while StegLearn can assist with goal intake, curriculum construction and review, bounded teaching, permitted observation, adaptation, evidence preservation, and recommendations.
 
 ## Product Model
 
@@ -25,13 +25,13 @@ Participant enters StegLearn
 
 Curriculum generation is not the terminal feature. StegLearn must produce a reviewable curriculum and be able to teach the selected version.
 
-The intended instructional range can extend from first exposure and foundational learning through advanced professional, graduate, doctoral, and post-doctoral depth where the subject supports those levels. Those labels describe instructional depth and rigor; they do not themselves constitute accreditation, degrees, licenses, or institutional credentials.
+The intended instructional range can extend from first exposure and foundational learning through advanced professional, graduate, doctoral, and post-doctoral depth where the subject supports those levels. These labels describe instructional depth and rigor; they do not themselves constitute accreditation, degrees, licenses, institutional equivalence, or professional authority.
 
 See [`docs/conversational-curriculum-and-teaching-model.md`](docs/conversational-curriculum-and-teaching-model.md) and [`docs/curriculum-review-and-teaching-contract.md`](docs/curriculum-review-and-teaching-contract.md).
 
 ## Purpose
 
-StegLearn exists to support governed learning as an adaptive growth process, not as passive screen time, answer production, curriculum compliance, or automatic teacher replacement.
+StegLearn supports governed learning as an adaptive growth process, not as passive screen time, answer production, curriculum compliance, or automatic teacher replacement.
 
 The system is designed for participants who grow through questions, building, observation, storytelling, play, experimentation, explanation, practice, research, and interaction with other people or admitted AI entities.
 
@@ -40,8 +40,6 @@ The system is designed for participants who grow through questions, building, ob
 StegLearn begins by enhancing the human teacher.
 
 The StegLearn AI Entity is intended to be visibly present on-screen and, when explicitly authorized, may speak, listen, present material, guide activities, teach, support individuals or small groups, and use permitted sensors and learning signals to evaluate observable variables such as engagement, participation, responsiveness, activity, and progress.
-
-The teacher remains in authority over educational objectives, instructional decisions, acceptance of learning evidence, and other high-impact learner decisions in teacher-led use.
 
 ```text
 Human teacher
@@ -95,7 +93,7 @@ Goal
 
 ## Curriculum Depth
 
-StegLearn may construct revisable paths at levels such as orientation, foundational, beginner, intermediate, advanced, vocational/applied, undergraduate-equivalent, graduate-equivalent, doctoral/research-equivalent, and post-doctoral/frontier-specialization depth where applicable.
+StegLearn may construct revisable paths at orientation, foundational, beginner, intermediate, advanced, vocational/applied, undergraduate-equivalent, graduate-equivalent, doctoral/research-equivalent, and post-doctoral/frontier-specialization depth where applicable.
 
 Requested level does not automatically prove readiness. StegLearn may recommend prerequisite work without turning that recommendation into a fixed participant identity.
 
@@ -107,32 +105,25 @@ An admitted AI entity may also participate in a governed learning relationship w
 
 ## Machine-Readable Curriculum Contracts
 
-The conversational curriculum flow now has explicit source contracts:
+The conversational curriculum flow has explicit source contracts:
 
-- `schemas/participant-goal-intake.schema.json` records the admitted participant, desired outcome, requested depth, starting-point basis, learning context, constraints, evidence expectations, and review requirements.
+- `schemas/participant-goal-intake.schema.json` records participant identity/admission, desired outcome, requested depth, starting-point basis, learning context, constraints, evidence expectations, and review requirements.
 - `schemas/generated-curriculum.schema.json` records stable curriculum identity/version, exact goal-intake provenance, supportable depth, prerequisites, objectives, teachable units, evidence expectations, progression gates, completion criteria, review binding, and exact-version teaching policy.
 - `schemas/curriculum-review-package.schema.json` provides the synchronized review surface used to inspect and review a generated curriculum before or during teaching.
 
-The generated curriculum contract deliberately reuses the existing curriculum-review package rather than creating a competing review mechanism. Teaching must bind the exact selected curriculum version, and material curriculum changes require an inspectable version transition.
+The generated curriculum contract reuses the existing curriculum-review package rather than creating a competing review mechanism. Teaching must bind the exact selected curriculum version, and material curriculum changes require an inspectable version transition.
 
-Examples are provided under `examples/curricula/`. `scripts/validate-curriculum-contracts.mjs` checks the example goal-to-curriculum linkage, stable IDs/versions, review-package binding, unique units, progression/evidence requirements, and exact-version teaching invariant. `npm run build` runs this validator before the existing receipt validation and TypeScript/Vite build.
+Examples are provided under `examples/curricula/`. `scripts/validate-curriculum-contracts.mjs` checks goal-to-curriculum linkage, stable IDs/versions, review-package binding, unique units, progression/evidence requirements, and exact-version teaching. `npm run build` runs this validator before receipt validation and the TypeScript/Vite build.
 
-## Conversational Goal Intake UI
+## Goal Intake and Bounded Curriculum Generation UI
 
-The prototype now exposes the first machine-bound entry surface for the broader StegLearn product direction.
+The prototype exposes the first two machine-bound transitions of the broader product flow.
 
-`app/src/GoalIntakePanel.tsx` lets a participant or admitted entity specify:
+`app/src/GoalIntakePanel.tsx` lets a participant or admitted entity specify entity identity/type, governed learning context, desired skill or knowledge outcome, requested depth, declared starting point, time/resource constraints, evidence expectations, and curriculum-review requirements.
 
-- entity identity/type;
-- human, AI, teacher-led, parent/steward, or individually governed context;
-- desired skill, knowledge, capability, or outcome;
-- requested instructional depth;
-- declared starting point;
-- time/resource constraints;
-- evidence expectations;
-- curriculum-review requirement and reviewer identities.
+The UI creates a `steglearn.participant-goal-intake/v1` record and can export its exact JSON. The admitted record is then consumed by `app/src/curriculumGeneration.ts`, which emits a `steglearn.generated-curriculum/v1` bounded curriculum draft with stable identity/version, goal provenance, prerequisites, objectives, units, teaching methods, evidence expectations, progression gates, completion criteria, review binding, and exact-version teaching policy.
 
-The UI creates and previews a `steglearn.participant-goal-intake/v1` record and can export the exact JSON. It does **not** claim that a curriculum has already been generated or taught. The next product transition must consume this admitted record rather than recreating goal state in a parallel shape.
+The current builder is deliberately deterministic and bounded. It proves the **goal-intake → generated-curriculum** contract path without claiming arbitrary-domain expert curriculum quality, accreditation, or live AI teaching. A later AI-backed generator must emit the same governed contract rather than create a parallel curriculum representation.
 
 ## Reviewable Curriculum
 
@@ -142,7 +133,7 @@ StegLearn must not present one curriculum for review and silently teach a materi
 
 ## What Counts as Learning Evidence
 
-Evidence may include questions, participation, things built, observations, explanations, demonstrations, mistakes found, revisions, code/designs/research artifacts, skills applied, and contextually reviewed receipts. AI interpretations must remain distinguishable from participant evidence, teacher or parent notes, and sensor observations.
+Evidence may include questions, participation, things built, observations, explanations, demonstrations, mistakes found, revisions, code/design/research artifacts, skills applied, and contextually reviewed receipts. AI interpretations must remain distinguishable from participant evidence, teacher or parent notes, and sensor observations.
 
 ## Repository Structure
 
@@ -150,6 +141,7 @@ Evidence may include questions, participation, things built, observations, expla
 app/src/
   GoalIntakePanel.tsx
   curriculum.ts
+  curriculumGeneration.ts
 
 docs/
   product-spec.md
@@ -200,6 +192,6 @@ Learning Transition Governance provides the doctrine for learning as an admissib
 
 ## Implementation Status
 
-The repository contains a local-first web prototype, schemas, example receipts, reusable learning paths, teacher-first governed AI architecture, conversational curriculum-generation and teaching doctrine, curriculum review/teaching contracts, goal-intake and generated-curriculum machine contracts, a live prototype goal-intake UI, public landing-page source, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
+The repository contains a local-first web prototype, schemas, example receipts, reusable learning paths, teacher-first governed AI architecture, conversational curriculum-generation and teaching doctrine, curriculum review/teaching contracts, goal-intake and generated-curriculum machine contracts, goal-intake and bounded curriculum-generation UI, public landing-page source, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
 
-Current source now implements **goal conversation UI → governed goal-intake record** and deterministically models the next **generated curriculum → review binding → exact-version teaching policy** states. Dynamic curriculum generation, runtime review rendering, curriculum-version-bound teaching execution, generalized AI-participant learning, sensor-mediated classroom assistance, and public Site publication remain incomplete unless separately evidenced.
+Current source now implements **goal conversation UI → governed goal-intake record → bounded generated-curriculum version**. Runtime review-package rendering, curriculum-version-bound teaching execution, generalized AI-participant learning, sensor-mediated classroom assistance, and public Site publication remain incomplete unless separately evidenced.
