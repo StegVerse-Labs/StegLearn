@@ -77,7 +77,7 @@ export function buildEarlyLanguageComparison(
     observation_count: observations.length,
     revision_event_count: revisionEventCount,
     first_observed_at: observations[0]?.created_at ?? null,
-    latest_observed_at: observations.at(-1)?.created_at ?? null,
+    latest_observed_at: observations[observations.length - 1]?.created_at ?? null,
     observations,
     comparison_prompts: [
       'Are self-corrections becoming more frequent or more precise?',
