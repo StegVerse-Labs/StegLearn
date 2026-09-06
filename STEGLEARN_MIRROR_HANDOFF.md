@@ -1,165 +1,176 @@
 # StegLearn Mirror Handoff
 
-## Repository
+## Repository / authority
 
-`StegVerse-Labs/StegLearn`
+Repository: `StegVerse-Labs/StegLearn`
 
-## Status
+Status: active implementation.
 
-Active implementation. This file is the repository-local source of truth for active StegLearn implementation lanes.
+This file is the repository-local source of truth for current StegLearn implementation lanes.
 
-## Canonical Product Direction
+## Canonical product direction
 
 StegLearn is a governed learning environment in which a human or admitted AI entity may enter, converse with the StegLearn AI Entity about a desired skill, capability, body of knowledge, outcome, and desired depth, receive a governed curriculum, obtain a reviewable version of that curriculum, and then be taught the selected curriculum version by StegLearn.
 
 ```text
 participant enters StegLearn
--> conversation about desired skill / knowledge / outcome
--> establish starting point + desired depth + constraints
--> governed participant goal-intake record
+-> goal conversation
+-> starting point + depth + constraints
+-> governed goal-intake record
 -> generated curriculum version
--> reviewable curriculum package
--> review / revise / select according to entity authority
--> teach selected curriculum version
--> observe permitted engagement / participation / progress
--> adapt instruction
--> preserve evidence / explanation / revision
--> review / receipt / longitudinal continuity
+-> synchronized human/machine review package
+-> review / revise / approve according to authority
+-> exact-version teaching session
+-> permitted observation / adaptation / evidence
+-> receipt / longitudinal continuity
 ```
 
-Curriculum generation is not terminal. Reviewability and teaching are part of the product definition.
+Curriculum generation is not terminal. Reviewability and teaching are product requirements.
 
-The intended instructional range can extend from first exposure through advanced professional, graduate, doctoral, and post-doctoral depth where the subject supports those levels. Depth labels do not themselves represent accreditation, degrees, professional licenses, credentialing authority, or institutional equivalence.
+Instructional depth may range from first exposure through advanced professional, graduate, doctoral, and post-doctoral depth where applicable. These are instructional-depth labels, not accreditation, degrees, licenses, institutional equivalence, or professional authority.
 
-## Preferred Initial Deployment
+Preferred first deployment remains **human teacher + governed on-screen StegLearn AI Entity**. In teacher-led use, the human teacher remains educational authority.
 
-The preferred first deployment remains **human teacher + governed on-screen StegLearn AI Entity**.
+## Governing invariants
 
-In teacher-led use, the human teacher remains the educational authority while StegLearn may discuss goals, generate curriculum, render reviewable versions, teach within admitted scope, observe permitted engagement/participation/progress, adapt instruction, preserve evidence, and return recommendations.
-
-The teacher-first posture is the preferred first validation environment; it is not the full product boundary.
-
-## Governing Boundaries
-
-- Generated curriculum does not become a fixed participant identity.
-- Requested level does not automatically prove readiness; prerequisite work may be proposed without permanent classification.
-- In teacher-led use, the human teacher remains the educational authority.
-- Review capability does not automatically grant approval or teaching authority.
-- Teaching must bind an identifiable curriculum version.
+- Requested depth does not automatically prove readiness.
+- Generated curriculum does not become fixed participant identity.
+- Review availability does not equal approval or teaching authority.
+- `APPROVE` requires an authority effect valid within the governing context.
+- Teaching binds exact curriculum ID/version.
+- A teaching session cannot advance against a different curriculum ID/version.
 - Material curriculum changes must remain versioned and inspectable.
-- Sensor and learning inputs must be explicitly authorized for the context.
-- Observable engagement, participation, responsiveness, activity, and progress may inform instruction but do not independently become mastery, failure, discipline, or fixed identity.
-- Participant evidence, sensor/system observations, human context, AI interpretation, curriculum content, teaching action, and review decision remain distinguishable evidence classes.
-- Professional, regulated, safety-critical, or high-consequence learning may require additional human supervision or separately governed constraints.
-- Completion does not itself grant professional licensure, accredited status, or authority outside the admitted learning relationship.
-- External educational-system interaction must cross the applicable Interlock/InTr boundary before becoming StegLearn state.
+- Sensor/learning inputs must be explicitly authorized before use.
+- Engagement, participation, responsiveness, activity, and progress observations do not independently become mastery, failure, discipline, or fixed identity.
+- Participant evidence, sensor/system observation, human context, AI interpretation, curriculum content, review decision, and teaching action remain distinguishable.
+- High-consequence or regulated learning may require additional human or external authority.
+- Completion does not grant licensure, accreditation, or authority outside the admitted learning relationship.
 - Task Registry owns work intent; WorkerCoordinator owns executable claims/fences; Master Records owns observed/reconstructable reality; Interlock/InTr governs ingress/egress. Source and CI do not manufacture runtime authority.
 
-## Existing Lanes Preserved
-
-- TI-83 Plus / Arduino reusable learning path and reviewed receipt model.
-- Early-language longitudinal continuity with family-specific records private/local by default.
-- Edukors evaluation-only external-learning Interlock/InTr relationship `steglearn.edukors.evaluation.v1`, source-validated with authentic runtime interaction unobserved.
-
-## Current Branch / PR
+## Current branch / collision state
 
 Branch: `feature/teacher-first-public-model`
 
 Open PR: `StegVerse-Labs/StegLearn#3` — `Implement StegLearn goal-to-curriculum review/teaching contracts`.
 
-No competing open StegLearn PR was observed for this same workload during the current preflight. Existing learning-path branches remain separate scope.
+Preflight found no competing open StegLearn PR for this same workload. Existing learning-path branches are separate scope.
 
-## Current Machine Preflight — 2026-09-06
+## Machine preflight — 2026-09-06
 
 Resolved before functional mutation:
 
-1. Canonical repository handoff: this file.
-2. Canonical Task Registry: `StegVerse-Labs/.github/data/canonical-task-registry.json`, generation 15, status `RUNTIME_PROFILE_GOVERNANCE_REVIEW_SOURCE_BOUND_AUTHENTIC_RUNTIME_PENDING`.
-3. WorkerCoordinator source: `StegVerse-Labs/.github/control/worker-registry.json`, generation 22. No StegLearn goal-intake/curriculum claim or fence was observed in indexed coordination surfaces.
-4. Master Records canonical work custody handoff: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`, status `SOURCE_FEED_RUNTIME_PROFILE_AND_PRESENCE_CUSTODY_PATH_IMPLEMENTED_AUTHENTIC_INPUT_PENDING`.
-5. Cross-task collision check: open StegLearn PR search found only PR #3 for the current workload; no duplicate goal-intake/generated-curriculum implementation was found.
-6. Existing implementations reused: `schemas/learning-path.schema.json`, `schemas/curriculum-review-package.schema.json`, receipt/evidence boundaries, Edukors external-learning validation, and the existing build path. No competing curriculum-review representation was minted.
-7. Site remains a separate publication target and is not mutated from this lane unless Site orchestration admits the workload.
+- canonical repository handoff: this file;
+- canonical Task Registry: `StegVerse-Labs/.github/data/canonical-task-registry.json`, generation 15, status `RUNTIME_PROFILE_GOVERNANCE_REVIEW_SOURCE_BOUND_AUTHENTIC_RUNTIME_PENDING`;
+- WorkerCoordinator source: `StegVerse-Labs/.github/control/worker-registry.json`, generation 22; no indexed StegLearn goal/curriculum/review/teaching claim or fence observed;
+- Master Records: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`, status `SOURCE_FEED_RUNTIME_PROFILE_AND_PRESENCE_CUSTODY_PATH_IMPLEMENTED_AUTHENTIC_INPUT_PENDING`;
+- existing `schemas/learning-path.schema.json`, `schemas/curriculum-review-package.schema.json`, receipt/evidence boundaries, Edukors validator, and build path were reused;
+- org/repo search found no existing teaching-session contract to reuse before `schemas/teaching-session.schema.json` was added;
+- Site remains a separate publication target and is not mutated unless Site orchestration admits the workload.
 
-### README completeness predicate
+### README completeness
 
 **README UPDATE REQUIRED AND SATISFIED.**
 
-Goal-intake UI and bounded generated-curriculum behavior materially change product interfaces and capability meaning. `README.md` is updated in the same change set and preserves the required Edukors completeness markers.
+Goal intake, generated curriculum, synchronized review, review decisions, and exact-version teaching materially change product interfaces, validation behavior, governance/authority semantics, and capability meaning. `README.md` is updated in the same change set and retains Edukors-required completeness markers.
 
-## Highest-Priority Admissible Machine Work Completed
+## Implemented this lane
 
-### Source contracts
+### Contracts
 
 - `schemas/participant-goal-intake.schema.json`
 - `schemas/generated-curriculum.schema.json`
-- `schemas/curriculum-review-package.schema.json` reused for review rather than duplicated
-- `examples/curricula/python-foundations-goal-intake.json`
-- `examples/curricula/python-foundations-generated-curriculum.json`
-- `scripts/validate-curriculum-contracts.mjs`
-- `app/package.json` gates build on curriculum-contract validation before receipt validation and TypeScript/Vite.
+- existing `schemas/curriculum-review-package.schema.json` reused
+- `schemas/teaching-session.schema.json`
+- `scripts/validate-curriculum-contracts.mjs` now validates goal/curriculum/review/teaching contract identity and exact-version requirements
+- `app/package.json` runs curriculum contract validation before receipt validation and TypeScript/Vite build
 
-### Goal-intake UI
+### Goal intake
 
-- `app/src/curriculum.ts` implements the exact `steglearn.participant-goal-intake/v1` TypeScript shape and builder.
-- `app/src/GoalIntakePanel.tsx` captures entity/context, desired outcome/depth, declared starting point, constraints, evidence expectations, and reviewer requirements.
-- The panel creates, previews, and exports the exact governed goal-intake JSON.
-- AI-participant/context mismatches and missing supervised human-authority/reviewer requirements fail closed in this bounded UI.
+- `app/src/curriculum.ts`
+- `app/src/GoalIntakePanel.tsx`
+- creates/exports `steglearn.participant-goal-intake/v1`
+- captures participant/context, desired outcome/depth, starting point, constraints, evidence expectations, reviewer requirements
+- bounded AI-participant/context and supervised-authority mismatches fail closed
 
-### Bounded generated-curriculum flow
+### Bounded curriculum generation
 
-- `app/src/curriculumGeneration.ts` consumes an admitted `ParticipantGoalIntake` and emits `steglearn.generated-curriculum/v1`.
-- The generated curriculum preserves exact goal-intake identity/version provenance and requested depth.
-- It emits stable curriculum identity/version, prerequisites, objectives, units, teaching methods, evidence expectations, progression gates, completion criteria, review binding, exact-version teaching policy, and non-capture semantics.
-- `GoalIntakePanel.tsx` can generate, preview, and export the bounded curriculum draft from the admitted goal.
-- The builder is intentionally deterministic. It proves the contract transition without claiming arbitrary-domain expert curriculum quality or live AI teaching.
-- A future AI-backed curriculum generator must emit the same contract rather than create a parallel curriculum representation.
+- `app/src/curriculumGeneration.ts`
+- consumes exact admitted goal record
+- emits `steglearn.generated-curriculum/v1`
+- preserves exact goal ID/version provenance and requested depth
+- emits prerequisites, objectives, units, teaching methods, evidence expectations, progression gates, completion criteria, review binding, exact-version teaching policy
+- deterministic prototype only; no arbitrary-domain expert-quality claim
 
-### Reuse / authority invariants
+### Synchronized review
 
-`steglearn.generated-curriculum/v1` binds to the existing `steglearn.curriculum-review-package/v1`. Material changes require a new inspectable version, and teaching must bind the exact selected curriculum version.
+- `app/src/curriculumReview.ts`
+- emits existing `steglearn.curriculum-review-package/v1`
+- verifies exact goal/curriculum provenance
+- human-readable and machine-readable UI projections resolve to the same curriculum ID/version
+- review package export supported
+- contextual `APPROVE` and `REQUEST_CHANGES` decisions supported
+- approval requires `APPROVAL_WITHIN_CONTEXT`; revision request remains distinct
+- `content_hash_sha256` remains intentionally null pending deterministic hashing
 
-## Validation Evidence
+### Review-gated teaching
 
-Historical evidence preserved:
+- `app/src/teaching.ts`
+- emits `steglearn.teaching-session/v1`
+- teaching start requires review policy satisfaction; default teacher-led path with approval requirement is blocked until `APPROVED`
+- teaching session records participant, exact curriculum ID/version, review state at start, human-authority requirement, authority IDs, current unit, timestamps, and teaching events
+- UI presents current unit outcomes, teaching methods, activities, evidence expectations, and progression gate
+- advancing units records teaching events and fails if curriculum ID/version differs
+- bounded session can complete after all generated units are presented
 
-- run `34001370386`: repository validation/build PASS after early-language compatibility repair.
-- run `34001573328`: canonical Edukors public-observation source binding PASS after validator stabilization.
-- run `34014352330`: curriculum-contract + repository build PASS after initial goal/curriculum schemas.
-- run `34014483851`: PASS after conversational goal-intake UI installation.
-- run `34014587317`: **PASS** on head `497cb7045e0a15d3ada182309efb38636b66508b` after bounded generated-curriculum UI installation and handoff update; Edukors validator and full build job completed successfully.
+This is now an actual bounded source/runtime prototype of **goal -> curriculum -> review -> teaching**, but not yet a conversational AI instructor, expert dynamic curriculum generator, evidence-driven adaptive progression engine, or production classroom system.
 
-These validations are source/build facts only. They do not prove arbitrary-domain subject-matter curriculum quality, runtime review authorization, curriculum teaching execution, classroom effectiveness, AI-participant learning, runtime sensing, or production activation.
+## Validation evidence
 
-## Remaining Machine Work — Priority Order
+Preserved historical PASS evidence:
 
-1. Materialize synchronized review-package rendering from the generated curriculum using `steglearn.curriculum-review-package/v1`.
-2. Implement actual teaching execution bound to the selected curriculum ID/version, not syllabus-only generation.
-3. Add curriculum revision/diff handling so material instructional changes produce a new inspectable version.
-4. Replace or augment the bounded deterministic generator with an admitted AI-backed generator that emits the same `steglearn.generated-curriculum/v1` contract; do not treat model output as reviewed curriculum automatically.
-5. Define machine-readable sensor/input permission and observation-event contracts only after checking existing StegVerse permission/evidence/Interlock contracts for reuse.
-6. Define teacher delegation/return contracts for bounded learner or small-group teaching.
-7. Add visible StegLearn Entity and teacher-facing observation/recommendation surfaces.
-8. Add deterministic fixtures/tests separating participant evidence, sensor/system observation, AI interpretation, curriculum content, review decision, teaching action, and human decision.
-9. Define admitted AI-participant learning contracts and negative tests.
-10. When Site orchestration admits the workload, install the public landing page and Site navigation/discovery path.
+- `34001370386` — early-language compatibility/build;
+- `34001573328` — Edukors public-observation source binding;
+- `34014352330` — initial goal/curriculum contracts;
+- `34014483851` — goal-intake UI;
+- `34014587317` — bounded generated-curriculum UI;
+- `34014660474` — synchronized review rendering; validate job completed SUCCESS.
 
-## Edukors Runtime Lane
+The newest review-decision / teaching-session changes are newer than `34014660474`; their CI must be observed before claiming latest-head PASS.
 
-Source implementation remains complete for evaluation-only observation binding. Authentic runtime execution still requires canonical task/WorkerCoordinator/Interlock admission, exact correlated observation, a StegLearn evaluation record, and Master Records reconciliation. No partnership or production integration is inferred.
+All CI evidence is source/build evidence only. It does not prove subject-matter curriculum quality, production AI teaching, classroom effectiveness, runtime sensor observation, external-learning InTr execution, or production activation.
 
-## Remaining Physical / User Work
+## Remaining machine work — priority order
 
-- None required for the current source/UI implementation.
-- A future real classroom pilot requires an explicitly authorized educator/learning context before collecting real participant or sensor evidence.
-- TI-83/Arduino physical work remains as documented in the existing lesson lane.
+1. Observe/fix latest-head validation for review-decision + teaching-session changes.
+2. Add deterministic curriculum content hashing and bind review decisions to the hashed curriculum version.
+3. Add material curriculum revision/diff flow producing a new inspectable version and invalidating prior teaching authorization where required.
+4. Add participant evidence capture/progression gating inside teaching rather than unit advancement by button alone.
+5. Add conversational AI teaching inside the exact-version teaching session while preserving teaching/evidence/event contracts.
+6. Replace/augment deterministic curriculum generation with an admitted AI-backed generator that still emits `steglearn.generated-curriculum/v1`; model output is not automatically reviewed curriculum.
+7. Check/reuse existing StegVerse permission/evidence/Interlock contracts before adding sensor/input permission and observation-event contracts.
+8. Define teacher delegation/return contracts for bounded learner/small-group teaching.
+9. Add visible StegLearn Entity and teacher-facing observation/recommendation surfaces.
+10. Add admitted AI-participant learning contracts and negative tests.
+11. When Site orchestration admits work, publish the StegLearn informational landing page and navigation/discovery path.
 
-## Release State
+## Edukors lane
 
-Not release-tagged. Review-package rendering, curriculum-version-bound teaching execution, material curriculum revision flow, admitted AI-backed generation, visible AI Entity behavior, sensor-mediated classroom interaction, generalized AI-participant learning, and public Site publication remain incomplete.
+Evaluation-only Edukors relationship `steglearn.edukors.evaluation.v1` remains source-complete. Authentic runtime execution still requires canonical task/WorkerCoordinator/Interlock admission, exact correlated observation, a StegLearn evaluation record, and Master Records reconciliation. No partnership or production integration is inferred.
 
-When release predicates are actually satisfied, release work must verify pertinent propagation to `StegVerse-Labs/Site`, `GCAT-BCAT-Engine/Publisher`, `StegVerse-Labs/admissibility-wiki`, and `StegVerse-002/stegguardian-wiki` as applicable.
+## User / physical work
 
-## Archive Readiness
+No user action is required for the current source/UI work.
 
-The current product direction, preflight, installed goal/curriculum contracts, goal-intake UI, bounded curriculum-generation flow, validation evidence, remaining implementation sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
+A future real classroom pilot requires an explicitly authorized educator/learning context before collecting real participant or sensor evidence.
+
+TI-83/Arduino physical work remains in the existing lesson lane.
+
+## Release state
+
+Not release-tagged. Deterministic hashing, curriculum revision/diff semantics, evidence-gated teaching progression, conversational AI instruction, admitted AI-backed generation, sensor-mediated classroom assistance, generalized AI-participant learning, authentic external-learning runtime evidence, and public Site publication remain incomplete.
+
+When release predicates are actually satisfied, verify propagation to `StegVerse-Labs/Site`, `GCAT-BCAT-Engine/Publisher`, `StegVerse-Labs/admissibility-wiki`, and `StegVerse-002/stegguardian-wiki` as applicable.
+
+## Archive readiness
+
+The current product direction, preflight, contracts, goal/curriculum/review/teaching implementation, validation boundary, remaining sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
