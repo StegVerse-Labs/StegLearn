@@ -126,11 +126,10 @@ Historical evidence preserved:
 - run `34001370386`: repository validation/build PASS after early-language compatibility repair.
 - run `34001573328`: canonical Edukors public-observation source binding PASS after validator stabilization.
 - run `34014352330`: curriculum-contract + repository build PASS after initial goal/curriculum schemas.
-- run `34014483851`: **PASS** on head `f7f3fdcc69b288fbbfb19e9486b2cf06b598813e` after conversational goal-intake UI installation; Edukors validator, curriculum-contract validator, committed receipts, TypeScript, and Vite build all passed.
+- run `34014483851`: PASS after conversational goal-intake UI installation.
+- run `34014587317`: **PASS** on head `497cb7045e0a15d3ada182309efb38636b66508b` after bounded generated-curriculum UI installation and handoff update; Edukors validator and full build job completed successfully.
 
-The bounded curriculum-generation commits are newer than run `34014483851`; their CI must be observed separately before a PASS is claimed for the latest head.
-
-These validations are source/build facts only. They do not prove subject-matter curriculum quality, runtime review authorization, curriculum teaching execution, classroom effectiveness, AI-participant learning, runtime sensing, or production activation.
+These validations are source/build facts only. They do not prove arbitrary-domain subject-matter curriculum quality, runtime review authorization, curriculum teaching execution, classroom effectiveness, AI-participant learning, runtime sensing, or production activation.
 
 ## Remaining Machine Work — Priority Order
 
@@ -163,4 +162,4 @@ When release predicates are actually satisfied, release work must verify pertine
 
 ## Archive Readiness
 
-The current product direction, preflight, installed goal/curriculum contracts, goal-intake UI, bounded curriculum-generation flow, validation boundary, remaining implementation sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
+The current product direction, preflight, installed goal/curriculum contracts, goal-intake UI, bounded curriculum-generation flow, validation evidence, remaining implementation sequence, Site publication boundary, and Edukors relationship are repository-resident. No conversation-only information is required to continue this lane.
