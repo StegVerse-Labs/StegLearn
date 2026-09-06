@@ -117,6 +117,23 @@ The generated curriculum contract deliberately reuses the existing curriculum-re
 
 Examples are provided under `examples/curricula/`. `scripts/validate-curriculum-contracts.mjs` checks the example goal-to-curriculum linkage, stable IDs/versions, review-package binding, unique units, progression/evidence requirements, and exact-version teaching invariant. `npm run build` runs this validator before the existing receipt validation and TypeScript/Vite build.
 
+## Conversational Goal Intake UI
+
+The prototype now exposes the first machine-bound entry surface for the broader StegLearn product direction.
+
+`app/src/GoalIntakePanel.tsx` lets a participant or admitted entity specify:
+
+- entity identity/type;
+- human, AI, teacher-led, parent/steward, or individually governed context;
+- desired skill, knowledge, capability, or outcome;
+- requested instructional depth;
+- declared starting point;
+- time/resource constraints;
+- evidence expectations;
+- curriculum-review requirement and reviewer identities.
+
+The UI creates and previews a `steglearn.participant-goal-intake/v1` record and can export the exact JSON. It does **not** claim that a curriculum has already been generated or taught. The next product transition must consume this admitted record rather than recreating goal state in a parallel shape.
+
 ## Reviewable Curriculum
 
 Every generated curriculum should be capable of becoming a stable review artifact before or during teaching. The review surface should provide a human-readable curriculum, a machine-readable canonical curriculum, stable identity/version, review comments or decisions tied to the reviewed version, a distinction between inspection/comment/revision/approval/teaching authorization, and traceability from the selected curriculum version into the teaching session.
@@ -130,6 +147,10 @@ Evidence may include questions, participation, things built, observations, expla
 ## Repository Structure
 
 ```text
+app/src/
+  GoalIntakePanel.tsx
+  curriculum.ts
+
 docs/
   product-spec.md
   learner-loop.md
@@ -179,6 +200,6 @@ Learning Transition Governance provides the doctrine for learning as an admissib
 
 ## Implementation Status
 
-The repository contains a local-first web prototype, schemas, example receipts, reusable learning paths, teacher-first governed AI architecture, conversational curriculum-generation and teaching doctrine, curriculum review/teaching contracts, goal-intake and generated-curriculum machine contracts, public landing-page source, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
+The repository contains a local-first web prototype, schemas, example receipts, reusable learning paths, teacher-first governed AI architecture, conversational curriculum-generation and teaching doctrine, curriculum review/teaching contracts, goal-intake and generated-curriculum machine contracts, a live prototype goal-intake UI, public landing-page source, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
 
-Current source now deterministically models **goal intake → generated curriculum → review binding → exact-version teaching policy**. This is source/schema validation only; dynamic curriculum generation, runtime review rendering, curriculum-version-bound teaching execution, generalized AI-participant learning, sensor-mediated classroom assistance, and public Site publication remain incomplete unless separately evidenced.
+Current source now implements **goal conversation UI → governed goal-intake record** and deterministically models the next **generated curriculum → review binding → exact-version teaching policy** states. Dynamic curriculum generation, runtime review rendering, curriculum-version-bound teaching execution, generalized AI-participant learning, sensor-mediated classroom assistance, and public Site publication remain incomplete unless separately evidenced.
