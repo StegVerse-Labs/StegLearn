@@ -54,6 +54,7 @@ docs/
   learner-loop.md
   homeschool-receipt-model.md
   ai-scaffold-policy.md
+  EDUKORS_INTR_MIRROR_HANDOFF.md
 
 lessons/
   README.md
@@ -64,11 +65,14 @@ lessons/
 schemas/
   learning-path.schema.json
   learning-receipt.schema.json
+  external-learning-interlock.schema.json
 
 examples/
   receipts/
     sleep-question-reflection-receipt.json
     ti83-sensor-lab-receipt.json
+  interlocks/
+    edukors-evaluation-interlock.json
 ```
 
 ## Learning Paths
@@ -78,6 +82,16 @@ StegLearn keeps reusable lessons inside a governed `lessons/` catalog rather tha
 A learning path is an adaptable scaffold, not a fixed curriculum lane or learner identity. Each path includes supervision guidance, safety gates, evidence opportunities, reflection prompts, subject mappings, and a machine-readable manifest.
 
 The first materialized path is the [TI-83 Plus and Arduino Sensor Lab](lessons/ti83-arduino-sensor-lab/README.md), which moves from electronics restoration through TI-BASIC, sensor observations, a protected Arduino bridge, and governed low-voltage action.
+
+## External Learning Relationships
+
+StegLearn may evaluate or interact with external educational systems only through an explicit, bounded relationship contract. External access or content availability does not itself grant authority to change StegLearn state.
+
+The first installed external-learning relationship is the evaluation-only Edukors Interlock/InTr lane documented in [`docs/EDUKORS_INTR_MIRROR_HANDOFF.md`](docs/EDUKORS_INTR_MIRROR_HANDOFF.md). Its machine-readable relationship is `steglearn.edukors.evaluation.v1`.
+
+The current Edukors relationship permits unauthenticated public educational observation, comparison, evidence/artifact intake, and human-mediated requests. It does not permit authenticated access, automated mutation of Edukors, direct mutation of StegLearn, learner-private-data egress, or inference of partnership or endorsement. Any API, MCP, authenticated account, AI-agent, or other machine transport requires a separately admitted capability package.
+
+External observations become StegLearn evidence only after the applicable Interlock/InTr ingress boundary is satisfied. Source installation, public retrieval, CI, or repository presence does not prove an authentic runtime Interlock/InTr transition.
 
 ## Relationship to Learning Transition Governance
 
@@ -91,6 +105,6 @@ StegLearn captures the learning loop, preserves evidence, and produces parent-re
 
 ## Implementation Status
 
-The repository contains a local-first web prototype, schemas, example receipts, governance documentation, and reusable learning-path foundations.
+The repository contains a local-first web prototype, schemas, example receipts, governance documentation, reusable learning-path foundations, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
 
-The current implementation target remains a complete learner loop that records a question, connects it to an activity, captures the learner explanation, requires parent review, produces a portable receipt, and preserves it in a portfolio.
+The current implementation target remains a complete learner loop that records a question, connects it to an activity, captures the learner explanation, requires parent review, produces a portable receipt, and preserves it in a portfolio. External-learning evaluation remains non-authorizing until authentic Interlock/InTr evidence exists.

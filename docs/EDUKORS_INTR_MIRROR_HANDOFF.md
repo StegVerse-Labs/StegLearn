@@ -14,6 +14,29 @@ This is the bounded continuation record for the StegLearn ↔ Edukors external-l
 
 This lane inherits, and does not replace, StegVerse Universal Interlock/InTr, Master Records reconstruction, disclosure, SKAP relationship, and TV/TVC credential-authority invariants. The organization-level external state-transition admission contract remains authoritative where an external AI or AI-mediated service is involved.
 
+## Machine preflight — 2026-09-05
+
+Preflight inputs resolved before repair mutation:
+
+- repository source of truth: `STEGLEARN_MIRROR_HANDOFF.md`;
+- bounded lane handoff: this file;
+- organization task registry: `StegVerse-Labs/.github/data/canonical-task-registry.json`, generation 12;
+- canonical coordination handoff: `StegVerse-Labs/.github/docs/CANONICAL_WORK_COORDINATION_SYSTEM_MIRROR_HANDOFF.md`;
+- Master Records coordination custody handoff: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`;
+- WorkerCoordinator/cross-task search: no StegLearn/Edukors executable claim or canonical task identity was found in the current organization-level indexed coordination surfaces; the current COSV adoption manifest still carries a stale pre-audit StegLearn classification and is not used as authority for this lane.
+
+Preflight result:
+
+`PASS_FOR_EXISTING_LANE_VALIDATION_REPAIR_ONLY`
+
+Reason: the highest-priority observed defect was not new Edukors functionality but failure of the already-installed validation lane. GitHub Actions run `34000449659` failed at `Validate Edukors Interlock source contract` with exact failure `handoff missing marker: runtime interaction not observed`; the build step was therefore skipped. No new external capability, runtime transport, or partnership state was admissible before repairing that existing source contract.
+
+README impact determination:
+
+`README_UPDATE_REQUIRED`
+
+The installed Edukors relationship materially changes StegLearn's external-interface, governance-boundary, evidence, privacy, and capability semantics. The prior README did not describe that boundary. Therefore README completeness is part of the same repair change set, and the source validator now fails closed if the README loses the external-learning relationship semantics.
+
 ## Goal
 
 Present a real Interlock/InTr boundary before deeper integration momentum develops, so any StegLearn interaction with `https://edukors.org/` begins as an explicit, bounded, reconstructable external-learning relationship rather than an ungoverned API or content dependency.
@@ -99,16 +122,18 @@ An authentic evaluation interaction must preserve enough evidence to reconstruct
 8. the resulting StegLearn evaluation record or proposal;
 9. any later internal transition as a separate governed event.
 
-Source installation alone is not evidence that this path has executed.
+Source installation, public web retrieval, CI success, or repository presence alone is not evidence that this path has executed through authentic StegVerse Interlock/InTr runtime.
 
 ## Machine surfaces
 
 Destination `StegVerse-Labs/StegLearn`:
 
+- `README.md`
 - `docs/EDUKORS_INTR_MIRROR_HANDOFF.md`
 - `schemas/external-learning-interlock.schema.json`
 - `examples/interlocks/edukors-evaluation-interlock.json`
 - `scripts/validate-edukors-interlock.mjs`
+- `.github/workflows/validate.yml`
 
 Potential later integration dependencies, only if momentum exists:
 
@@ -118,24 +143,43 @@ Potential later integration dependencies, only if momentum exists:
 - StegLearn human–AI learning interaction receipts
 - explicit Edukors-side technical or human consent for any non-public integration
 
+## Validation state
+
+Observed failure before current repair:
+
+```text
+run: 34000449659
+job: validate
+step: Validate Edukors Interlock source contract
+result: FAILURE
+exact failure: handoff missing marker: runtime interaction not observed
+build step: SKIPPED
+```
+
+The validator now asserts the canonical status token `SOURCE_EVALUATION_INTERLOCK_INSTALLED_RUNTIME_INTERACTION_NOT_OBSERVED` rather than relying on an incidental prose phrase, and it also verifies that README external-learning semantics remain installed.
+
+A fresh GitHub Actions PASS is still required before source validation is called observed successful.
+
 ## Completion predicates for evaluation phase
 
-1. A machine-readable bounded relationship is installed.
-2. Public observation and human-mediated exchange are positively enumerated.
-3. Unauthenticated public evaluation is separated from authenticated or production integration.
-4. Learner-private data disclosure is fail-closed.
-5. Edukors cannot mutate internal StegLearn state directly.
-6. Future machine/API/MCP access requires a new capability admission rather than inheriting evaluation authority.
-7. At least one authentic interaction can later produce correlated egress/ingress evidence without redefining InTr.
+1. A machine-readable bounded relationship is installed. **SOURCE COMPLETE**
+2. Public observation and human-mediated exchange are positively enumerated. **SOURCE COMPLETE**
+3. Unauthenticated public evaluation is separated from authenticated or production integration. **SOURCE COMPLETE**
+4. Learner-private data disclosure is fail-closed. **SOURCE COMPLETE**
+5. Edukors cannot mutate internal StegLearn state directly. **SOURCE COMPLETE**
+6. Future machine/API/MCP access requires a new capability admission rather than inheriting evaluation authority. **SOURCE COMPLETE**
+7. README reflects the material external-interface/governance semantics and validation enforces that completeness. **SOURCE REPAIR INSTALLED; CI REOBSERVATION PENDING**
+8. At least one authentic interaction produces correlated egress/ingress evidence without redefining InTr. **RUNTIME PENDING**
 
 ## Remaining work
 
-- Bind the validator into the repository validation workflow/build gate.
+- Observe a fresh passing repository validation run after the validation/README completeness repair.
 - Materialize a Universal InTr connector profile only when a real transport surface is selected.
 - If Edukors expresses collaboration interest, present this Interlock/InTr boundary as the proposed interaction contract before deeper technical integration.
-- Perform the first authentic public-source evaluation through the bounded relationship and preserve transition evidence.
+- Perform the first authentic public-source evaluation through the bounded relationship and preserve authentic transition evidence; do not substitute ordinary web retrieval for InTr runtime evidence.
+- Reconcile authentic transition evidence through Master Records when such evidence exists.
 - Do not claim runtime activation until that evidence exists.
 
 ## Release posture
 
-No partnership, endorsement, runtime integration, certification, production activation, or release authority is established by this source contract.
+No partnership, endorsement, runtime integration, certification, production activation, or release authority is established by this source contract or its validation repair.

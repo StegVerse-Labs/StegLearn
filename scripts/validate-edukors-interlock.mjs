@@ -5,17 +5,19 @@ import process from 'node:process';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const manifestPath = path.join(ROOT, 'examples/interlocks/edukors-evaluation-interlock.json');
 const handoffPath = path.join(ROOT, 'docs/EDUKORS_INTR_MIRROR_HANDOFF.md');
+const readmePath = path.join(ROOT, 'README.md');
 
 const failures = [];
 const requireCheck = (condition, message) => { if (!condition) failures.push(message); };
 
-for (const file of [manifestPath, handoffPath]) {
+for (const file of [manifestPath, handoffPath, readmePath]) {
   requireCheck(fs.existsSync(file), `missing ${path.relative(ROOT, file)}`);
 }
 
 if (failures.length === 0) {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   const handoff = fs.readFileSync(handoffPath, 'utf8');
+  const readme = fs.readFileSync(readmePath, 'utf8');
 
   requireCheck(manifest.schema_version === '1.0.0', 'schema_version must be 1.0.0');
   requireCheck(manifest.relationship_id === 'steglearn.edukors.evaluation.v1', 'relationship_id mismatch');
@@ -40,11 +42,20 @@ if (failures.length === 0) {
     'EGRESS INTERLOCK',
     'INGRESS INTERLOCK',
     'InTr materialization',
-    'runtime interaction not observed',
+    'SOURCE_EVALUATION_INTERLOCK_INSTALLED_RUNTIME_INTERACTION_NOT_OBSERVED',
     'does **not** permit',
     'explicit human authorization'
   ]) {
     requireCheck(handoff.toLowerCase().includes(marker.toLowerCase()), `handoff missing marker: ${marker}`);
+  }
+
+  for (const marker of [
+    '## External Learning Relationships',
+    'steglearn.edukors.evaluation.v1',
+    'separately admitted capability package',
+    'does not prove an authentic runtime Interlock/InTr transition'
+  ]) {
+    requireCheck(readme.toLowerCase().includes(marker.toLowerCase()), `README missing external-learning completeness marker: ${marker}`);
   }
 }
 
