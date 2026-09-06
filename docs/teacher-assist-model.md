@@ -217,3 +217,18 @@ An initial teacher-assist pilot should be able to test whether StegLearn helps a
 - support more learners without reducing teacher authority.
 
 These are evaluation targets, not currently claimed runtime outcomes.
+
+## Broader Product Relationship
+
+The teacher-first lane validates only the initial bounded deployment mode. The broader product remains:
+
+```text
+human or admitted AI participant
+-> goal conversation
+-> curriculum generation
+-> teaching
+-> adaptive progression
+-> evidence / continuity
+```
+
+The public landing page should make both truths clear at once: **StegLearn can develop and teach a curriculum for an admitted participant, and the first deployment path begins by enhancing a human teacher.**
