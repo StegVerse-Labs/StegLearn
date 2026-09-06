@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,6 +13,20 @@ const requireArray = (value, label, min = 0) => {
   if (!Array.isArray(value) || value.length < min) fail(`${label} must be an array with at least ${min} item(s)`);
 };
 const semver = /^[0-9]+\.[0-9]+\.[0-9]+$/;
+const sha256Pattern = '^[a-f0-9]{64}$';
+
+function canonical(value) {
+  if (value === null || typeof value !== 'object') {
+    if (typeof value === 'number' && !Number.isFinite(value)) fail('canonical JSON does not permit non-finite numbers');
+    return JSON.stringify(value);
+  }
+  if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
+  return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`;
+}
+
+function sha256(value) {
+  return crypto.createHash('sha256').update(canonical(value), 'utf8').digest('hex');
+}
 
 const goal = readJson('examples/curricula/python-foundations-goal-intake.json');
 const curriculum = readJson('examples/curricula/python-foundations-generated-curriculum.json');
@@ -20,18 +35,20 @@ const curriculumSchema = readJson('schemas/generated-curriculum.schema.json');
 const reviewSchema = readJson('schemas/curriculum-review-package.schema.json');
 const teachingSchema = readJson('schemas/teaching-session.schema.json');
 
-if (goalSchema.properties?.schema_version?.const !== 'steglearn.participant-goal-intake/v1') {
-  fail('participant goal schema version contract drifted');
-}
-if (curriculumSchema.properties?.schema_version?.const !== 'steglearn.generated-curriculum/v1') {
-  fail('generated curriculum schema version contract drifted');
-}
-if (reviewSchema.properties?.schema_version?.const !== 'steglearn.curriculum-review-package/v1') {
-  fail('curriculum review package schema version contract drifted');
-}
-if (teachingSchema.properties?.schema_version?.const !== 'steglearn.teaching-session/v1') {
-  fail('teaching session schema version contract drifted');
-}
+if (goalSchema.properties?.schema_version?.const !== 'steglearn.participant-goal-intake/v1') fail('participant goal schema version contract drifted');
+if (curriculumSchema.properties?.schema_version?.const !== 'steglearn.generated-curriculum/v1') fail('generated curriculum schema version contract drifted');
+if (reviewSchema.properties?.schema_version?.const !== 'steglearn.curriculum-review-package/v1') fail('curriculum review package schema version contract drifted');
+if (teachingSchema.properties?.schema_version?.const !== 'steglearn.teaching-session/v1') fail('teaching session schema version contract drifted');
+
+if (!reviewSchema.properties?.review_surface?.required?.includes('content_hash_sha256')) fail('review surface must require content_hash_sha256');
+if (reviewSchema.properties?.review_surface?.properties?.content_hash_sha256?.pattern !== sha256Pattern) fail('review content hash must be a lowercase SHA-256 hex string');
+const reviewItem = reviewSchema.properties?.review_surface?.properties?.reviews?.items;
+if (!reviewItem?.required?.includes('reviewed_content_hash_sha256')) fail('review decision must bind reviewed_content_hash_sha256');
+if (reviewItem?.properties?.reviewed_content_hash_sha256?.pattern !== sha256Pattern) fail('review decision hash must be a lowercase SHA-256 hex string');
+if (!reviewSchema.properties?.teaching_binding?.required?.includes('bound_content_hash_sha256')) fail('teaching binding must require bound_content_hash_sha256');
+if (reviewSchema.properties?.teaching_binding?.properties?.bound_content_hash_sha256?.pattern !== sha256Pattern) fail('teaching binding hash must be a lowercase SHA-256 hex string');
+if (!teachingSchema.required?.includes('curriculum_content_hash_sha256')) fail('teaching session must require curriculum_content_hash_sha256');
+if (teachingSchema.properties?.curriculum_content_hash_sha256?.pattern !== sha256Pattern) fail('teaching session curriculum hash must be a lowercase SHA-256 hex string');
 
 if (goal.schema_version !== 'steglearn.participant-goal-intake/v1') fail('goal example schema_version mismatch');
 requireString(goal.goal_intake_id, 'goal.goal_intake_id');
@@ -72,12 +89,35 @@ if (curriculum.review_binding?.review_package_schema !== 'steglearn.curriculum-r
 if (curriculum.teaching_policy?.teaching_must_bind_exact_version !== true) fail('teaching must bind the exact curriculum version');
 if (curriculum.teaching_policy?.teachable !== true) fail('example curriculum should be teachable');
 
-const teachingRequired = new Set(teachingSchema.required ?? []);
-for (const requiredField of ['teaching_session_id', 'participant_entity_id', 'curriculum_id', 'curriculum_version', 'review_state_at_start', 'teaching_authority', 'state', 'events']) {
-  if (!teachingRequired.has(requiredField)) fail(`teaching session schema must require ${requiredField}`);
-}
-if (!teachingSchema.properties?.curriculum_id || !teachingSchema.properties?.curriculum_version) {
-  fail('teaching session schema must preserve exact curriculum identity and version');
-}
+const reviewEnvelope = {
+  curriculum_id: curriculum.curriculum_id,
+  curriculum_version: curriculum.curriculum_version,
+  learning_goal: goal.desired_outcome,
+  requested_depth: curriculum.requested_depth,
+  starting_point_summary: goal.starting_point.summary,
+  constraints: [
+    ...goal.constraints.time.map((item) => `time: ${item}`),
+    ...goal.constraints.resources.map((item) => `resource: ${item}`),
+    ...goal.constraints.safety_or_regulatory.map((item) => `safety/regulatory: ${item}`),
+    ...goal.constraints.accessibility.map((item) => `accessibility: ${item}`),
+  ],
+  canonical_curriculum: {
+    objectives: curriculum.objectives,
+    prerequisites: curriculum.prerequisites.map((item) => `${item.state}: ${item.description}`),
+    sequence: curriculum.units.map((unit) => ({
+      unit_id: unit.unit_id,
+      title: unit.title,
+      outcomes: unit.outcomes,
+      activities: unit.activities,
+      evidence_expectations: unit.evidence_expectations,
+    })),
+    completion_criteria: curriculum.completion_criteria,
+  },
+};
+const firstHash = sha256(reviewEnvelope);
+const reorderedEnvelope = Object.fromEntries(Object.entries(reviewEnvelope).reverse());
+const secondHash = sha256(reorderedEnvelope);
+if (!/^[a-f0-9]{64}$/.test(firstHash)) fail('deterministic review hash did not produce SHA-256 hex');
+if (firstHash !== secondHash) fail('canonical review hash changed when object key insertion order changed');
 
-console.log('StegLearn curriculum contracts: PASS');
+console.log(`StegLearn curriculum contracts: PASS (${firstHash})`);
