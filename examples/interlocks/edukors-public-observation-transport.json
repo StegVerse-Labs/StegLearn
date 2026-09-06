@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "relationship_id": "steglearn.edukors.evaluation.v1",
+  "binding_state": "SOURCE_BINDING_ONLY_AUTHENTIC_RUNTIME_NOT_OBSERVED",
+  "transport_profile": {
+    "repository": "StegVerse-Labs/StegOS",
+    "path": "specs/universal-intr-connector-profiles.v1.json",
+    "profile_id": "external-api-observation",
+    "request_class": "EXTERNAL_API_OBSERVATION",
+    "payload_schema": "stegverse.external-api.request/v1",
+    "operations": ["OBSERVE", "READ"]
+  },
+  "external_target": {
+    "name": "Edukors",
+    "origin": "https://edukors.org/",
+    "access_class": "PUBLIC_UNAUTHENTICATED_OBSERVATION"
+  },
+  "reuse_policy": {
+    "new_connector_profile_created": false,
+    "canonical_profile_reused": true,
+    "profile_authority_effect": "NONE",
+    "transport_grants_execution_authority": false,
+    "authenticated_access_admitted": false,
+    "external_mutation_admitted": false,
+    "learner_private_data_egress_admitted": false
+  },
+  "runtime_evidence": {
+    "authentic_intr_materialization_observed": false,
+    "master_records_reconciliation_observed": false,
+    "ordinary_web_retrieval_is_intr_evidence": false
+  }
+}

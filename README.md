@@ -73,6 +73,7 @@ examples/
     ti83-sensor-lab-receipt.json
   interlocks/
     edukors-evaluation-interlock.json
+    edukors-public-observation-transport.json
 ```
 
 ## Learning Paths
@@ -91,7 +92,9 @@ The first installed external-learning relationship is the evaluation-only Edukor
 
 The current Edukors relationship permits unauthenticated public educational observation, comparison, evidence/artifact intake, and human-mediated requests. It does not permit authenticated access, automated mutation of Edukors, direct mutation of StegLearn, learner-private-data egress, or inference of partnership or endorsement. Any API, MCP, authenticated account, AI-agent, or other machine transport requires a separately admitted capability package.
 
-External observations become StegLearn evidence only after the applicable Interlock/InTr ingress boundary is satisfied. Source installation, public retrieval, CI, or repository presence does not prove an authentic runtime Interlock/InTr transition.
+For credential-free public observation, StegLearn reuses the existing canonical StegOS Universal InTr connector profile `external-api-observation` from `StegVerse-Labs/StegOS/specs/universal-intr-connector-profiles.v1.json`; StegLearn does not mint a competing Edukors-specific connector profile. The binding admits only the profile's existing `OBSERVE` and `READ` semantics for the public Edukors origin, with no execution-authority effect, no authenticated access, no external mutation, and no learner-private-data egress.
+
+External observations become StegLearn evidence only after the applicable Interlock/InTr ingress boundary is satisfied. Source installation, public retrieval, CI, or repository presence does not prove an authentic runtime Interlock/InTr transition. Ordinary web retrieval is not a substitute for an authentic InTr materialization receipt or Master Records reconciliation.
 
 ## Relationship to Learning Transition Governance
 
