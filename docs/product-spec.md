@@ -11,13 +11,15 @@ participant
 -> conversation about desired skill / knowledge / outcome
 -> establish starting point + desired depth
 -> generate governed curriculum
--> teach curriculum
+-> produce reviewable curriculum version
+-> review / revise / select according to entity authority
+-> teach selected curriculum version
 -> observe permitted participation / progress
 -> adapt instruction
 -> preserve evidence / review / continuity
 ```
 
-A participant may be human or an admitted AI entity.
+A participant or reviewer may be human or an admitted AI entity.
 
 Its preferred initial deployment posture remains **human teacher + governed AI Entity**. The teacher remains the educational authority in teacher-led use while StegLearn augments the teacher's ability to observe, teach, adapt, document, and support learners across a live learning environment.
 
@@ -33,11 +35,40 @@ From that conversation, StegLearn should be able to:
 2. establish the participant's current starting point where necessary;
 3. establish desired depth, rigor, constraints, evidence expectations, and context;
 4. generate a curriculum appropriate to that goal;
-5. teach the generated curriculum;
-6. adapt sequence, examples, pace, prerequisite work, and depth from observed progress;
-7. preserve reconstructable evidence of learning and revision over time.
+5. produce a stable, reviewable version of that curriculum for an authorized human or admitted AI entity;
+6. accept comments, revision requests, selection, or approval according to the reviewer's admitted authority;
+7. teach the selected curriculum version;
+8. adapt sequence, examples, pace, prerequisite work, and depth from observed progress;
+9. preserve reconstructable evidence of learning, review, curriculum revision, and teaching over time.
 
-Curriculum generation is not the terminal feature. **Teaching the generated curriculum is part of the product.**
+Curriculum generation is not the terminal feature. **The product requires curriculum development, reviewability, and teaching.**
+
+## Reviewable Curriculum Requirement
+
+Every generated curriculum should be capable of being represented as two synchronized views of the same versioned curriculum:
+
+- a human-readable review view;
+- a machine-readable canonical manifest.
+
+Both must resolve to the same stable `curriculum_id` and `curriculum_version` and should be hash-bindable so an entity can identify exactly what it reviewed.
+
+Review capability is distinct from authority:
+
+```text
+inspect
+!= comment
+!= request revision
+!= approve
+!= authorize teaching
+```
+
+Those capabilities depend on the governing context and reviewer role.
+
+A reviewable curriculum may be inspected by the participant, teacher, parent/steward, subject-matter reviewer, institution, admitted AI reviewer, or other governed entity when permitted.
+
+Teaching must bind to an identifiable curriculum version. StegLearn must not present one curriculum for review and silently teach a materially different curriculum without recording the change.
+
+See `docs/curriculum-review-and-teaching-contract.md` and `schemas/curriculum-review-package.schema.json`.
 
 ## Curriculum Depth
 
@@ -79,6 +110,8 @@ A generated curriculum may include:
 
 Generated curricula remain revisable as new evidence appears.
 
+Material changes should create a new curriculum version or explicit change set when the governing context requires re-review.
+
 ## Teaching Function
 
 StegLearn may teach through:
@@ -97,7 +130,7 @@ StegLearn may teach through:
 - participant explanation-back;
 - evidence-based progression checks.
 
-Where a human teacher is present, StegLearn teaches within the teacher's admitted objectives, permissions, and delegation boundaries.
+Where a human teacher is present, StegLearn teaches within the teacher's admitted objectives, permissions, reviewed curriculum boundaries, and delegation scope.
 
 ## Initial Product Position
 
@@ -109,6 +142,7 @@ When explicitly authorized for the context, the Entity may:
 
 - appear on-screen and interact with learners;
 - speak, listen, present, prompt, explain, and teach;
+- generate curriculum and render a reviewable version before bounded teaching;
 - use permitted sensors and learning signals;
 - evaluate observable engagement, participation, responsiveness, activity, and progress;
 - support individuals, pairs, or small groups;
@@ -116,7 +150,7 @@ When explicitly authorized for the context, the Entity may:
 - preserve questions, attempts, revisions, artifacts, and explanations;
 - return evidence and recommendations to the teacher.
 
-The teacher sets objectives, permissions, boundaries, and final educational decisions in teacher-led use.
+The teacher sets objectives, permissions, review/approval boundaries, and final educational decisions in teacher-led use.
 
 ## V1 Definition of Done
 
@@ -124,6 +158,9 @@ A participant can complete one governed learning loop in a teacher- or steward-s
 
 ```text
 Desired learning outcome / Wonder
+→ Generated curriculum
+→ Reviewable version
+→ Selected curriculum version
 → Build, Observe, Study, or Practice
 → Explain / Demonstrate
 → Human Review where applicable
@@ -134,13 +171,15 @@ Desired learning outcome / Wonder
 The system is done for v1 when it can:
 
 1. capture a participant's desired learning outcome or question;
-2. connect it to an activity or instructional sequence;
-3. teach or guide at least one bounded learning path;
-4. capture explanation, demonstration, or other evidence;
-5. allow teacher, parent, or steward review as applicable;
-6. generate a structured learning receipt;
-7. store the receipt as a continuity record;
-8. preserve the distinction between observed evidence, human review, and AI interpretation.
+2. generate a bounded curriculum connected to that goal;
+3. render the generated curriculum in human-readable and machine-readable review forms;
+4. capture at least one review result tied to the exact curriculum version;
+5. teach or guide at least one selected curriculum version;
+6. capture explanation, demonstration, or other evidence;
+7. allow teacher, parent, steward, or other admitted review as applicable;
+8. generate a structured learning receipt;
+9. store the receipt as a continuity record;
+10. preserve the distinction between observed evidence, curriculum review, human decision, and AI interpretation.
 
 Teacher-first AI Entity functionality extends this base loop but must not be falsely claimed as complete until runtime predicates are evidenced.
 
@@ -148,7 +187,7 @@ Teacher-first AI Entity functionality extends this base loop but must not be fal
 
 ### Human Learner
 
-The learner asks, explores, builds, explains, revises, participates, and reflects.
+The learner asks, explores, builds, explains, revises, participates, reflects, and may review the proposed curriculum before teaching begins.
 
 The learner may enter with anything from an introductory question to an advanced research goal.
 
@@ -156,7 +195,9 @@ The learner may enter with anything from an introductory question to an advanced
 
 An admitted AI entity may participate in StegLearn as a learner when identity, authority, permitted inputs and outputs, evidence obligations, and learning-state mutation rights are explicitly bounded.
 
-External request capability alone does not establish admission.
+An admitted AI entity may also review a curriculum when its review role is separately permitted.
+
+External request capability alone does not establish admission or review authority.
 
 ### Human Teacher
 
@@ -165,6 +206,7 @@ In teacher-led use, the human teacher is the educational authority.
 The teacher:
 
 - sets instructional objectives;
+- reviews or constrains generated curricula as applicable;
 - determines what sensor and activity inputs are permitted;
 - delegates bounded work to StegLearn;
 - interprets recommendations in context;
@@ -178,9 +220,9 @@ The parent or steward acts as continuity holder, witness, safety layer, and revi
 
 ### StegLearn Governed AI Entity
 
-The AI Entity may discuss learning goals, generate curricula, teach, observe permitted learning activity, scaffold instruction, suggest paths, ask clarifying questions, adapt explanations, support bounded learner or group work, summarize evidence, and draft learning receipts.
+The AI Entity may discuss learning goals, generate curricula, produce synchronized human-readable and machine-readable review packages, teach selected curriculum versions, observe permitted learning activity, scaffold instruction, suggest paths, ask clarifying questions, adapt explanations, support bounded learner or group work, summarize evidence, and draft learning receipts.
 
-The AI Entity is not automatically the final authority over the participant merely because it generated or taught the curriculum.
+The AI Entity is not automatically the final authority over the participant merely because it generated, reviewed, or taught the curriculum.
 
 ### Authorized Sensors and Learning Tools
 
@@ -206,6 +248,7 @@ StegLearn should help the teacher:
 - surface repeated questions or common instructional friction;
 - identify stalled or completed activities;
 - generate alternate explanations or differentiated paths;
+- review proposed paths before delegating teaching;
 - support a learner or small group while the teacher works elsewhere;
 - preserve live learning evidence that would otherwise be lost;
 - reduce manual documentation burden;
@@ -226,9 +269,13 @@ StegLearn should gather only the context needed to build an appropriate path.
 
 StegLearn converts the agreed goal and depth into a structured, revisable curriculum.
 
+### Curriculum Review Package
+
+StegLearn renders the curriculum for review by any admitted entity with review capability, including synchronized human-readable and machine-readable forms tied to a stable curriculum version.
+
 ### Teaching
 
-StegLearn delivers instruction from the generated curriculum rather than merely returning a syllabus.
+StegLearn delivers instruction from the selected curriculum version rather than merely returning a syllabus.
 
 ### Participation and Engagement Observation
 
@@ -242,6 +289,7 @@ A teacher may explicitly delegate a limited instructional activity to StegLearn.
 
 ```text
 teacher delegation
+→ selected curriculum version
 → bounded AI teaching interaction
 → participant responses and permitted activity evidence
 → adaptation within delegated scope
@@ -251,17 +299,19 @@ teacher delegation
 
 Delegation does not silently transfer final educational authority.
 
-### Human Review
+### Human / Entity Review
 
-The teacher, parent, or steward reviews evidence or receipts where the context requires it.
+Review may occur before teaching, during material curriculum revision, and over evidence or receipts where the context requires it.
+
+Review role and authority must remain explicit.
 
 ### Portfolio Continuity
 
-Receipts and evidence accumulate over time to show development, revision, completed work, and changing depth.
+Curriculum versions, review records, receipts, and evidence accumulate over time to show development, revision, completed work, and changing depth.
 
 ## Non-Capture Requirement
 
-No lesson path, requested level, score, sensor observation, AI recommendation, participation metric, generated curriculum, or compliance category may be treated as the participant's destiny.
+No lesson path, requested level, score, sensor observation, AI recommendation, participation metric, generated curriculum, reviewer comment, or compliance category may be treated as the participant's destiny.
 
 Requested level does not automatically prove readiness. StegLearn may recommend prerequisite work without converting that recommendation into a fixed identity classification.
 
@@ -271,18 +321,19 @@ In teacher-led use:
 
 - teacher authority is explicit;
 - AI teaching assistance is bounded and inspectable;
+- curriculum review and approval rights are explicit;
 - sensor access is explicit and revocable;
 - observations remain distinguishable from AI interpretation;
 - recommendations remain distinguishable from teacher decisions;
 - external systems cannot directly mutate participant state without the applicable governed boundary.
 
-In AI-participant use, identity, mutation rights, evidence obligations, and allowed egress must be separately admitted.
+In AI-participant or AI-reviewer use, identity, mutation rights, evidence obligations, review capability, approval authority, and allowed egress must be separately admitted.
 
 ## Regulated / High-Consequence Learning
 
 Professional, regulated, safety-critical, medical, legal, financial, hazardous, or other high-consequence domains may require additional human supervision, standards, licensing boundaries, or governed constraints.
 
-Completion of a StegLearn curriculum does not itself grant professional licensure or authority.
+Completion or approval of a StegLearn curriculum does not itself grant professional licensure or authority.
 
 ## Implementation Sequence
 
@@ -291,14 +342,16 @@ Preferred sequence:
 ```text
 1. Human teacher + StegLearn classroom assistant
 2. Conversational goal intake + generated bounded curriculum
-3. StegLearn teaches that curriculum within teacher-delegated scope
-4. Teacher-delegated small-group assistance
-5. Supervised individualized tutoring
-6. Parent/steward-supervised learning contexts
-7. Admitted AI-participant learning contexts
-8. More autonomous governed learning only where separately admitted
+3. Human-readable + machine-readable curriculum review package
+4. Review / revision / selection tied to exact curriculum version
+5. StegLearn teaches that selected version within teacher-delegated scope
+6. Teacher-delegated small-group assistance
+7. Supervised individualized tutoring
+8. Parent/steward-supervised learning contexts
+9. Admitted AI-participant and AI-reviewer contexts
+10. More autonomous governed learning only where separately admitted
 ```
 
 The system must not infer that later autonomy is authorized merely because an earlier assistance mode works.
 
-See `docs/conversational-curriculum-and-teaching-model.md` for the broader curriculum-generation and teaching model.
+See `docs/conversational-curriculum-and-teaching-model.md` and `docs/curriculum-review-and-teaching-contract.md`.
