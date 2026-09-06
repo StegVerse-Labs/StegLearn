@@ -1,14 +1,42 @@
 # StegLearn
 
-StegLearn is a homeschool-capable learning system designed to maximize learner growth without capture.
+StegLearn is a governed learning system designed to maximize learner growth without capture.
 
-It turns curiosity, creation, explanation, revision, and responsibility into parent-reviewed learning receipts.
+Its initial implementation posture is **human teacher + governed AI Entity**: the teacher remains the educational authority while StegLearn helps observe permitted learning activity, support learners, adapt instructional assistance, and preserve evidence of growth.
+
+StegLearn turns curiosity, creation, explanation, revision, participation, and responsibility into reviewed learning evidence and portable learning receipts.
 
 ## Purpose
 
-StegLearn exists to support human learning as a governed growth process, not as passive screen time, answer production, or curriculum compliance.
+StegLearn exists to support human learning as a governed growth process, not as passive screen time, answer production, curriculum compliance, or teacher replacement.
 
-The system is designed for learners who grow through questions, building, observation, storytelling, play, experimentation, and explanation.
+The system is designed for learners who grow through questions, building, observation, storytelling, play, experimentation, explanation, and interaction with other people.
+
+## Teacher-First Governed AI Model
+
+StegLearn begins by enhancing the human teacher.
+
+The StegLearn AI Entity is intended to be visibly present on-screen and, when explicitly authorized, may speak, listen, present material, guide activities, support individuals or small groups, and use permitted sensors and learning signals to evaluate observable variables such as engagement, participation, responsiveness, activity, and progress.
+
+The teacher remains in authority over educational objectives, instructional decisions, acceptance of learning evidence, and other high-impact learner decisions.
+
+```text
+Human teacher
+  -> objectives, permissions, boundaries, final educational decisions
+
+StegLearn governed AI Entity
+  -> observe, assist, explain, adapt, organize, record, recommend
+
+Authorized sensors and learning tools
+  -> bounded evidence about participation, engagement, activity, and progress
+
+Learner
+  -> question, explore, build, explain, revise, reflect
+```
+
+Technical access to a sensor does not automatically make its use admissible. Inputs must be explicitly permitted for the context in which they are used.
+
+See [`docs/teacher-assist-model.md`](docs/teacher-assist-model.md) for the full teacher-first model and [`docs/public-landing-page.md`](docs/public-landing-page.md) for the public presentation source.
 
 ## Core Principle
 
@@ -20,6 +48,8 @@ It must not predetermine what the learner must become.
 
 ## V1 Learning Loop
 
+The learning loop remains the evidence layer beneath live teacher-AI interaction:
+
 ```text
 Wonder
 → Build or Observe
@@ -29,6 +59,18 @@ Wonder
 → Portfolio
 ```
 
+A surrounding teacher-assist loop may operate during live instruction:
+
+```text
+Observe
+→ Engage
+→ Assist
+→ Adapt
+→ Explain
+→ Review
+→ Continue
+```
+
 ## What Counts as Learning Evidence
 
 StegLearn treats learning evidence as more than test answers.
@@ -36,6 +78,7 @@ StegLearn treats learning evidence as more than test answers.
 Evidence may include:
 
 - questions asked
+- participation in learning activity
 - things built
 - observations made
 - explanations given
@@ -44,7 +87,9 @@ Evidence may include:
 - care shown
 - skills applied
 - artifacts created
-- parent-reviewed receipts
+- teacher-, parent-, or steward-reviewed receipts
+
+AI interpretations must remain distinguishable from learner evidence, teacher or parent notes, and sensor observations.
 
 ## Repository Structure
 
@@ -54,6 +99,8 @@ docs/
   learner-loop.md
   homeschool-receipt-model.md
   ai-scaffold-policy.md
+  teacher-assist-model.md
+  public-landing-page.md
   EDUKORS_INTR_MIRROR_HANDOFF.md
 
 lessons/
@@ -104,10 +151,12 @@ StegLearn is the product-facing implementation path for human learning governanc
 
 The doctrine asks what makes a learning transition admissible.
 
-StegLearn captures the learning loop, preserves evidence, and produces parent-reviewed receipts.
+StegLearn captures the learning loop, preserves evidence, and produces reviewed learning receipts while maintaining explicit authority boundaries around AI assistance and sensor use.
 
 ## Implementation Status
 
-The repository contains a local-first web prototype, schemas, example receipts, governance documentation, reusable learning-path foundations, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
+The repository contains a local-first web prototype, schemas, example receipts, governance documentation, reusable learning-path foundations, teacher-first governed AI architecture, public landing-page source, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
 
-The current implementation target remains a complete learner loop that records a question, connects it to an activity, captures the learner explanation, requires parent review, produces a portable receipt, and preserves it in a portfolio. External-learning evaluation remains non-authorizing until authentic Interlock/InTr evidence exists.
+The current implementation target is a teacher-assisted complete learner loop in which StegLearn can support live instruction without silently acquiring educational authority. Sensor-mediated classroom assistance, on-screen AI Entity interaction, and teacher-delegated small-group assistance remain implementation targets unless separately evidenced as working runtime behavior.
+
+External-learning evaluation remains non-authorizing until authentic Interlock/InTr evidence exists.
