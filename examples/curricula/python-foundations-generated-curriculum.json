@@ -1,0 +1,77 @@
+{
+  "schema_version": "steglearn.generated-curriculum/v1",
+  "curriculum_id": "curriculum-python-foundations-001",
+  "curriculum_version": "1.0.0",
+  "source_goal_intake": {
+    "goal_intake_id": "goal-python-foundations-001",
+    "goal_intake_version": "1.0.0"
+  },
+  "title": "Python Foundations Through Explanation and Practice",
+  "summary": "A beginner path from basic Python expressions through a small reviewed program, with explanation-back and revision evidence at each stage.",
+  "requested_depth": "BEGINNER",
+  "supportable_depth": "BEGINNER",
+  "depth_rationale": "The declared starting point supports a beginner path without assuming prior programming mastery.",
+  "objectives": [
+    "Read and explain basic Python expressions and statements.",
+    "Use variables, conditionals, loops, and functions in small programs.",
+    "Test, revise, and explain a small program using observed behavior as evidence."
+  ],
+  "prerequisites": [
+    {
+      "prerequisite_id": "basic-file-navigation",
+      "description": "Open, save, and locate a text or code file.",
+      "state": "EVIDENCED_SATISFIED",
+      "evidence_refs": ["goal-python-foundations-001:starting_point"]
+    }
+  ],
+  "units": [
+    {
+      "unit_id": "python-001-values-variables",
+      "title": "Values, Expressions, and Variables",
+      "outcomes": ["Explain how a value becomes bound to a variable and predict simple expression results."],
+      "teaching_methods": ["DIRECT_EXPLANATION", "GUIDED_PRACTICE", "EXPLANATION_BACK"],
+      "activities": ["Run short expressions", "Modify variable assignments", "Explain observed output"],
+      "evidence_expectations": ["Participant correctly predicts and explains at least three simple expressions."],
+      "progression_gate": "Proceed when the participant can explain variable assignment without relying on memorized wording.",
+      "optional_branches": []
+    },
+    {
+      "unit_id": "python-002-control-flow",
+      "title": "Conditionals and Loops",
+      "outcomes": ["Use conditional logic and repetition to implement a small stated behavior."],
+      "teaching_methods": ["SOCRATIC_QUESTIONING", "ADAPTIVE_EXAMPLES", "GUIDED_PRACTICE", "EXPLANATION_BACK"],
+      "activities": ["Trace a conditional", "Write a loop", "Revise a loop after observing incorrect behavior"],
+      "evidence_expectations": ["Participant can explain why a branch or loop executes in a given example."],
+      "progression_gate": "Proceed when the participant can change control flow to satisfy a new requirement and explain the change.",
+      "optional_branches": ["nested-control-flow"]
+    },
+    {
+      "unit_id": "python-003-functions-project",
+      "title": "Functions, Testing, and Small Project",
+      "outcomes": ["Decompose a small requirement into functions and revise the result from test evidence."],
+      "teaching_methods": ["PROJECT_GUIDANCE", "CRITIQUE_REVISION", "EXPLANATION_BACK"],
+      "activities": ["Design a small command-line program", "Test expected and unexpected inputs", "Revise one defect", "Explain final design"],
+      "evidence_expectations": ["Participant produces a small working program and a plain-language explanation of one revision."],
+      "progression_gate": "Complete when the program, explanation, and revision evidence satisfy the curriculum completion criteria.",
+      "optional_branches": ["intro-testing-tools"]
+    }
+  ],
+  "completion_criteria": [
+    "All required unit progression gates are satisfied.",
+    "Participant produces a small Python program matching an agreed requirement.",
+    "Participant explains at least one defect and evidence-supported revision.",
+    "Required human review is completed before the curriculum is marked complete."
+  ],
+  "review_binding": {
+    "review_package_required": true,
+    "material_change_requires_new_version": true,
+    "review_package_schema": "steglearn.curriculum-review-package/v1"
+  },
+  "teaching_policy": {
+    "teachable": true,
+    "teaching_must_bind_exact_version": true,
+    "adaptation_mode": "VERSIONED_MATERIAL_CHANGES",
+    "human_authority_required": true
+  },
+  "non_capture_note": "Completion records evidence for this curriculum version only and does not define the participant's permanent capability or identity."
+}
