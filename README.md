@@ -2,9 +2,9 @@
 
 StegLearn is a governed learning system designed to maximize participant growth without capture.
 
-Its broader product model is conversational: a human or admitted AI entity can enter StegLearn, describe a desired skill, capability, or body of knowledge, agree on the desired depth, receive a governed curriculum, and then be taught that curriculum by the StegLearn AI Entity.
+Its broader product model is conversational: a human or admitted AI entity can enter StegLearn, describe a desired skill, capability, or body of knowledge, agree on the desired depth, receive a governed curriculum, obtain a reviewable version of that curriculum, and then be taught that curriculum by the StegLearn AI Entity.
 
-Its preferred initial deployment posture is **human teacher + governed AI Entity**: the teacher remains the educational authority while StegLearn helps observe permitted learning activity, generate appropriate learning paths, teach within delegated scope, adapt instruction, support learners, and preserve evidence of growth.
+Its preferred initial deployment posture is **human teacher + governed AI Entity**: the teacher remains the educational authority while StegLearn helps observe permitted learning activity, generate appropriate learning paths, make those paths reviewable before execution, teach within delegated scope, adapt instruction, support learners, and preserve evidence of growth.
 
 StegLearn turns curiosity, desired capability, creation, explanation, revision, participation, and responsibility into reviewed learning evidence and portable learning receipts.
 
@@ -15,18 +15,22 @@ Participant enters StegLearn
 → conversation about desired skill / knowledge / outcome
 → establish starting point + desired depth
 → generate governed curriculum
-→ teach curriculum
+→ produce reviewable curriculum version
+→ review / revise / select according to entity authority
+→ teach selected curriculum version
 → observe permitted engagement / participation / progress
 → adapt instruction
 → preserve evidence + revision
 → review / receipt / continuity
 ```
 
+The reviewable curriculum is intended to support both human-readable and machine-readable inspection of the same versioned curriculum. A participant, teacher, steward, subject-matter reviewer, institution, admitted AI reviewer, or other governed entity may inspect or comment according to its admitted role. Review capability does not itself grant approval or teaching authority.
+
 The intended instructional range can extend from first exposure and foundational learning through advanced professional, graduate, doctoral, and post-doctoral depth where the subject supports those levels.
 
 Those levels describe instructional depth and rigor. They do not themselves constitute accreditation, degrees, licenses, or institutional credentials.
 
-See [`docs/conversational-curriculum-and-teaching-model.md`](docs/conversational-curriculum-and-teaching-model.md).
+See [`docs/conversational-curriculum-and-teaching-model.md`](docs/conversational-curriculum-and-teaching-model.md) and [`docs/curriculum-review-and-teaching-contract.md`](docs/curriculum-review-and-teaching-contract.md).
 
 ## Purpose
 
@@ -44,10 +48,10 @@ The teacher remains in authority over educational objectives, instructional deci
 
 ```text
 Human teacher
-  → objectives, permissions, boundaries, final educational decisions
+  → objectives, permissions, curriculum review, boundaries, final educational decisions
 
 StegLearn governed AI Entity
-  → discuss goals, generate curriculum, teach, observe, assist, explain, adapt, organize, record, recommend
+  → discuss goals, generate curriculum, render reviewable versions, teach, observe, assist, explain, adapt, organize, record, recommend
 
 Authorized sensors and learning tools
   → bounded evidence about participation, engagement, activity, and progress
@@ -85,6 +89,8 @@ A surrounding adaptive teaching loop may operate during instruction:
 
 ```text
 Goal
+→ Curriculum
+→ Reviewable Version
 → Teach
 → Observe
 → Engage
@@ -139,6 +145,21 @@ An admitted AI entity may also participate in a governed learning relationship w
 
 The ability of an external model or agent to send requests does not itself establish admission.
 
+## Reviewable Curriculum
+
+Every generated curriculum should be capable of becoming a stable review artifact before or during teaching.
+
+The review surface should provide:
+
+- a human-readable curriculum;
+- a machine-readable canonical curriculum;
+- stable curriculum identity and version;
+- review comments or decisions tied to the reviewed version;
+- a clear distinction between inspection, comment, revision request, approval, and teaching authorization;
+- traceability from the selected curriculum version into the teaching session.
+
+StegLearn must not present one curriculum for review and silently teach a materially different curriculum without recording the change.
+
 ## Repository Structure
 
 ```text
@@ -149,6 +170,7 @@ docs/
   ai-scaffold-policy.md
   teacher-assist-model.md
   conversational-curriculum-and-teaching-model.md
+  curriculum-review-and-teaching-contract.md
   public-landing-page.md
   EDUKORS_INTR_MIRROR_HANDOFF.md
 
@@ -161,6 +183,7 @@ lessons/
 schemas/
   learning-path.schema.json
   learning-receipt.schema.json
+  curriculum-review-package.schema.json
   external-learning-interlock.schema.json
 ```
 
@@ -188,12 +211,12 @@ StegLearn is the product-facing implementation path for governed learning.
 
 The doctrine asks what makes a learning transition admissible.
 
-StegLearn captures learning goals, generates and teaches curricula, preserves evidence, adapts instruction, and produces reviewed learning receipts while maintaining explicit authority boundaries around AI assistance, participant identity, and sensor use.
+StegLearn captures learning goals, generates reviewable curricula, teaches selected curriculum versions, preserves evidence, adapts instruction, and produces reviewed learning receipts while maintaining explicit authority boundaries around AI assistance, participant identity, review authority, and sensor use.
 
 ## Implementation Status
 
-The repository contains a local-first web prototype, schemas, example receipts, governance documentation, reusable learning-path foundations, teacher-first governed AI architecture, conversational curriculum-generation and teaching doctrine, public landing-page source, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
+The repository contains a local-first web prototype, schemas, example receipts, governance documentation, reusable learning-path foundations, teacher-first governed AI architecture, conversational curriculum-generation and teaching doctrine, a curriculum review/teaching contract and schema, public landing-page source, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
 
-The current implementation target is a teacher-assisted complete learning loop in which StegLearn can discuss a desired outcome, build a bounded path, teach within admitted scope, and preserve evidence without silently acquiring educational authority.
+The current implementation target is a teacher-assisted complete learning loop in which StegLearn can discuss a desired outcome, build a bounded path, render that path for review, teach the selected version within admitted scope, and preserve evidence without silently acquiring educational authority.
 
-Dynamic curriculum generation across the full requested depth range, generalized AI-participant learning, sensor-mediated classroom assistance, on-screen AI Entity interaction, and teacher-delegated small-group teaching remain implementation targets unless separately evidenced as working runtime behavior.
+Dynamic curriculum generation across the full requested depth range, generalized AI-participant learning, runtime review-package rendering, curriculum-version-bound teaching, sensor-mediated classroom assistance, on-screen AI Entity interaction, and teacher-delegated small-group teaching remain implementation targets unless separately evidenced as working runtime behavior.
