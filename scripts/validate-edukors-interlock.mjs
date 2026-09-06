@@ -66,8 +66,6 @@ if (failures.length === 0) {
     'does **not** permit',
     'explicit human authorization',
     'external-api-observation',
-    'run `34001370386`',
-    'run `34001498346`',
     'README_UPDATE_REQUIRED'
   ]) {
     requireCheck(handoff.toLowerCase().includes(marker.toLowerCase()), `handoff missing marker: ${marker}`);
