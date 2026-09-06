@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "lesson_id": "steglearn.stegverse-foundations.01",
+  "lesson_version": "1.0.0",
+  "visual_grammar": [
+    "actor.human",
+    "actor.ai",
+    "actor.institution",
+    "actor.machine",
+    "boundary.governance",
+    "transition.candidate",
+    "transition.admitted",
+    "evidence.receipt",
+    "state.continuity",
+    "system.external"
+  ],
+  "scenes": [
+    {
+      "order": 1,
+      "scene_id": "SCN-01",
+      "claim_ids": ["CLM-01"],
+      "caption": "StegVerse is governance infrastructure for consequential systems.",
+      "narration": "StegVerse provides governance infrastructure for humans, AI, autonomous systems, institutions, and machines participating in increasingly consequential digital and physical systems.",
+      "visual": {"kind":"DIAGRAM","instruction":"Introduce human, AI, institution, and machine actors around a shared governance boundary. Show agency, authority, bounded consequence, continuity, evidence, and interoperability as preserved properties."},
+      "do_not_imply": ["StegVerse centrally controls every participant.","StegVerse guarantees correct outcomes."]
+    },
+    {
+      "order": 2,
+      "scene_id": "SCN-02",
+      "claim_ids": ["CLM-02"],
+      "caption": "The ecosystem governs participation; it does not need to manufacture the intelligence.",
+      "narration": "StegVerse is not intended to be the intelligence factory. Its governance remains useful across different models, clouds, sovereign runtimes, agents, robotics stacks, and external execution systems.",
+      "visual": {"kind":"DIAGRAM","instruction":"Show multiple interchangeable intelligence and execution providers outside a stable StegVerse governance layer."},
+      "do_not_imply": ["A specific model provider is required.","StegVerse owns all underlying compute."]
+    },
+    {
+      "order": 3,
+      "scene_id": "SCN-03",
+      "claim_ids": ["CLM-03"],
+      "caption": "Each governed component contributes a defined capability to the ecosystem.",
+      "narration": "StegVerse recognizes nine ecosystem contribution classes: agency, continuity, admissibility, execution, observability, evidence, recovery, interoperability, and consequence containment.",
+      "visual": {"kind":"LIST_DIAGRAM","instruction":"Animate the nine contribution classes around an ecosystem ring. Do not depict them as identical authorities."},
+      "do_not_imply": ["Every component must implement all nine classes.","A contribution class automatically grants authority."]
+    },
+    {
+      "order": 4,
+      "scene_id": "SCN-04",
+      "claim_ids": ["CLM-04"],
+      "caption": "Capability is not authority. Observation is not execution.",
+      "narration": "Several distinctions are foundational: capability is not authority, observation is not execution, source completion is not activation, and CI success is not runtime proof.",
+      "visual": {"kind":"COMPARISON","instruction":"Present four paired terms separated by a not-equal symbol and highlight authority and evidence boundaries."},
+      "do_not_imply": ["CI or deployment proves a consequence occurred.","A signal or receipt automatically grants authority."]
+    },
+    {
+      "order": 5,
+      "scene_id": "SCN-05",
+      "claim_ids": ["CLM-05"],
+      "caption": "Governance preserves plural agency instead of collapsing decisions into one universal authority.",
+      "narration": "StegVerse governance is not designed to become one entity that decides universally correct outcomes. It makes authority explicit, transitions governable, consequences bounded where possible, and evidence reconstructable.",
+      "visual": {"kind":"DIAGRAM","instruction":"Show multiple independent actors retaining agency while crossing explicit governed transition boundaries."},
+      "do_not_imply": ["Governance means centralized control.","Governance guarantees universally correct decisions."]
+    },
+    {
+      "order": 6,
+      "scene_id": "SCN-06",
+      "claim_ids": ["CLM-06"],
+      "caption": "Ask not only what a system can do, but what it was permitted to do and what proves what happened.",
+      "narration": "At ecosystem scale, StegVerse asks: what was the system permitted to do, under whose authority, against what state, with what bounded consequence, and what evidence proves what actually happened?",
+      "visual": {"kind":"FLOW","instruction":"Show proposal to state and context to admissibility to execution boundary to consequence to receipt to reconstruction."},
+      "do_not_imply": ["A receipt alone is sufficient without provenance and binding.","Permission and execution are the same event."]
+    },
+    {
+      "order": 7,
+      "scene_id": "SCN-07",
+      "claim_ids": ["CLM-04"],
+      "caption": "Checkpoint: capability and authority remain separate.",
+      "narration": "Checkpoint: if a component can perform an action, does that automatically authorize the action? No. Capability and authority are distinct.",
+      "visual": {"kind":"CHECKPOINT","instruction":"Display the three lesson choices and reveal the second choice as correct."},
+      "do_not_imply": ["The checkpoint itself grants any authority."]
+    }
+  ]
+}

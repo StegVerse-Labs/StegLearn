@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate StegVerse Foundations static lesson contract
+        run: node ../scripts/validate-stegverse-foundations.mjs
+
       - name: Validate Edukors Interlock source contract
         run: node ../scripts/validate-edukors-interlock.mjs
 

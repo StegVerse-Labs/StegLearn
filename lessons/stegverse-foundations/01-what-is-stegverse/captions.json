@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "lesson_id": "steglearn.stegverse-foundations.01",
+  "lesson_version": "1.0.0",
+  "language": "en-US",
+  "caption_source": "CANONICAL_SCENE_CAPTIONS",
+  "entries": [
+    {"scene_id":"SCN-01","order":1,"text":"StegVerse is governance infrastructure for consequential systems."},
+    {"scene_id":"SCN-02","order":2,"text":"The ecosystem governs participation; it does not need to manufacture the intelligence."},
+    {"scene_id":"SCN-03","order":3,"text":"Each governed component contributes a defined capability to the ecosystem."},
+    {"scene_id":"SCN-04","order":4,"text":"Capability is not authority. Observation is not execution."},
+    {"scene_id":"SCN-05","order":5,"text":"Governance preserves plural agency instead of collapsing decisions into one universal authority."},
+    {"scene_id":"SCN-06","order":6,"text":"Ask not only what a system can do, but what it was permitted to do and what proves what happened."},
+    {"scene_id":"SCN-07","order":7,"text":"Checkpoint: capability and authority remain separate."}
+  ],
+  "translation_policy": {
+    "translations_must_preserve_claim_semantics": true,
+    "machine_translation_requires_review_for_canonical_publication": true
+  }
+}

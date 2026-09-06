@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "lesson_id": "steglearn.stegverse-foundations.01",
+  "module_id": "SVF-01",
+  "version": "1.0.0",
+  "title": "What Is StegVerse?",
+  "difficulty": "FOUNDATION",
+  "estimated_duration_minutes": 6,
+  "learning_objectives": [
+    "Explain StegVerse as governance infrastructure for consequential digital and physical systems.",
+    "Distinguish intelligence or capability from authority.",
+    "Recognize the ecosystem contribution classes without treating them as automatic permissions."
+  ],
+  "canonical_sources": [
+    {
+      "source_id": "SRC-ECOSYSTEM-PURPOSE",
+      "repository": "StegVerse-Labs/.github",
+      "path": "docs/ECOSYSTEM_PURPOSE_INVARIANT.md",
+      "authority_scope": "CANONICAL_ECOSYSTEM_PURPOSE",
+      "status": "CANONICAL_ACTIVE"
+    }
+  ],
+  "claims": [
+    {"claim_id":"CLM-01","source_id":"SRC-ECOSYSTEM-PURPOSE","text":"StegVerse provides governance infrastructure so humans, artificial intelligences, autonomous systems, institutions, and machines can participate in consequential systems while preserving agency, explicit authority, bounded consequence, continuity, reconstructable evidence, and interoperability."},
+    {"claim_id":"CLM-02","source_id":"SRC-ECOSYSTEM-PURPOSE","text":"StegVerse is not intended to be the intelligence factory; its governance infrastructure is designed to remain useful across different models, clouds, runtimes, agent frameworks, robotics stacks, and external execution systems."},
+    {"claim_id":"CLM-03","source_id":"SRC-ECOSYSTEM-PURPOSE","text":"The ecosystem recognizes nine contribution classes: agency, continuity, admissibility, execution, observability, evidence, recovery, interoperability, and consequence containment."},
+    {"claim_id":"CLM-04","source_id":"SRC-ECOSYSTEM-PURPOSE","text":"Capability is not authority, observation is not execution, source completion is not activation, and CI success is not runtime proof."},
+    {"claim_id":"CLM-05","source_id":"SRC-ECOSYSTEM-PURPOSE","text":"StegVerse governance is not meant to collapse into one entity that decides universally correct outcomes; it makes authority explicit, transitions governable, consequences bounded where possible, and evidence reconstructable."},
+    {"claim_id":"CLM-06","source_id":"SRC-ECOSYSTEM-PURPOSE","text":"The ecosystem is oriented toward asking what an AI or automated system was permitted to do, under whose authority, against what state, with what bounded consequence, and what evidence proves what happened."}
+  ],
+  "renderer_policy": {
+    "siteflow_target": "AI_SITEFLOW_STATIC_VIDEO",
+    "captions_are_canonical": true,
+    "renderer_may_paraphrase_claims": false,
+    "renderer_may_invent_claims": false,
+    "renderer_may_change_authority_semantics": false,
+    "generated_content_is_authoritative": false
+  },
+  "checkpoint": {
+    "question": "Which statement best matches the StegVerse authority model?",
+    "choices": [
+      "If a component can perform an action, it automatically has authority to perform it.",
+      "Capability and authority are distinct; a capable component still needs the applicable governance and authority basis.",
+      "A successful CI run proves a production action occurred."
+    ],
+    "correct_choice_index": 1,
+    "evidence_objective": "The learner distinguishes capability from authority and source or build evidence from runtime consequence."
+  },
+  "receipt_evidence_objectives": [
+    "Learner can state the purpose of StegVerse in their own words.",
+    "Learner can distinguish capability from authority.",
+    "Learner can name at least three ecosystem contribution classes without treating the list as a permission grant."
+  ],
+  "version_provenance": {
+    "architecture_as_of": "2026-09-06",
+    "source_change_requires_lesson_review": true,
+    "prior_versions_preserved": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "learning_path_id": "steglearn.stegverse-foundations.v1",
+  "version": "1.0.0",
+  "title": "StegVerse Foundations",
+  "summary": "A guided tutorial series for understanding the purpose, principles, mechanics, authority boundaries, evidence model, and practical operation of the StegVerse ecosystem.",
+  "audience": {"minimum_age_guidance": 13, "adult_supervision_required": false},
+  "rendering_model": "CANONICAL_LESSON_DATA_TO_PRESENTATION",
+  "modules": [
+    {"order":1,"module_id":"SVF-01","slug":"01-what-is-stegverse","title":"What Is StegVerse?","state":"MATERIALIZED","objective":"Explain the ecosystem purpose and distinguish governance infrastructure from an intelligence provider."},
+    {"order":2,"module_id":"SVF-02","slug":"02-stegid-identity-continuity","title":"Your StegVerse Identity","state":"ROADMAP","objective":"Understand StegID, identity continuity, devices, and receipts."},
+    {"order":3,"module_id":"SVF-03","slug":"03-knowledge-vault","title":"Your Knowledge Vault","state":"ROADMAP","objective":"Understand KV custody, references, privacy, and recovery boundaries."},
+    {"order":4,"module_id":"SVF-04","slug":"04-devices-and-nodes","title":"Devices and Nodes","state":"ROADMAP","objective":"Understand device registration, node establishment, continuity, and node state."},
+    {"order":5,"module_id":"SVF-05","slug":"05-submit-interlock-intr","title":"What Happens When You Press Submit?","state":"ROADMAP","objective":"Trace a candidate action across Interlock/InTr without conflating submission, admission, execution, or evidence."},
+    {"order":6,"module_id":"SVF-06","slug":"06-understanding-authority","title":"Understanding Authority","state":"ROADMAP","objective":"Distinguish capability, authority, observation, admission, execution, and evidence."},
+    {"order":7,"module_id":"SVF-07","slug":"07-stegcore-governance","title":"How StegCore Governs a Transition","state":"ROADMAP","objective":"Understand represented constraints, candidate transitions, governance decisions, and evidence."},
+    {"order":8,"module_id":"SVF-08","slug":"08-reading-a-receipt","title":"Reading a Receipt","state":"ROADMAP","objective":"Understand provenance, correlation, reconstruction, and what a receipt can and cannot prove."},
+    {"order":9,"module_id":"SVF-09","slug":"09-heartbeat-runtime","title":"Heartbeat and Runtime","state":"ROADMAP","objective":"Understand HB/oscillator observability and why liveness signals do not grant authority."},
+    {"order":10,"module_id":"SVF-10","slug":"10-ai-inside-stegverse","title":"AI Inside StegVerse","state":"ROADMAP","objective":"Understand AI participation, human involvement, and governance separation."},
+    {"order":11,"module_id":"SVF-11","slug":"11-skap-capabilities","title":"SKAP and Capabilities","state":"ROADMAP","objective":"Understand capability custody and why possession, reference, admission, and authority are distinct."},
+    {"order":12,"module_id":"SVF-12","slug":"12-crossing-ecosystem-boundary","title":"Crossing the Ecosystem Boundary","state":"ROADMAP","objective":"Understand governed interaction with external systems and reciprocal interoperability."}
+  ],
+  "non_capture_note": "Completing this path demonstrates exposure to ecosystem concepts; it does not establish permanent competence, identity, authority, or permission."
+}
