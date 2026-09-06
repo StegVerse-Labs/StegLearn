@@ -15,7 +15,7 @@ Participant enters StegLearn
 → governed goal-intake record
 → generated curriculum version
 → synchronized human/machine review package
-→ review / revise / select according to entity authority
+→ review / revise / approve according to entity authority
 → teach selected curriculum version
 → observe permitted engagement / participation / progress
 → adapt instruction
@@ -69,43 +69,47 @@ Requested level does not automatically prove readiness. StegLearn may recommend 
 
 A human may enter StegLearn to develop a skill, learn a discipline, prepare for advanced study, or pursue a research question. An admitted AI entity may also participate when its identity, authority, permitted inputs/outputs, evidence obligations, and learning-state mutation rights are explicitly bounded. External request capability alone does not establish admission.
 
-## Machine-Readable Curriculum Contracts
+## Machine-Readable Learning Contracts
 
-The conversational curriculum flow has explicit source contracts:
+The current source flow has explicit contracts:
 
 - `schemas/participant-goal-intake.schema.json` — admitted participant, desired outcome/depth, starting point, context, constraints, evidence and review requirements.
 - `schemas/generated-curriculum.schema.json` — stable curriculum identity/version, exact goal provenance, depth, prerequisites, objectives, units, teaching methods, evidence, progression, completion, review binding, and teaching policy.
 - `schemas/curriculum-review-package.schema.json` — synchronized review representation with human/machine availability, review state, review records, and exact curriculum-version teaching binding.
+- `schemas/teaching-session.schema.json` — exact curriculum ID/version, review state at start, authority binding, active unit, teaching events, and bounded teaching-session state.
 
 The generated curriculum reuses the existing curriculum-review package rather than creating a competing review mechanism. Teaching must bind the exact selected curriculum version, and material curriculum changes require an inspectable version transition.
 
-`examples/curricula/` contains bounded fixtures. `scripts/validate-curriculum-contracts.mjs` validates goal-to-curriculum linkage, stable IDs/versions, review binding, unique units, progression/evidence requirements, and exact-version teaching. `npm run build` runs this validator before receipt validation and TypeScript/Vite.
+`examples/curricula/` contains bounded fixtures. `scripts/validate-curriculum-contracts.mjs` validates goal/curriculum/review/teaching contract identities, goal-to-curriculum linkage, stable IDs/versions, review binding, unique units, progression/evidence requirements, and exact-version teaching requirements. `npm run build` runs this validator before receipt validation and TypeScript/Vite.
 
-## Goal Intake, Curriculum Generation, and Review UI
+## Goal → Curriculum → Review → Teach Prototype
 
-The prototype now implements the first three machine-bound transitions:
+The prototype now implements a bounded four-stage path:
 
 ```text
 governed goal intake
 → bounded generated curriculum
-→ synchronized review package
+→ synchronized review package + contextual decision
+→ exact-version teaching session
 ```
 
-`app/src/GoalIntakePanel.tsx` captures entity/context, desired outcome/depth, starting point, constraints, evidence expectations, and reviewer requirements. It creates and exports `steglearn.participant-goal-intake/v1`.
+`app/src/GoalIntakePanel.tsx` captures entity/context, desired outcome/depth, starting point, constraints, evidence expectations, and reviewer requirements, and creates `steglearn.participant-goal-intake/v1`.
 
-`app/src/curriculumGeneration.ts` consumes that exact admitted goal and emits `steglearn.generated-curriculum/v1`. The current generator is deliberately deterministic and bounded: it proves the contract path without claiming arbitrary-domain expert curriculum quality, accreditation, or live AI teaching. A future AI-backed generator must emit the same governed contract rather than create a parallel representation.
+`app/src/curriculumGeneration.ts` consumes the exact admitted goal and emits `steglearn.generated-curriculum/v1`. The current generator is deterministic and bounded: it proves the contract path without claiming arbitrary-domain expert curriculum quality, accreditation, or production AI authorship. A future AI-backed generator must emit the same governed contract rather than create a parallel representation.
 
-`app/src/curriculumReview.ts` consumes the admitted goal and generated curriculum and emits `steglearn.curriculum-review-package/v1`. It verifies exact goal provenance and preserves the generated curriculum ID/version in the teaching binding.
+`app/src/curriculumReview.ts` emits `steglearn.curriculum-review-package/v1`, verifies exact goal/curriculum provenance, renders human- and machine-readable projections from the same curriculum ID/version, and can record contextual review decisions. `APPROVE` requires an `APPROVAL_WITHIN_CONTEXT` authority effect; a revision request does not become approval.
 
-The UI renders a human-readable curriculum review and the synchronized machine-readable review package from the same curriculum ID/version. Review begins `UNREVIEWED`; rendering a review package does not mint approval or teaching authority. The review package can be exported as JSON.
+`app/src/teaching.ts` starts a `steglearn.teaching-session/v1` only when the review package's teaching requirement is satisfied. For the default teacher-led path, teaching is blocked until the curriculum is `APPROVED`. The teaching session retains the exact curriculum ID/version, review state at start, human-authority requirement, authority entity IDs, current unit, timestamps, and teaching events. It can advance through the generated units while refusing to advance against a different curriculum version.
 
-The current review-package `content_hash_sha256` is intentionally `null`; deterministic hashing remains a separate implementation item rather than being fabricated.
+The UI presents the current unit's outcomes, teaching methods, activities, evidence expectations, and progression gate and records unit/session transition events. This is a real bounded prototype teaching flow, but it is not yet a conversational AI instructor or evidence-driven adaptive teaching engine.
 
-## Reviewable Curriculum
+The current review-package `content_hash_sha256` remains intentionally `null`; deterministic curriculum hashing remains a separate implementation item rather than being fabricated.
+
+## Review and Teaching Boundaries
 
 StegLearn must not present one curriculum for review and silently teach a materially different curriculum. Human-readable and machine-readable review surfaces must resolve to the same curriculum identity/version, and material changes must create an inspectable version transition.
 
-Review availability is distinct from commenting, requesting revision, approving, or authorizing teaching.
+Review availability is distinct from commenting, requesting revision, approving, and authorizing teaching. Teaching-session creation does not itself grant accreditation, mastery, professional authority, or authority outside the admitted learning context.
 
 ## Repository Structure
 
@@ -115,6 +119,7 @@ app/src/
   curriculum.ts
   curriculumGeneration.ts
   curriculumReview.ts
+  teaching.ts
 
 docs/
   teacher-assist-model.md
@@ -127,13 +132,10 @@ schemas/
   participant-goal-intake.schema.json
   generated-curriculum.schema.json
   curriculum-review-package.schema.json
+  teaching-session.schema.json
   learning-path.schema.json
   learning-receipt.schema.json
   external-learning-interlock.schema.json
-
-examples/curricula/
-  python-foundations-goal-intake.json
-  python-foundations-generated-curriculum.json
 ```
 
 ## External Learning Relationships
@@ -148,6 +150,6 @@ Public observation or source installation does not imply partnership, authentica
 
 ## Implementation Status
 
-The repository contains a local-first web prototype, governance documentation, reusable learning paths, learning receipts, teacher-first governed AI architecture, conversational curriculum doctrine, goal/curriculum/review machine contracts, goal-intake UI, bounded curriculum generation, synchronized review rendering, public landing-page source, and the evaluation-only Edukors relationship.
+Current source implements **goal conversation → governed goal intake → bounded generated curriculum → synchronized review package → contextual approval/revision decision → exact-version bounded teaching session**.
 
-Current source implements **goal conversation → governed goal intake → bounded generated curriculum → synchronized review package**. Review decisions/approval, deterministic curriculum hashing, curriculum-version-bound teaching execution, material revision/diff flow, admitted AI-backed curriculum generation, sensor-mediated classroom assistance, generalized AI-participant learning, and public Site publication remain incomplete unless separately evidenced.
+The following remain incomplete unless separately evidenced: deterministic curriculum hashing, material revision/diff versioning, an admitted AI-backed curriculum generator, conversational AI teaching within the teaching session, evidence-driven adaptive progression, sensor-mediated classroom assistance, generalized AI-participant learning, authentic governed external-learning runtime interaction, and public Site publication.
