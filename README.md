@@ -41,6 +41,7 @@ docs/
   ai-scaffold-policy.md
   EDUKORS_INTR_MIRROR_HANDOFF.md
   STEGVERSE_FOUNDATIONS_MIRROR_HANDOFF.md
+  STEGLEARN_YOUTUBE_EDUCATION_PARTNERSHIP_MIRROR_HANDOFF.md
 
 lessons/
   README.md
@@ -113,12 +114,20 @@ For credential-free public observation, StegLearn reuses the canonical StegOS Un
 
 External observations become StegLearn evidence only after the applicable Interlock/InTr ingress boundary is satisfied. Source installation, public retrieval, CI, or repository presence does not prove an authentic runtime Interlock/InTr transition. Ordinary web retrieval is not a substitute for an authentic InTr materialization receipt or Master Records reconciliation.
 
+## Google / YouTube Education Partnership Evaluation
+
+StegLearn has a bounded source evaluation lane for using Google/YouTube as managed education media infrastructure while StegLearn retains curriculum, adaptation, learner-evidence, admissibility, mastery, and receipt authority. The canonical lane is [`docs/STEGLEARN_YOUTUBE_EDUCATION_PARTNERSHIP_MIRROR_HANDOFF.md`](docs/STEGLEARN_YOUTUBE_EDUCATION_PARTNERSHIP_MIRROR_HANDOFF.md).
+
+The target is a provider-neutral classroom-of-one media contract: low-latency instructor/AI video plus authorized learner camera and microphone return, independently addressable private sessions, N concurrent learner sessions, programmatic lifecycle control, and education/minor privacy safeguards. Public YouTube APIs satisfy broadcast lifecycle, low-latency delivery, and live-chat feedback but do not currently expose the full bidirectional learner A/V classroom-of-one contract. Missing capabilities remain partnership-negotiation requirements or require another approved Google media surface.
+
+Public research, source registration, or a prepared outreach package does not imply Google/YouTube partnership, endorsement, negotiated rights, production integration, or permission to transmit learner data.
+
 ## Relationship to Learning Transition Governance
 
 Learning Transition Governance provides the doctrine for learning as an admissible transition process. StegLearn is the product-facing implementation path for human learning governance.
 
 ## Implementation Status
 
-The repository contains a local-first web prototype, schemas, example receipts, governance documentation, reusable learning paths, the StegVerse Foundations static lesson-rendering contract, and an evaluation-only external-learning Interlock/InTr contract for Edukors.
+The repository contains a local-first web prototype, schemas, example receipts, governance documentation, reusable learning paths, the StegVerse Foundations static lesson-rendering contract, an evaluation-only external-learning Interlock/InTr contract for Edukors, and a source-only Google/YouTube education partnership evaluation lane.
 
-The current learning implementation target remains a complete learner loop that records a question, connects it to an activity, captures the learner explanation, requires parent review, produces a portable receipt, and preserves it in a portfolio. Static lesson rendering does not itself establish learner understanding; accepted learning evidence remains separately reviewable.
+The current learning implementation target remains a complete learner loop that records a question, connects it to an activity, captures the learner explanation, requires parent review, produces a portable receipt, and preserves it in a portfolio. Static lesson rendering or external media transport does not itself establish learner understanding; accepted learning evidence remains separately reviewable.
