@@ -3,8 +3,8 @@
 Updated: 2026-09-15
 Goal Task ID: `STEGLEARN-YOUTUBE-EDUCATION-PARTNERSHIP-001`
 COSV: `40000100100000`
-Authorization state: `OWNER_AUTHORIZED_OUTREACH_READY`
-Submission state: `NOT_YET_SUBMITTED`
+Authorization state: `OWNER_AUTHORIZED_OUTREACH`
+Submission state: `OWNER_REPORTED_SUBMISSION / GOOGLE_ACKNOWLEDGEMENT_NOT_YET_OBSERVED`
 
 ## Purpose
 
@@ -28,16 +28,14 @@ Google currently instructs education technology companies to complete the Partne
 
 ## Specialist-form field package
 
-Use these organization/product values:
-
 - Phase of education: `Education technology`
 - Organization name: `StegVerse`
 - Organization website: `https://stegverse.org`
 - Country: `United States`
-- Job title: prefer `Head of Digital Transformation / AI`; `Educational Technology Lead` is also a valid form option if preferred by the owner
-- Product interests: select `Teaching and Learning` and `Google Cloud`
-- Current Google Workspace for Education use: answer truthfully based on current StegVerse organization state; do not infer `Yes`
-- Marketing/news opt-in: owner choice; not required for the partnership request
+- Job title: prefer `Head of Digital Transformation / AI`
+- Product interests: `Teaching and Learning` and `Google Cloud`
+- Current Google Workspace for Education use: answer from actual organization state
+- Marketing/news opt-in: owner choice
 
 ### 500-character problem statement
 
@@ -66,8 +64,35 @@ StegLearn is a governed AI-assisted education platform evaluating Google/YouTube
 9. Google does not become curriculum, learner-state, mastery, evidence, or receipt authority.
 10. Provider-neutral StegLearn session contract remains replaceable if Google cannot satisfy the capability set.
 
+## Submission evidence reconciliation
+
+On 2026-09-15, the owner directed reconciliation of the submitted Google for Education specialist and/or Partner Advantage application evidence. This establishes an owner-reported submission state, but no exact Google case/reference identifier, on-screen receipt, or confirmation email has yet been observed in the connected evidence surfaces.
+
+Connected Gmail was searched on 2026-09-15 for recent messages matching Google for Education, Partner Advantage, Player for Education, Youth & Learning, StegLearn, education partner, request/case/inquiry terms, and recent Google/Google Cloud senders. No Google acknowledgement or routing response matching this outreach was observed. One unrelated GitHub CI notification mentioning StegLearn was returned and is not Google partnership evidence.
+
+Evidence disposition:
+
+- owner-reported submission: `OBSERVED_FROM_OWNER_INSTRUCTION`
+- Google acknowledgement email: `NOT_OBSERVED`
+- Google case/reference identifier: `UNKNOWN`
+- Google technical capability statement: `NOT_OBSERVED`
+- partnership status: `NOT_CLAIMED`
+- negotiated classroom-of-one capability: `NOT_CLAIMED`
+
+## Capability determination after submission
+
+No new written Google evidence is available, so the minimum capability assessment is unchanged:
+
+- low-latency instructor/downlink delivery: publicly supported;
+- programmatic broadcast lifecycle: publicly supported;
+- low-latency chat feedback when enabled: publicly supported;
+- authorized learner camera uplink: unresolved / negotiation required;
+- authorized learner microphone uplink: unresolved / negotiation required;
+- N independently addressable private bidirectional classrooms of one: unresolved / negotiation required or approved adjacent Google transport required;
+- education/minor account, consent, retention, and moderation model for that bidirectional lane: unresolved / negotiation required.
+
 ## Submission boundary
 
-The current ChatGPT tool surface can verify public Google pages and maintain canonical GitHub evidence but cannot type into or submit arbitrary Google web forms or complete authenticated Partner Advantage account workflows. Owner authorization is present; interactive identity/account submission remains a minimal user action.
+The current ChatGPT tool surface can verify public Google pages, search connected Gmail, and maintain canonical GitHub evidence but cannot inspect a past browser submission confirmation unless the owner provides it or Google sends an accessible acknowledgement.
 
-No Google submission, acknowledgement, partnership, negotiated capability, learner-data transfer, or runtime integration is claimed until evidence is observed.
+No Google partnership, negotiated capability, learner-data transfer, or runtime integration is claimed until evidence is observed.
