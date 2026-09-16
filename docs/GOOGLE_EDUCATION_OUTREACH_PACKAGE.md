@@ -68,28 +68,34 @@ StegLearn is a governed AI-assisted education platform evaluating Google/YouTube
 
 On 2026-09-15, the owner directed reconciliation of the submitted Google for Education specialist and/or Partner Advantage application evidence. This establishes an owner-reported submission state, but no exact Google case/reference identifier, on-screen receipt, or confirmation email has yet been observed in the connected evidence surfaces.
 
-Connected Gmail was searched on 2026-09-15 for recent messages matching Google for Education, Partner Advantage, Player for Education, Youth & Learning, StegLearn, education partner, request/case/inquiry terms, and recent Google/Google Cloud senders. No Google acknowledgement or routing response matching this outreach was observed. One unrelated GitHub CI notification mentioning StegLearn was returned and is not Google partnership evidence.
+### Connected Gmail checks
 
-Evidence disposition:
+Initial reconciliation search on 2026-09-15 covered recent Google for Education, Partner Advantage, Player for Education, Youth & Learning, StegLearn, education-partner, request/case/inquiry terms, and recent Google/Google Cloud senders. No Google acknowledgement or routing response matching this outreach was observed. One unrelated GitHub CI notification mentioning StegLearn was returned and is not Google partnership evidence.
+
+A second connected Gmail search was performed on 2026-09-15 at approximately 21:12 America/Chicago using the terms `Google for Education`, `Partner Advantage`, `Player for Education`, `Youth & Learning`, `YouTube Education`, `StegLearn`, `Google Cloud Partner`, plus recent Google/Google Cloud/YouTube senders combined with education/partner/case/request/inquiry terms. No matching Google acknowledgement, case/reference identifier, routing response, or technical capability statement was observed. The Google-domain results returned in the broader sender search were unrelated Google Store messages and are not outreach evidence.
+
+Evidence disposition after the second search:
 
 - owner-reported submission: `OBSERVED_FROM_OWNER_INSTRUCTION`
 - Google acknowledgement email: `NOT_OBSERVED`
 - Google case/reference identifier: `UNKNOWN`
+- Google routing response: `NOT_OBSERVED`
 - Google technical capability statement: `NOT_OBSERVED`
 - partnership status: `NOT_CLAIMED`
 - negotiated classroom-of-one capability: `NOT_CLAIMED`
 
-## Capability determination after submission
+## Capability determination after second Gmail check
 
-No new written Google evidence is available, so the minimum capability assessment is unchanged:
+No new written Google evidence is available, so no `UNRESOLVED` classroom-of-one capability state is changed.
 
-- low-latency instructor/downlink delivery: publicly supported;
-- programmatic broadcast lifecycle: publicly supported;
-- low-latency chat feedback when enabled: publicly supported;
-- authorized learner camera uplink: unresolved / negotiation required;
-- authorized learner microphone uplink: unresolved / negotiation required;
-- N independently addressable private bidirectional classrooms of one: unresolved / negotiation required or approved adjacent Google transport required;
-- education/minor account, consent, retention, and moderation model for that bidirectional lane: unresolved / negotiation required.
+- low-latency instructor/downlink delivery: `PUBLICLY_SUPPORTED`
+- programmatic broadcast lifecycle: `PUBLICLY_SUPPORTED_FOR_YOUTUBE_LIVE_BROADCAST`
+- low-latency chat feedback when enabled: `PUBLICLY_SUPPORTED_WHEN_CHAT_ENABLED`
+- authorized learner camera uplink: `UNRESOLVED_NEGOTIATION_REQUIRED`
+- authorized learner microphone uplink: `UNRESOLVED_NEGOTIATION_REQUIRED`
+- independently addressable private learner sessions: `UNRESOLVED_NEGOTIATION_REQUIRED`
+- N concurrent private bidirectional classrooms of one: `UNRESOLVED_NEGOTIATION_OR_APPROVED_ADJACENT_GOOGLE_TRANSPORT_REQUIRED`
+- education/minor identity, consent, retention, moderation, and account model for that bidirectional lane: `UNRESOLVED_NEGOTIATION_REQUIRED`
 
 ## Submission boundary
 
