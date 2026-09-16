@@ -4,7 +4,7 @@ Updated: 2026-09-15
 Repository: `StegVerse-Labs/StegLearn`
 Goal Task ID: `STEGLEARN-YOUTUBE-EDUCATION-PARTNERSHIP-001`
 COSV: `40000100100000`
-Status: `ACTIVE / OWNER OUTREACH AUTHORIZED / INTERACTIVE SUBMISSION PENDING`
+Status: `ACTIVE / OWNER-REPORTED SUBMISSION / GOOGLE ACKNOWLEDGEMENT PENDING`
 
 ## Goal
 
@@ -12,42 +12,32 @@ Pursue a bounded Google/YouTube education partnership path that lets StegLearn u
 
 StegLearn remains authority for curriculum, instructional adaptation, learner evidence, admissibility, mastery state, and accepted learning receipts. Google/YouTube is evaluated only as a presentation/media substrate and external education partner.
 
-## Owner authorization
+## Outreach state
 
-The owner explicitly authorized external Google education partnership outreach on 2026-09-15. Authorization covers the Google for Education specialist inquiry and Partner Advantage Build application using StegVerse / StegLearn positioning. It does not authorize learner-data transmission or grant Google instructional authority.
+The owner previously authorized external Google education partnership outreach. On 2026-09-15 the owner directed reconciliation of the submitted Google for Education specialist and/or Partner Advantage application evidence. This supports an owner-reported submission state, but no exact Google case/reference identifier, browser confirmation artifact, confirmation email, or written technical response has yet been observed.
 
-## Refreshed official partner-entry path
+Connected Gmail searches on 2026-09-15 covered recent Google for Education, Partner Advantage, Player for Education, Youth & Learning, StegLearn, education-partner, request/case/inquiry, and recent Google/Google Cloud sender terms. No matching Google acknowledgement or routing response was observed.
 
-Immediately before submission preparation, the following official surfaces were rechecked:
+Canonical outreach package: [`GOOGLE_EDUCATION_OUTREACH_PACKAGE.md`](GOOGLE_EDUCATION_OUTREACH_PACKAGE.md).
 
-- `https://edu.google.com/resources/get-started/find-a-partner/become-a-partner/build/`
-- `https://edu.google.com/intl/ALL_in/contact/`
-- `https://support.google.com/youtube/answer/15503014`
-- `https://developers.google.com/youtube/v3/live/docs/liveBroadcasts`
-- `https://developers.google.com/youtube/v3/live/docs/liveChatMessages/streamList`
+## Refreshed public capability boundary
 
-Google still directs education technology companies into Partner Advantage with `Build` as the engagement and `Google for Education` as the solution. Integrated Solutions remains a later qualification step requiring three Google-approved Workspace for Education and/or Classroom integrations plus integration evidence.
-
-The current Google for Education specialist form explicitly supports `Education technology`, `Head of Digital Transformation / AI`, `Educational Technology Lead`, organization name/website/country, `Google Cloud`, `Teaching and Learning`, and a 500-character needs field.
-
-## Public capability matrix
-
-Available today through public Google/YouTube surfaces:
+Public Google/YouTube capability remains:
 
 - managed YouTube video delivery;
-- Player for Education embedded education playback with additional student privacy safeguards and no ads;
+- Player for Education embedded education playback;
 - programmatic YouTube Live broadcast lifecycle;
-- low/ultra-low latency broadcast modes;
-- Live Chat retrieval and server-streaming updates when chat is enabled;
+- low/ultra-low-latency broadcast modes;
+- Live Chat retrieval and server-streaming updates when enabled;
 - cohort one-to-many instruction;
 - StegLearn-owned adaptation based on permitted feedback channels.
 
-Not exposed as an ordinary public YouTube Live API product:
+Still unresolved without written Google partner/technical evidence:
 
 - independently addressable learner camera uplink;
 - independently addressable learner microphone uplink;
-- N simultaneous private bidirectional classrooms of one without a separate creator/host model per learner;
-- a public education-specific exception to child-directed Live Chat restrictions.
+- N simultaneous private bidirectional classrooms of one without a creator/host model per learner;
+- supported education/minor identity, consent, retention, moderation, and account handling for that bidirectional lane.
 
 ## Minimum negotiated capability set
 
@@ -62,52 +52,28 @@ Not exposed as an ordinary public YouTube Live API product:
 9. Google does not become curriculum, learner-state, mastery, evidence, or receipt authority.
 10. Provider-neutral StegLearn session contract remains replaceable if Google cannot satisfy the set.
 
-## Canonical outreach package
+## Evidence disposition
 
-See [`GOOGLE_EDUCATION_OUTREACH_PACKAGE.md`](GOOGLE_EDUCATION_OUTREACH_PACKAGE.md).
+- owner-reported submission: `OBSERVED_FROM_OWNER_INSTRUCTION`
+- Google acknowledgement: `NOT_OBSERVED`
+- Google case/reference ID: `UNKNOWN`
+- written Google routing statement: `NOT_OBSERVED`
+- written Google technical capability statement: `NOT_OBSERVED`
+- partnership status: `NOT_CLAIMED`
+- negotiated classroom-of-one capability: `NOT_CLAIMED`
 
-Specialist-form organization values:
-
-- Phase: `Education technology`
-- Organization: `StegVerse`
-- Website: `https://stegverse.org`
-- Country: `United States`
-- Job title: `Head of Digital Transformation / AI` preferred
-- Product interests: `Teaching and Learning` + `Google Cloud`
-
-Problem statement:
-
-> StegLearn is a governed AI-assisted education platform evaluating Google/YouTube as managed media infrastructure for individualized classrooms of one. We need low-latency instructor video, authorized learner camera/mic return, N concurrent private sessions, programmatic lifecycle control, and education/minor privacy safeguards while StegLearn retains curriculum, adaptation, evidence, and mastery authority. Please route us to Player for Education / YouTube Youth & Learning Partnerships.
-
-Partner Advantage:
-
-- Engagement: `Build`
-- Solution: `Google for Education`
-- Company/product: `StegVerse / StegLearn`
-- Positioning: governed AI-assisted education technology platform
-- Integrated Solutions eligibility: not claimed
-
-## Machine/user execution boundary
-
-Machine-authorized work completed:
-
-- refreshed public evidence;
-- finalized submission text and field mapping;
-- canonical package/handoff maintenance;
-- preserved provider-neutral capability boundaries.
-
-The available tool surface cannot interactively type into or submit arbitrary Google web forms or complete authenticated Partner Advantage account workflows. Interactive identity/account submission remains the only required user step.
-
-## Evidence rule
-
-A form submission is outreach evidence only. It is not proof of partnership or negotiated media capability. Any Google acknowledgement, case/reference number, confirmation email, or written technical response must be preserved before changing capability assumptions.
-
-Do not build proprietary A/V infrastructure while this Google pathway remains viable and untested.
+A form submission or automated receipt is outreach evidence only. It is not proof of partnership or negotiated media capability.
 
 ## Current state
 
-`OWNER_AUTHORIZED_PUBLIC_EVIDENCE_REFRESHED_SUBMISSION_PACKAGE_READY_INTERACTIVE_GOOGLE_SUBMISSION_PENDING`
+`OWNER_REPORTED_SUBMISSION_GOOGLE_ACKNOWLEDGEMENT_NOT_OBSERVED_NEGOTIATED_AV_GAPS_UNCHANGED`
+
+## Next evidence gate
+
+Any Google acknowledgement, case/reference number, confirmation email, or written technical response must be preserved verbatim enough to bind sender, date/time, subject/reference, and exact capability statements before changing capability assumptions.
+
+Do not build proprietary A/V infrastructure while this Google pathway remains viable and technically unresolved.
 
 ## Manual work
 
-Submit the specialist form and Partner Advantage application using `docs/GOOGLE_EDUCATION_OUTREACH_PACKAGE.md`; preserve all Google confirmations/responses for canonical reconciliation.
+If a browser confirmation screen or Partner Advantage reference number exists but was not emailed, provide that artifact or exact reference so it can be canonically reconciled. Otherwise no manual work is required until Google responds.
