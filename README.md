@@ -120,6 +120,8 @@ StegLearn has a bounded source evaluation lane for using Google/YouTube as manag
 
 The target is a provider-neutral classroom-of-one media contract: low-latency instructor/AI video plus authorized learner camera and microphone return, independently addressable private sessions, N concurrent learner sessions, programmatic lifecycle control, and education/minor privacy safeguards. Public YouTube APIs satisfy broadcast lifecycle, low-latency delivery, and live-chat feedback but do not currently expose the full bidirectional learner A/V classroom-of-one contract. Missing capabilities remain partnership-negotiation requirements or require another approved Google media surface.
 
+Partner Network enrollment is currently gated by Google organization identity reconciliation, not by a new StegLearn A/V architecture requirement. The existing `stegverse.org` Google organization was originally administered by `Rige1Randoloh@stegverse.org`; before creating `Rigel@stegverse.org`, the administrator must check whether that address is already managed or exists as an unmanaged/conflicting Google Account. This identity-only work must not change MX records, Gmail routing, DNS, curriculum authority, or learner-data permissions.
+
 Public research, source registration, or a prepared outreach package does not imply Google/YouTube partnership, endorsement, negotiated rights, production integration, or permission to transmit learner data.
 
 ## Relationship to Learning Transition Governance
