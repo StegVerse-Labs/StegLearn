@@ -119,7 +119,7 @@ No Google outreach has been sent and no partnership, negotiated capability, stud
 - Public-source evaluation does not imply partnership, endorsement, curriculum adoption, authenticated access, or production integration.
 - Google/YouTube transport cannot become StegLearn curriculum, learner-state, evidence, mastery, or receipt authority.
 - Ordinary public web retrieval is not authentic InTr execution evidence.
-- Task Registry owns work intent; WorkerCoordinator owns executable claims/fences; Master Records owns observed/reconstructable reality; Interlock/InTr governs ingress/egress.
+- Task Registry owns work intent; WorkerCoordinator owns executable claims/fences; the Organization owns observed/runtime reality; Master Records = organization records/reconstruction; Interlock/InTr governs ingress/egress.
 - Canonical lesson claims must bind declared sources. A renderer or media provider may not invent claims or change authority/runtime semantics.
 - Generalized curriculum generation/review/teaching must bind exact curriculum identity/version/hash and must not silently replace source-bound lesson provenance.
 
@@ -205,7 +205,7 @@ For the Google / YouTube partnership lane, current source mutation evidence is r
 
 ### Edukors lane
 
-Authentic runtime sequence remains task admission → Universal InTr observation → exact egress/ingress correlation → StegLearn evaluation record → Master Records reconciliation.
+Authentic runtime sequence remains task admission → Universal InTr observation → exact egress/ingress correlation → StegLearn evaluation record → Master Records organization record.
 
 ## Remaining Physical / User Work
 

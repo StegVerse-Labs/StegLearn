@@ -16,7 +16,7 @@ Materialize a canonical StegLearn curriculum for learning the StegVerse ecosyste
 
 Repository-wide implementation authority remains `STEGLEARN_MIRROR_HANDOFF.md`.
 
-This bounded lane does not replace organization-level ecosystem purpose, repository-local handoffs for the components being taught, Master Records evidence authority, Interlock/InTr transition governance, WorkerCoordinator claim/fence authority, or the separate governed curriculum/review/teaching work currently represented by StegLearn PR #3.
+This bounded lane does not replace organization-level ecosystem purpose, repository-local handoffs for the components being taught, Master Records organization records, Interlock/InTr transition governance, WorkerCoordinator claim/fence authority, or the separate governed curriculum/review/teaching work currently represented by StegLearn PR #3.
 
 ## Machine preflight — 2026-09-06
 
@@ -26,7 +26,7 @@ Resolved before functional mutation:
 - canonical task registry: `StegVerse-Labs/.github/data/canonical-task-registry.json`, Task Registry generation 15;
 - canonical coordination handoff: `StegVerse-Labs/.github/docs/CANONICAL_WORK_COORDINATION_SYSTEM_MIRROR_HANDOFF.md`;
 - WorkerCoordinator registry generation 22 as reported by the canonical coordination reconciliation;
-- Master Records state through the canonical coordination handoff: custody/reconstruction source paths exist, while authentic lifecycle input remains evidence-dependent;
+- Master Records state through the canonical coordination handoff: organization records/reconstruction source paths exist, while authentic lifecycle input remains evidence-dependent;
 - initial cross-task search in `StegVerse-Labs/StegLearn` found no existing StegVerse Foundations, SiteFlow video-lesson, lesson-scene, or caption-track implementation;
 - organization indexed StegLearn reference remains a stale COSV pre-audit classification and is not used as execution authority;
 - canonical organization-level lesson-01 source: `StegVerse-Labs/.github/docs/ECOSYSTEM_PURPOSE_INVARIANT.md`, status `CANONICAL / ACTIVE`.

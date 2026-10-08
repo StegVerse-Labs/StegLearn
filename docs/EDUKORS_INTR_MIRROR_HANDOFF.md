@@ -22,12 +22,12 @@ Before functional mutation, the following current state was resolved:
 - bounded lane handoff: this file;
 - organization task registry: `StegVerse-Labs/.github/data/canonical-task-registry.json`, generation 12;
 - canonical coordination handoff: `StegVerse-Labs/.github/docs/CANONICAL_WORK_COORDINATION_SYSTEM_MIRROR_HANDOFF.md`;
-- Master Records coordination custody handoff: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`;
+- Master Records coordination organization-record handoff: `master-records/orchestration/CANONICAL_WORK_COORDINATION_CUSTODY_MIRROR_HANDOFF.md`;
 - WorkerCoordinator/cross-task search: no StegLearn/Edukors executable claim or canonical task identity was found in current indexed coordination surfaces;
 - the COSV adoption manifest carries a stale pre-audit StegLearn classification and is not used as current authority;
 - existing StegOS Universal InTr connector registry already contains `external-api-observation`, so a new Edukors connector profile would duplicate canonical implementation.
 
-The coordination model remains: Task Registry owns work intent/coordination, WorkerCoordinator owns executable claim/fence authority, Master Records owns observed/reconstructable reality, and Interlock/InTr governs task and external-system state transitions. No source or CI result is treated as runtime admission or execution evidence.
+The coordination model remains: Task Registry owns work intent/coordination, WorkerCoordinator owns executable claim/fence authority, the Organization owns observed/runtime reality; Master Records = organization records/reconstruction; and Interlock/InTr governs task and external-system state transitions. No source or CI result is treated as runtime admission or execution evidence.
 
 ## Machine preflight results
 
@@ -208,18 +208,18 @@ Potential later dependencies only if integration momentum exists:
 8. Canonical `external-api-observation` profile reused. **SOURCE COMPLETE**
 9. Source contract + binding + repository build observed passing. **VALIDATED — run 34001573328**
 10. Authentic interaction produces correlated egress/ingress evidence. **RUNTIME PENDING**
-11. Authentic evidence reconciled through Master Records. **RUNTIME PENDING**
+11. Authentic evidence recorded as a Master Records organization record. **RUNTIME PENDING**
 
 ## Remaining machine work
 
 - Admit the first authentic Edukors public-observation task through the canonical task/WorkerCoordinator/Interlock path when that runtime path actually presents an executable claim.
 - Execute the first authentic credential-free public Edukors observation through Universal InTr using `external-api-observation`.
 - Preserve exact egress/ingress correlation and produce a StegLearn evaluation record.
-- Reconcile authentic retained evidence through Master Records.
+- Record authentic retained evidence as a Master Records organization record.
 - Do not substitute ordinary web retrieval for InTr runtime evidence.
 - If collaboration interest develops, present this contract before privileged integration and admit API/MCP/authenticated/AI-agent capability separately.
 
-No current canonical task-registry identity, WorkerCoordinator claim, or Master Records execution event for the Edukors observation has been observed. Source code or GitHub Actions MUST NOT manufacture those authority facts. Therefore authentic runtime execution is currently blocked on the canonical execution/admission substrate, not on missing StegLearn source implementation.
+No current canonical task-registry identity, WorkerCoordinator claim, or Master Records organization record for the Edukors observation has been observed. Source code or GitHub Actions MUST NOT manufacture those authority facts. Therefore authentic runtime execution is currently blocked on the canonical execution/admission substrate, not on missing StegLearn source implementation.
 
 ## Remaining user work
 
